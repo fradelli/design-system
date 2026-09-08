@@ -1,0 +1,18 @@
+{
+  "name": "@fradelli/npm-consumer-fixture",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.20.0 <25"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "smoke": "node smoke.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "typescript": "6.0.3"
+  }
+}

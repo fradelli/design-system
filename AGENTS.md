@@ -36,7 +36,13 @@
 - Classifique mudanças públicas segundo SemVer e inclua Changeset quando a
   automação existir.
 - Valide formatação, lint, tipos, testes, build e tarball conforme os scripts
-  disponíveis. Durante a fase documental, execute ao menos `git diff --check` e
-  confirme que nenhum arquivo de implementação foi criado.
+  disponíveis. O gate completo é `npm run ci`; para mudanças apenas documentais,
+  execute ao menos `npm run format:check` e `git diff --check`.
+- Não edite `dist/`, `.tmp/`, tarballs ou lockfiles de fixtures manualmente. São
+  artefatos gerados e não devem ser versionados.
+- Mantenha imports relativos do source compatíveis com NodeNext, incluindo a
+  extensão `.js` quando houver módulo relativo emitido.
+- A publicação está intencionalmente bloqueada até a KAN-226. Não remova o
+  `prepublishOnly` nem adicione tokens ou permissão `packages: write` antes dela.
 - Um novo ADR substitui uma decisão aceita; não reescreva silenciosamente o
   histórico arquitetural.

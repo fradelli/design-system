@@ -1,0 +1,7 @@
+dist
+.tmp
+coverage
+storybook-static
+package-lock.json
+docs/decisions
+docs/governance
