@@ -55,4 +55,3 @@ O package começa privado no GitHub Packages. Tokens de acesso vivem somente nos
 ambientes apropriados e nunca em `.npmrc`, documentação, fixture, log ou commit.
 Falha de autenticação deve interromper instalação/publicação; não existe fallback
 para copiar código ou consumir uma versão flutuante.
-

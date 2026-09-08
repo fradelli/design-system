@@ -49,4 +49,3 @@ Este repositório público ainda não possui um arquivo `LICENSE`. A visibilidad
 do código-fonte não deve ser interpretada como concessão automática de direito
 de reutilização. A política de licença será decidida antes de uma eventual
 distribuição pública do package.
-

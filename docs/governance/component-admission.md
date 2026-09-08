@@ -44,4 +44,3 @@ Toda admissão de padrão composto deve registrar na PR:
 
 Se o segundo uso exigir muitas exceções, a conclusão correta pode ser manter
 duas composições locais sobre primitives compartilhados.
-

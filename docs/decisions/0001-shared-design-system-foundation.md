@@ -169,4 +169,3 @@ independentes, um terceiro consumidor com requisitos incompatíveis ou a
 necessidade comprovada de separar tokens de componentes. Uma mudança estrutural
 deve criar um novo ADR que declare substituir este; não se altera silenciosamente
 uma decisão já usada por releases.
-
