@@ -5,14 +5,27 @@ Kaizen e futuros produtos do ecossistema Fradelli.
 
 ## Estado atual
 
-Este repositório contém somente o contrato arquitetural e as regras de
-governança aprovadas na [KAN-223](https://sandicts.atlassian.net/browse/KAN-223).
-Ainda não existe package publicado, código de componente, tokens executáveis ou
-comando de instalação.
+Este repositório contém o contrato arquitetural, as regras de governança e o
+scaffold técnico do package `@fradelli/ui`. O package ainda não possui tokens ou
+componentes e não está publicado; essas evoluções pertencem às tarefas
+seguintes.
 
-O scaffold técnico será criado na KAN-222. O contrato planejado é um único
-package versionado chamado `@fradelli/ui`, publicado inicialmente como package
-privado no GitHub Packages.
+O scaffold da [KAN-222](https://sandicts.atlassian.net/browse/KAN-222) produz um
+tarball ESM com declarações TypeScript e um entrypoint CSS mínimo. A publicação
+privada no GitHub Packages permanece bloqueada até a KAN-226.
+
+## Desenvolvimento
+
+Use Node.js `24.20.0` e npm `11.19.0`:
+
+```bash
+npm ci
+npm run ci
+```
+
+Os gates incluem formatação, lint, tipos, testes, build, inspeção do tarball,
+compatibilidade com consumidores npm e pnpm e auditoria de dependências. Para
+validar apenas o artefato instalável, execute `npm run pack:check`.
 
 ## Consumidores
 
