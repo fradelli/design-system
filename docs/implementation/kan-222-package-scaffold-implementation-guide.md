@@ -14,8 +14,8 @@ related-repository: fradelli/design-system
 
 ## Status do documento
 
-- **Situação:** implementado e validado localmente na branch
-  `codex/KAN-222-scaffold-fradelli-ui`.
+- **Situação:** implementado, validado e enviado para revisão na
+  [PR #1](https://github.com/fradelli/design-system/pull/1).
 
 - **Escopo:** criar a fundação técnica de um package ESM mínimo, instalável e verificável, sem
   implementar ainda a fundação visual ou componentes.
@@ -475,8 +475,8 @@ Resultados esperados:
 - [x] Publicação está bloqueada sem impedir `npm pack`.
 - [x] Nenhuma credencial ou dado pessoal foi adicionado.
 - [x] Nenhuma cor, fonte, token, Tailwind, Storybook ou component foi antecipado.
-- [ ] `main` possui proteção compatível com desenvolvimento solo.
-- [ ] KAN-222 contém todas as evidências e fica In Review.
+- [x] `main` possui proteção compatível com desenvolvimento solo.
+- [x] KAN-222 contém todas as evidências e fica In Review.
 
 ## Riscos e controles
 
