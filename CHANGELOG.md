@@ -1,5 +1,4 @@
 # Changelog
 
-Todas as mudanças relevantes deste package serão registradas neste arquivo.
-
-Ainda não há releases publicadas. O scaffold técnico permanece na versão `0.0.0` até a KAN-226.
+Todas as mudanças relevantes de `@fradelli/ui` são registradas neste arquivo pela automação de
+Changesets.

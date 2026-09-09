@@ -8,11 +8,13 @@ Kaizen e futuros produtos do ecossistema Fradelli.
 Este repositório contém o contrato arquitetural, as regras de governança e o
 package `@fradelli/ui`. A fundação visual é dark-first e inclui tokens de cor,
 tipografia, espaçamento, radius, foco e motion, além dos primeiros primitives
-compartilhados. O package ainda não está publicado.
+compartilhados. O workflow de release está preparado para publicar o package
+privadamente no GitHub Packages.
 
 O scaffold da [KAN-222](https://sandicts.atlassian.net/browse/KAN-222) produz um
-tarball ESM com declarações TypeScript e um entrypoint CSS mínimo. A publicação
-privada no GitHub Packages permanece bloqueada até a KAN-226.
+tarball ESM com declarações TypeScript e um entrypoint CSS explícito. A primeira
+versão será criada por uma PR automática de Changesets; a integração do workflow
+não publica diretamente a partir da PR técnica.
 
 ## Desenvolvimento
 
@@ -26,6 +28,12 @@ npm run ci
 Os gates incluem formatação, lint, tipos, testes, build, inspeção do tarball,
 compatibilidade com consumidores npm e pnpm e auditoria de dependências. Para
 validar apenas o artefato instalável, execute `npm run pack:check`.
+
+Mudanças públicas devem incluir sua intenção de versão:
+
+```bash
+npm run changeset
+```
 
 ### Tokens e Storybook
 
@@ -100,11 +108,23 @@ Cada aplicativo mantém suas páginas, features, regras de negócio, integraçõ
 marca e ciclo de release. O Design System compartilha somente identidade,
 tokens, primitives e padrões visuais sem domínio.
 
+## Releases
+
+Releases usam Semantic Versioning e são produzidas exclusivamente pelo workflow
+`Release`. Um merge com Changesets cria ou atualiza uma PR de versão; somente o
+merge dessa PR publica no GitHub Packages e cria a tag e o GitHub Release.
+
+Credenciais nunca são versionadas. O produtor usa o `GITHUB_TOKEN` efêmero, e
+cada consumidor recebe apenas acesso de leitura ao package. Consulte o
+[runbook de releases](docs/governance/releasing.md) para revisão, autenticação,
+verificação e rollback.
+
 ## Fonte normativa
 
 - [ADR 0001 — Fundação do Design System compartilhado](docs/decisions/0001-shared-design-system-foundation.md)
 - [Admissão de componentes](docs/governance/component-admission.md)
 - [Versionamento e releases](docs/governance/versioning-and-releases.md)
+- [Operação de releases](docs/governance/releasing.md)
 
 O ADR 0001 é a fonte normativa. Documentos nos aplicativos consumidores devem
 apontar para ele, sem manter cópias independentes da decisão.

@@ -44,7 +44,12 @@
   extensão `.js` quando houver módulo relativo emitido.
 - Nunca edite `src/styles/tokens.generated.css` manualmente. Altere os arquivos
   DTCG em `tokens/` e execute `npm run tokens:build`.
-- A publicação está intencionalmente bloqueada até a KAN-226. Não remova o
-  `prepublishOnly` nem adicione tokens ou permissão `packages: write` antes dela.
+- Releases são feitas exclusivamente pelo workflow `Release`, a partir de `main`, com Changesets.
+- Nunca execute `npm publish` localmente nem adicione PAT, `_authToken`, `.env` ou `.npmrc`
+  autenticado ao repositório.
+- Toda mudança pública deve declarar impacto SemVer e incluir Changeset, salvo justificativa
+  documental explícita na PR.
+- Versões publicadas são imutáveis; corrija com nova versão e faça rollback nos consumidores pela
+  versão exata anterior.
 - Um novo ADR substitui uma decisão aceita; não reescreva silenciosamente o
   histórico arquitetural.
