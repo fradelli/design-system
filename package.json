@@ -96,8 +96,9 @@
     "ci": "npm run format:check && npm run lint && npm run typecheck && npm run test:unit && npm run tokens:check && npm run storybook:build && npm run test:storybook && npm run pack:check && npm run fixtures:check && npm run audit",
     "changeset": "changeset",
     "version": "changeset version",
+    "release": "changeset publish",
     "prepack": "npm run build",
-    "prepublishOnly": "node scripts/block-publish.mjs"
+    "prepublishOnly": "node scripts/verify-publish-context.mjs"
   },
   "peerDependencies": {
     "react": ">=19.2.7 <20",

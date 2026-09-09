@@ -1,7 +1,15 @@
 # Changesets
 
-Mudanças que alterem a API, os estilos ou o comportamento público devem incluir um Changeset e
-seguir a política em `docs/governance/versioning-and-releases.md`.
+Mudanças que alterem API, estilos ou comportamento público devem incluir um Changeset e seguir
+`docs/governance/versioning-and-releases.md`.
 
-O scaffold da KAN-222 permanece em `0.0.0` e não publica uma versão. A automação de release será
-implementada pela KAN-226.
+## Fluxo
+
+1. Crie o Changeset na PR de implementação com `npm run changeset`.
+2. Classifique a mudança como patch, minor ou major conforme a governança.
+3. Depois do merge, o workflow `Release` cria ou atualiza a PR de versão.
+4. Revise versão e changelog gerados antes de integrar essa PR.
+5. O merge da PR de versão publica uma versão imutável no GitHub Packages.
+
+Documentação e mudanças internas sem efeito no artefato podem registrar na PR por que não exigem
+Changeset. Nunca edite uma versão já publicada nem execute publicação fora do workflow de `main`.
