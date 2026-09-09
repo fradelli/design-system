@@ -8,6 +8,13 @@
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "include": ["src/index.ts"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/**/*.stories.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/*.stories.tsx",
+    "src/stories/**",
+    "src/testing/**",
+    "src/tokens/token-test-utils.ts"
+  ]
 }

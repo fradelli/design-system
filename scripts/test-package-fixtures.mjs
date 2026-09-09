@@ -48,6 +48,7 @@ async function validateFixture(name, manager) {
   if (manager === "npm") {
     runNodeCli(npmCli, ["install", "--ignore-scripts", tarball], target);
     runNodeCli(npmCli, ["run", "typecheck"], target);
+    runNodeCli(npmCli, ["run", "styles"], target);
     runNodeCli(npmCli, ["run", "smoke"], target);
     const tree = JSON.parse(runNodeCli(npmCli, ["ls", "--json", "--all"], target, "utf8"));
     for (const dependency of ["react", "react-dom"]) {
@@ -60,6 +61,7 @@ async function validateFixture(name, manager) {
 
   runNodeCli(pnpmCli, ["add", "--ignore-scripts", tarball], target);
   runNodeCli(pnpmCli, ["run", "typecheck"], target);
+  runNodeCli(pnpmCli, ["run", "styles"], target);
   runNodeCli(pnpmCli, ["run", "smoke"], target);
   const list = JSON.parse(
     runNodeCli(pnpmCli, ["list", "--json", "--depth", "Infinity"], target, "utf8"),

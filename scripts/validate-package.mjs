@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { mkdir, readFile, readdir, rm } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, stat } from "node:fs/promises";
 import { join } from "node:path";
 
 const temporaryDirectory = ".tmp/package";
@@ -15,8 +15,30 @@ function runNodeCli(cli, args, options = {}) {
 const expectedFiles = [
   "CHANGELOG.md",
   "README.md",
+  "dist/components/alert/index.d.ts",
+  "dist/components/alert/index.js",
+  "dist/components/badge/index.d.ts",
+  "dist/components/badge/index.js",
+  "dist/components/button/index.d.ts",
+  "dist/components/button/index.js",
+  "dist/components/card/index.d.ts",
+  "dist/components/card/index.js",
+  "dist/components/field/index.d.ts",
+  "dist/components/field/index.js",
+  "dist/components/input/index.d.ts",
+  "dist/components/input/index.js",
+  "dist/components/label/index.d.ts",
+  "dist/components/label/index.js",
+  "dist/components/separator/index.d.ts",
+  "dist/components/separator/index.js",
+  "dist/components/sheet/index.d.ts",
+  "dist/components/sheet/index.js",
+  "dist/components/skeleton/index.d.ts",
+  "dist/components/skeleton/index.js",
   "dist/index.d.ts",
   "dist/index.js",
+  "dist/lib/cn.d.ts",
+  "dist/lib/cn.js",
   "dist/styles.css",
   "package.json",
 ];
@@ -38,11 +60,9 @@ if (JSON.stringify(actualFiles) !== JSON.stringify(expectedFiles)) {
 }
 
 const packageJson = JSON.parse(await readFile("package.json", "utf8"));
-const exportTargets = [
-  packageJson.exports["."].types,
-  packageJson.exports["."].import,
-  packageJson.exports["./styles.css"],
-];
+const exportTargets = Object.values(packageJson.exports).flatMap((entry) =>
+  typeof entry === "string" ? [entry] : Object.values(entry),
+);
 
 for (const target of exportTargets) {
   await readFile(target.replace(/^\.\//, ""));
@@ -51,6 +71,7 @@ for (const target of exportTargets) {
 const forbiddenPatterns = [/@\//u, /next(?:\/|\b)/iu, /sandicts/iu, /kaizen/iu];
 for (const file of await readdir("dist", { recursive: true })) {
   const path = join("dist", file);
+  if ((await stat(path)).isDirectory()) continue;
   const content = await readFile(path, "utf8");
   for (const pattern of forbiddenPatterns) {
     if (pattern.test(content)) {

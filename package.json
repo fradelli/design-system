@@ -17,6 +17,50 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./alert": {
+      "types": "./dist/components/alert/index.d.ts",
+      "import": "./dist/components/alert/index.js"
+    },
+    "./badge": {
+      "types": "./dist/components/badge/index.d.ts",
+      "import": "./dist/components/badge/index.js"
+    },
+    "./button": {
+      "types": "./dist/components/button/index.d.ts",
+      "import": "./dist/components/button/index.js"
+    },
+    "./card": {
+      "types": "./dist/components/card/index.d.ts",
+      "import": "./dist/components/card/index.js"
+    },
+    "./cn": {
+      "types": "./dist/lib/cn.d.ts",
+      "import": "./dist/lib/cn.js"
+    },
+    "./field": {
+      "types": "./dist/components/field/index.d.ts",
+      "import": "./dist/components/field/index.js"
+    },
+    "./input": {
+      "types": "./dist/components/input/index.d.ts",
+      "import": "./dist/components/input/index.js"
+    },
+    "./label": {
+      "types": "./dist/components/label/index.d.ts",
+      "import": "./dist/components/label/index.js"
+    },
+    "./separator": {
+      "types": "./dist/components/separator/index.d.ts",
+      "import": "./dist/components/separator/index.js"
+    },
+    "./sheet": {
+      "types": "./dist/components/sheet/index.d.ts",
+      "import": "./dist/components/sheet/index.js"
+    },
+    "./skeleton": {
+      "types": "./dist/components/skeleton/index.d.ts",
+      "import": "./dist/components/skeleton/index.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./package.json": "./package.json"
   },
@@ -73,6 +117,9 @@
     "@storybook/addon-vitest": "10.6.0",
     "@storybook/react-vite": "10.6.0",
     "@tailwindcss/vite": "4.3.3",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.7",
     "@types/node": "24.13.3",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",
@@ -80,6 +127,7 @@
     "@vitest/browser-playwright": "4.1.11",
     "eslint": "10.10.0",
     "globals": "17.12.0",
+    "jsdom": "30.0.1",
     "playwright": "1.63.0",
     "pnpm": "11.25.0",
     "prettier": "3.9.6",
@@ -93,5 +141,15 @@
     "typescript-eslint": "8.70.0",
     "vite": "8.2.2",
     "vitest": "4.1.11"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "2.1.10",
+    "@radix-ui/react-dialog": "1.1.23",
+    "@radix-ui/react-label": "2.1.15",
+    "@radix-ui/react-separator": "1.1.15",
+    "@radix-ui/react-slot": "1.3.3",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "tailwind-merge": "3.6.0"
   }
 }
