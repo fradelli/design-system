@@ -15,8 +15,8 @@ related-repository: fradelli/design-system
 ## Status do documento
 
 - **Situação:** implementação concluída localmente e enviada para a
-  [PR #4](https://github.com/fradelli/design-system/pull/4), mantida como draft até a política da
-  organização permitir que GitHub Actions crie a PR automática de versão.
+  [PR #4](https://github.com/fradelli/design-system/pull/4). A política da organização e a permissão
+  do repositório já permitem que GitHub Actions crie a PR automática de versão.
 - **Escopo:** habilitar releases privadas, imutáveis e auditáveis de `@fradelli/ui` no GitHub
   Packages usando Changesets e GitHub Actions.
 - **Card:** `KAN-226`; o título exato do Jira deve ser confirmado quando a integração Atlassian
@@ -57,9 +57,9 @@ PR de versão; a PR técnica da KAN-226 não chama `npm publish` diretamente.
 | Versão do manifest           | `0.0.0`                                         | Changesets calcula `0.1.0` pelos minors pendentes          |
 | Changesets                   | dois arquivos `minor`                           | foundations e primitives entram juntos no primeiro release |
 | Registry                     | `https://npm.pkg.github.com`                    | configuração já aponta ao destino correto                  |
-| Publicação                   | bloqueada por `scripts/block-publish.mjs`       | substituir o bloqueio por um guard de contexto             |
+| Publicação                   | protegida por `verify-publish-context.mjs`      | somente push em `main` pode publicar                       |
 | Permissões padrão de Actions | `read`                                          | manter o padrão mínimo do repositório                      |
-| Actions criando PR           | bloqueado pela política da organização          | owner deve habilitar antes do merge da PR técnica          |
+| Actions criando PR           | habilitado na organização e no repositório      | Changesets pode criar a PR de versão                       |
 | Proteção de `main`           | PR, CI, histórico linear e conversas resolvidas | a PR de versão também passará pelo gate                    |
 | Exclusão de branch no merge  | habilitada                                      | conferir a exclusão da branch da KAN-226 e da release      |
 | Secrets de release           | nenhum necessário                               | usar somente o `GITHUB_TOKEN` efêmero                      |
@@ -148,22 +148,21 @@ de adoção posteriores.
 
 ### 1. Configuração do GitHub Actions
 
-**Ação:** solicitar ao owner da organização a alteração da política e confirmar a configuração
-remota antes do primeiro merge.
+**Ação:** configuração concluída na organização e confirmada no repositório antes do primeiro
+merge.
 
 O repositório atualmente retorna:
 
 ```json
 {
   "default_workflow_permissions": "read",
-  "can_approve_pull_request_reviews": false
+  "can_approve_pull_request_reviews": true
 }
 ```
 
-Uma tentativa no nível do repositório retorna `409` porque a organização não permite esse recurso.
-O owner deve habilitar **Allow GitHub Actions to create and approve pull requests** em
-`fradelli` → **Settings** → **Actions** → **General**. Depois, manter o default do repositório como
-`read` e habilitar a opção local:
+A organização permite **Allow GitHub Actions to create and approve pull requests** em `fradelli` →
+**Settings** → **Actions** → **General**. O repositório mantém o default como `read` e habilita a
+opção local:
 
 ```powershell
 gh api --method PUT repos/fradelli/design-system/actions/permissions/workflow `
@@ -179,7 +178,7 @@ gh api repos/fradelli/design-system/actions/permissions/workflow
 
 Esperado: `default_workflow_permissions` continua `read` e
 `can_approve_pull_request_reviews` passa a `true`. O workflow declara permissões maiores somente no
-job de release. Não integrar a PR técnica enquanto o retorno continuar `false`.
+job de release.
 
 ### 2. `scripts/verify-publish-context.mjs`
 
