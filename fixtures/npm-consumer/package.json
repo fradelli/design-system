@@ -8,11 +8,14 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
+    "styles": "tailwindcss -i input.css -o output.css --minify",
     "smoke": "node smoke.mjs"
   },
   "dependencies": {
+    "@tailwindcss/cli": "4.3.3",
     "react": "19.2.7",
     "react-dom": "19.2.7",
+    "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   }
 }

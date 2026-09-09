@@ -1,2 +1,2 @@
-/** Public API placeholder. Components and tokens are introduced by later cards. */
+/** Public components are intentionally exposed only through explicit subpaths. */
 export {};

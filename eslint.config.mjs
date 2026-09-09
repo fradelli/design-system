@@ -3,7 +3,9 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist/**", ".tmp/**", "coverage/**", "storybook-static/**"] },
+  {
+    ignores: ["dist/**", ".tmp/**", "coverage/**", "storybook-static/**", "fixtures/**"],
+  },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked.map((config) => ({
     ...config,

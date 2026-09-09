@@ -7,8 +7,8 @@ Kaizen e futuros produtos do ecossistema Fradelli.
 
 Este repositório contém o contrato arquitetural, as regras de governança e o
 package `@fradelli/ui`. A fundação visual é dark-first e inclui tokens de cor,
-tipografia, espaçamento, radius, foco e motion. O package ainda não está
-publicado e os components serão adicionados em tarefas seguintes.
+tipografia, espaçamento, radius, foco e motion, além dos primeiros primitives
+compartilhados. O package ainda não está publicado.
 
 O scaffold da [KAN-222](https://sandicts.atlassian.net/browse/KAN-222) produz um
 tarball ESM com declarações TypeScript e um entrypoint CSS mínimo. A publicação
@@ -55,6 +55,39 @@ do package instalado. O caminho pode variar conforme a folha de estilo do app:
 
 Cada aplicativo carrega Inter no root e define `--font-inter`. O package usa
 fallbacks de sistema e não distribui arquivos da fonte.
+
+### Components
+
+Components e o helper `cn` são expostos somente por subpaths explícitos:
+
+```tsx
+import { Button } from "@fradelli/ui/button";
+import { Field, FieldDescription, FieldLabel } from "@fradelli/ui/field";
+import { Input } from "@fradelli/ui/input";
+import { cn } from "@fradelli/ui/cn";
+```
+
+Os subpaths disponíveis são `alert`, `badge`, `button`, `card`, `cn`, `field`,
+`input`, `label`, `separator`, `sheet` e `skeleton`. O entrypoint raiz permanece
+vazio intencionalmente para não unir boundaries de cliente e servidor.
+
+Labels, descrições e erros são associados pelo consumidor com atributos HTML:
+
+```tsx
+<Field data-invalid="true">
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <Input id="email" aria-describedby="email-help email-error" aria-invalid="true" />
+  <FieldDescription id="email-help">Used for account access.</FieldDescription>
+  <FieldError id="email-error">Email is required.</FieldError>
+</Field>
+```
+
+O `SheetContent` exige `closeLabel`. Essa copy deve vir do sistema de i18n do
+aplicativo:
+
+```tsx
+<SheetContent closeLabel={messages.closePanel}>...</SheetContent>
+```
 
 ## Consumidores
 
