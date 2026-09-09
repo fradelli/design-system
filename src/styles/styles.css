@@ -1,2 +1,101 @@
-/* Reserved cascade layer for the shared visual foundation introduced by KAN-221. */
-@layer fradelli-ui;
+@import "./tokens.generated.css" layer(fradelli-ui.tokens);
+
+@layer fradelli-ui.tokens, fradelli-ui.base;
+
+:root {
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--fd-color-background);
+  --color-surface: var(--fd-color-surface);
+  --color-surface-elevated: var(--fd-color-surface-elevated);
+  --color-surface-interactive: var(--fd-color-surface-interactive);
+  --color-foreground: var(--fd-color-foreground);
+  --color-muted-foreground: var(--fd-color-muted-foreground);
+  --color-border: var(--fd-color-border);
+  --color-input: var(--fd-color-input);
+  --color-primary: var(--fd-color-primary);
+  --color-primary-foreground: var(--fd-color-primary-foreground);
+  --color-brand: var(--fd-color-brand);
+  --color-brand-foreground: var(--fd-color-brand-foreground);
+  --color-focus-ring: var(--fd-color-focus-ring);
+  --color-status-success: var(--fd-color-status-success-solid);
+  --color-status-success-subtle: var(--fd-color-status-success-subtle);
+  --color-status-success-foreground: var(--fd-color-status-success-foreground);
+  --color-status-success-border: var(--fd-color-status-success-border);
+  --color-status-warning: var(--fd-color-status-warning-solid);
+  --color-status-warning-subtle: var(--fd-color-status-warning-subtle);
+  --color-status-warning-foreground: var(--fd-color-status-warning-foreground);
+  --color-status-warning-border: var(--fd-color-status-warning-border);
+  --color-status-info: var(--fd-color-status-info-solid);
+  --color-status-info-subtle: var(--fd-color-status-info-subtle);
+  --color-status-info-foreground: var(--fd-color-status-info-foreground);
+  --color-status-info-border: var(--fd-color-status-info-border);
+  --color-status-destructive: var(--fd-color-status-destructive-solid);
+  --color-status-destructive-subtle: var(--fd-color-status-destructive-subtle);
+  --color-status-destructive-foreground: var(--fd-color-status-destructive-foreground);
+  --color-status-destructive-border: var(--fd-color-status-destructive-border);
+  --color-category-yellow: var(--fd-color-category-yellow-solid);
+  --color-category-yellow-subtle: var(--fd-color-category-yellow-subtle);
+  --color-category-yellow-foreground: var(--fd-color-category-yellow-foreground);
+  --color-category-yellow-border: var(--fd-color-category-yellow-border);
+  --color-category-orange: var(--fd-color-category-orange-solid);
+  --color-category-orange-subtle: var(--fd-color-category-orange-subtle);
+  --color-category-orange-foreground: var(--fd-color-category-orange-foreground);
+  --color-category-orange-border: var(--fd-color-category-orange-border);
+  --color-category-red: var(--fd-color-category-red-solid);
+  --color-category-red-subtle: var(--fd-color-category-red-subtle);
+  --color-category-red-foreground: var(--fd-color-category-red-foreground);
+  --color-category-red-border: var(--fd-color-category-red-border);
+  --color-category-pink: var(--fd-color-category-pink-solid);
+  --color-category-pink-subtle: var(--fd-color-category-pink-subtle);
+  --color-category-pink-foreground: var(--fd-color-category-pink-foreground);
+  --color-category-pink-border: var(--fd-color-category-pink-border);
+  --color-category-purple: var(--fd-color-category-purple-solid);
+  --color-category-purple-subtle: var(--fd-color-category-purple-subtle);
+  --color-category-purple-foreground: var(--fd-color-category-purple-foreground);
+  --color-category-purple-border: var(--fd-color-category-purple-border);
+  --color-category-blue: var(--fd-color-category-blue-solid);
+  --color-category-blue-subtle: var(--fd-color-category-blue-subtle);
+  --color-category-blue-foreground: var(--fd-color-category-blue-foreground);
+  --color-category-blue-border: var(--fd-color-category-blue-border);
+  --color-category-cyan: var(--fd-color-category-cyan-solid);
+  --color-category-cyan-subtle: var(--fd-color-category-cyan-subtle);
+  --color-category-cyan-foreground: var(--fd-color-category-cyan-foreground);
+  --color-category-cyan-border: var(--fd-color-category-cyan-border);
+  --color-category-green: var(--fd-color-category-green-solid);
+  --color-category-green-subtle: var(--fd-color-category-green-subtle);
+  --color-category-green-foreground: var(--fd-color-category-green-foreground);
+  --color-category-green-border: var(--fd-color-category-green-border);
+  --font-sans: var(--fd-font-family-sans);
+  --radius-xs: var(--fd-radius-xs);
+  --radius-sm: var(--fd-radius-sm);
+  --radius-md: var(--fd-radius-md);
+  --radius-lg: var(--fd-radius-lg);
+  --radius-xl: var(--fd-radius-xl);
+}
+
+@layer fradelli-ui.base {
+  body {
+    color: var(--fd-color-foreground);
+    background: var(--fd-color-background);
+    font-family: var(--fd-font-family-sans);
+  }
+
+  :focus-visible {
+    outline: var(--fd-focus-width) solid var(--fd-focus-color);
+    outline-offset: var(--fd-focus-offset);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

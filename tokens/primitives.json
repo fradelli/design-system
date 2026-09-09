@@ -1,0 +1,135 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "primitive": {
+    "color": {
+      "$type": "color",
+      "neutral": {
+        "950": { "$value": "#0B0B0C" },
+        "900": { "$value": "#141416" },
+        "850": { "$value": "#1C1C1F" },
+        "800": { "$value": "#242428" },
+        "700": { "$value": "#2B2B30" },
+        "400": { "$value": "#9B9BA3" },
+        "50": { "$value": "#F4F4F5" },
+        "ink": { "$value": "#151515" }
+      },
+      "yellow": {
+        "solid": { "$value": "#F2CF63" },
+        "subtle": { "$value": "#312C20" },
+        "border": { "$value": "#968140" }
+      },
+      "orange": {
+        "solid": { "$value": "#F0A866" },
+        "subtle": { "$value": "#312720" },
+        "border": { "$value": "#946942" }
+      },
+      "red": {
+        "solid": { "$value": "#F07878" },
+        "subtle": { "$value": "#312123" },
+        "border": { "$value": "#944C4D" }
+      },
+      "pink": {
+        "solid": { "$value": "#E58AB7" },
+        "subtle": { "$value": "#2F232B" },
+        "border": { "$value": "#8E5773" }
+      },
+      "purple": {
+        "solid": { "$value": "#B79AF2" },
+        "subtle": { "$value": "#292533" },
+        "border": { "$value": "#726196" }
+      },
+      "blue": {
+        "solid": { "$value": "#7DA7F2" },
+        "subtle": { "$value": "#222733" },
+        "border": { "$value": "#4F6996" }
+      },
+      "cyan": {
+        "solid": { "$value": "#65C8D0" },
+        "subtle": { "$value": "#1F2B2E" },
+        "border": { "$value": "#417C82" }
+      },
+      "green": {
+        "solid": { "$value": "#7BC8A4" },
+        "subtle": { "$value": "#212B28" },
+        "border": { "$value": "#4E7C67" }
+      },
+      "destructive": {
+        "solid": { "$value": "#FF6673" },
+        "subtle": { "$value": "#35191E" },
+        "border": { "$value": "#A3424A" },
+        "foreground": { "$value": "#19080B" }
+      },
+      "brandForeground": { "$value": "#1C0D0D" },
+      "primaryForeground": { "$value": "#15130B" }
+    },
+    "font": {
+      "family": {
+        "$type": "string",
+        "sans": { "$value": "var(--font-inter, Inter), ui-sans-serif, system-ui, sans-serif" }
+      },
+      "weight": {
+        "$type": "fontWeight",
+        "400": { "$value": 400 },
+        "500": { "$value": 500 },
+        "600": { "$value": 600 },
+        "700": { "$value": 700 },
+        "800": { "$value": 800 }
+      },
+      "size": {
+        "$type": "dimension",
+        "12": { "$value": { "value": 12, "unit": "px" } },
+        "14": { "$value": { "value": 14, "unit": "px" } },
+        "16": { "$value": { "value": 16, "unit": "px" } },
+        "20": { "$value": { "value": 20, "unit": "px" } },
+        "24": { "$value": { "value": 24, "unit": "px" } },
+        "32": { "$value": { "value": 32, "unit": "px" } }
+      },
+      "lineHeight": {
+        "$type": "dimension",
+        "16": { "$value": { "value": 16, "unit": "px" } },
+        "20": { "$value": { "value": 20, "unit": "px" } },
+        "24": { "$value": { "value": 24, "unit": "px" } },
+        "28": { "$value": { "value": 28, "unit": "px" } },
+        "32": { "$value": { "value": 32, "unit": "px" } },
+        "40": { "$value": { "value": 40, "unit": "px" } }
+      }
+    },
+    "space": {
+      "$type": "dimension",
+      "0": { "$value": { "value": 0, "unit": "px" } },
+      "1": { "$value": { "value": 4, "unit": "px" } },
+      "2": { "$value": { "value": 8, "unit": "px" } },
+      "3": { "$value": { "value": 12, "unit": "px" } },
+      "4": { "$value": { "value": 16, "unit": "px" } },
+      "6": { "$value": { "value": 24, "unit": "px" } },
+      "8": { "$value": { "value": 32, "unit": "px" } },
+      "12": { "$value": { "value": 48, "unit": "px" } }
+    },
+    "radius": {
+      "$type": "dimension",
+      "xs": { "$value": { "value": 4, "unit": "px" } },
+      "sm": { "$value": { "value": 6, "unit": "px" } },
+      "md": { "$value": { "value": 8, "unit": "px" } },
+      "lg": { "$value": { "value": 12, "unit": "px" } },
+      "xl": { "$value": { "value": 16, "unit": "px" } },
+      "full": { "$value": { "value": 999, "unit": "px" } }
+    },
+    "focus": {
+      "$type": "dimension",
+      "width": { "$value": { "value": 2, "unit": "px" } },
+      "offset": { "$value": { "value": 2, "unit": "px" } }
+    },
+    "motion": {
+      "duration": {
+        "$type": "duration",
+        "fast": { "$value": "120ms" },
+        "normal": { "$value": "180ms" },
+        "slow": { "$value": "240ms" }
+      },
+      "easing": {
+        "$type": "cubicBezier",
+        "standard": { "$value": [0.2, 0, 0, 1] }
+      }
+    }
+  }
+}

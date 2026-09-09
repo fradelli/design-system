@@ -5,3 +5,4 @@ storybook-static
 package-lock.json
 docs/decisions
 docs/governance
+src/styles/tokens.generated.css

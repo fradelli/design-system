@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@import "../src/styles/styles.css";
+@source "../src";
+
+html,
+body,
+#storybook-root {
+  min-height: 100%;
+}
