@@ -1,7 +1,7 @@
 ---
 title: Plano de implementação da KAN-226
 doc-type: implementation-guide
-status: planned
+status: in-review
 last-reviewed: 2026-09-08
 owners:
   - frontend
@@ -14,6 +14,9 @@ related-repository: fradelli/design-system
 
 ## Status do documento
 
+- **Situação:** implementação concluída localmente e enviada para a
+  [PR #4](https://github.com/fradelli/design-system/pull/4), mantida como draft até a política da
+  organização permitir que GitHub Actions crie a PR automática de versão.
 - **Escopo:** habilitar releases privadas, imutáveis e auditáveis de `@fradelli/ui` no GitHub
   Packages usando Changesets e GitHub Actions.
 - **Card:** `KAN-226`; o título exato do Jira deve ser confirmado quando a integração Atlassian
