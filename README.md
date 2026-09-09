@@ -6,9 +6,9 @@ Kaizen e futuros produtos do ecossistema Fradelli.
 ## Estado atual
 
 Este repositório contém o contrato arquitetural, as regras de governança e o
-scaffold técnico do package `@fradelli/ui`. O package ainda não possui tokens ou
-componentes e não está publicado; essas evoluções pertencem às tarefas
-seguintes.
+package `@fradelli/ui`. A fundação visual é dark-first e inclui tokens de cor,
+tipografia, espaçamento, radius, foco e motion. O package ainda não está
+publicado e os components serão adicionados em tarefas seguintes.
 
 O scaffold da [KAN-222](https://sandicts.atlassian.net/browse/KAN-222) produz um
 tarball ESM com declarações TypeScript e um entrypoint CSS mínimo. A publicação
@@ -26,6 +26,35 @@ npm run ci
 Os gates incluem formatação, lint, tipos, testes, build, inspeção do tarball,
 compatibilidade com consumidores npm e pnpm e auditoria de dependências. Para
 validar apenas o artefato instalável, execute `npm run pack:check`.
+
+### Tokens e Storybook
+
+Os arquivos `tokens/*.json` são a fonte editável. O CSS gerado é versionado para
+revisão, mas não deve ser alterado manualmente:
+
+```bash
+npm run tokens:build
+npm run tokens:check
+npm run storybook
+```
+
+O consumidor importa o CSS uma vez:
+
+```css
+@import "@fradelli/ui/styles.css";
+```
+
+Em Tailwind CSS 4, importe também o framework e declare explicitamente o source
+do package instalado. O caminho pode variar conforme a folha de estilo do app:
+
+```css
+@import "tailwindcss";
+@import "@fradelli/ui/styles.css";
+@source "../node_modules/@fradelli/ui/dist";
+```
+
+Cada aplicativo carrega Inter no root e define `--font-inter`. O package usa
+fallbacks de sistema e não distribui arquivos da fonte.
 
 ## Consumidores
 

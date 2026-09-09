@@ -14,5 +14,5 @@
     "noEmit": true,
     "types": ["node", "react", "react-dom"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "scripts/**/*.mjs", "*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", ".storybook/**/*.ts", "scripts/**/*.mjs", "*.ts"]
 }

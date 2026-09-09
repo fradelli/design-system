@@ -42,6 +42,8 @@
   artefatos gerados e não devem ser versionados.
 - Mantenha imports relativos do source compatíveis com NodeNext, incluindo a
   extensão `.js` quando houver módulo relativo emitido.
+- Nunca edite `src/styles/tokens.generated.css` manualmente. Altere os arquivos
+  DTCG em `tokens/` e execute `npm run tokens:build`.
 - A publicação está intencionalmente bloqueada até a KAN-226. Não remova o
   `prepublishOnly` nem adicione tokens ou permissão `packages: write` antes dela.
 - Um novo ADR substitui uma decisão aceita; não reescreva silenciosamente o

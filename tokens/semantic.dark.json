@@ -1,0 +1,161 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "color": {
+    "$type": "color",
+    "background": { "$value": "{primitive.color.neutral.950}" },
+    "surface": { "$value": "{primitive.color.neutral.900}" },
+    "surfaceElevated": { "$value": "{primitive.color.neutral.850}" },
+    "surfaceInteractive": { "$value": "{primitive.color.neutral.800}" },
+    "foreground": { "$value": "{primitive.color.neutral.50}" },
+    "mutedForeground": { "$value": "{primitive.color.neutral.400}" },
+    "border": { "$value": "{primitive.color.neutral.700}" },
+    "input": { "$value": "{primitive.color.neutral.700}" },
+    "primary": { "$value": "{primitive.color.yellow.solid}" },
+    "primaryForeground": { "$value": "{primitive.color.primaryForeground}" },
+    "brand": { "$value": "{primitive.color.red.solid}" },
+    "brandForeground": { "$value": "{primitive.color.brandForeground}" },
+    "focusRing": { "$value": "{primitive.color.yellow.solid}" },
+    "category": {
+      "yellow": {
+        "solid": { "$value": "{primitive.color.yellow.solid}" },
+        "subtle": { "$value": "{primitive.color.yellow.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.yellow.border}" }
+      },
+      "orange": {
+        "solid": { "$value": "{primitive.color.orange.solid}" },
+        "subtle": { "$value": "{primitive.color.orange.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.orange.border}" }
+      },
+      "red": {
+        "solid": { "$value": "{primitive.color.red.solid}" },
+        "subtle": { "$value": "{primitive.color.red.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.red.border}" }
+      },
+      "pink": {
+        "solid": { "$value": "{primitive.color.pink.solid}" },
+        "subtle": { "$value": "{primitive.color.pink.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.pink.border}" }
+      },
+      "purple": {
+        "solid": { "$value": "{primitive.color.purple.solid}" },
+        "subtle": { "$value": "{primitive.color.purple.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.purple.border}" }
+      },
+      "blue": {
+        "solid": { "$value": "{primitive.color.blue.solid}" },
+        "subtle": { "$value": "{primitive.color.blue.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.blue.border}" }
+      },
+      "cyan": {
+        "solid": { "$value": "{primitive.color.cyan.solid}" },
+        "subtle": { "$value": "{primitive.color.cyan.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.cyan.border}" }
+      },
+      "green": {
+        "solid": { "$value": "{primitive.color.green.solid}" },
+        "subtle": { "$value": "{primitive.color.green.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.green.border}" }
+      }
+    },
+    "status": {
+      "success": {
+        "solid": { "$value": "{primitive.color.green.solid}" },
+        "subtle": { "$value": "{primitive.color.green.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.green.border}" }
+      },
+      "warning": {
+        "solid": { "$value": "{primitive.color.yellow.solid}" },
+        "subtle": { "$value": "{primitive.color.yellow.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.yellow.border}" }
+      },
+      "info": {
+        "solid": { "$value": "{primitive.color.blue.solid}" },
+        "subtle": { "$value": "{primitive.color.blue.subtle}" },
+        "foreground": { "$value": "{primitive.color.neutral.ink}" },
+        "border": { "$value": "{primitive.color.blue.border}" }
+      },
+      "destructive": {
+        "solid": { "$value": "{primitive.color.destructive.solid}" },
+        "subtle": { "$value": "{primitive.color.destructive.subtle}" },
+        "foreground": { "$value": "{primitive.color.destructive.foreground}" },
+        "border": { "$value": "{primitive.color.destructive.border}" }
+      }
+    }
+  },
+  "font": {
+    "family": { "sans": { "$type": "string", "$value": "{primitive.font.family.sans}" } },
+    "weight": {
+      "$type": "fontWeight",
+      "body": { "$value": "{primitive.font.weight.400}" },
+      "label": { "$value": "{primitive.font.weight.500}" },
+      "emphasis": { "$value": "{primitive.font.weight.600}" },
+      "heading": { "$value": "{primitive.font.weight.700}" },
+      "display": { "$value": "{primitive.font.weight.800}" }
+    },
+    "size": {
+      "$type": "dimension",
+      "xs": { "$value": "{primitive.font.size.12}" },
+      "sm": { "$value": "{primitive.font.size.14}" },
+      "md": { "$value": "{primitive.font.size.16}" },
+      "lg": { "$value": "{primitive.font.size.20}" },
+      "xl": { "$value": "{primitive.font.size.24}" },
+      "2xl": { "$value": "{primitive.font.size.32}" }
+    },
+    "lineHeight": {
+      "$type": "dimension",
+      "xs": { "$value": "{primitive.font.lineHeight.16}" },
+      "sm": { "$value": "{primitive.font.lineHeight.20}" },
+      "md": { "$value": "{primitive.font.lineHeight.24}" },
+      "lg": { "$value": "{primitive.font.lineHeight.28}" },
+      "xl": { "$value": "{primitive.font.lineHeight.32}" },
+      "2xl": { "$value": "{primitive.font.lineHeight.40}" }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "0": { "$value": "{primitive.space.0}" },
+    "1": { "$value": "{primitive.space.1}" },
+    "2": { "$value": "{primitive.space.2}" },
+    "3": { "$value": "{primitive.space.3}" },
+    "4": { "$value": "{primitive.space.4}" },
+    "6": { "$value": "{primitive.space.6}" },
+    "8": { "$value": "{primitive.space.8}" },
+    "12": { "$value": "{primitive.space.12}" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "xs": { "$value": "{primitive.radius.xs}" },
+    "sm": { "$value": "{primitive.radius.sm}" },
+    "md": { "$value": "{primitive.radius.md}" },
+    "lg": { "$value": "{primitive.radius.lg}" },
+    "xl": { "$value": "{primitive.radius.xl}" },
+    "full": { "$value": "{primitive.radius.full}" }
+  },
+  "focus": {
+    "width": { "$type": "dimension", "$value": "{primitive.focus.width}" },
+    "offset": { "$type": "dimension", "$value": "{primitive.focus.offset}" },
+    "color": { "$type": "color", "$value": "{primitive.color.yellow.solid}" }
+  },
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "fast": { "$value": "{primitive.motion.duration.fast}" },
+      "normal": { "$value": "{primitive.motion.duration.normal}" },
+      "slow": { "$value": "{primitive.motion.duration.slow}" }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": { "$value": "{primitive.motion.easing.standard}" }
+    }
+  }
+}
