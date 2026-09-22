@@ -16,6 +16,7 @@ const expected = [
   "./sheet",
   "./skeleton",
   "./styles.css",
+  "./switch",
 ];
 
 describe("package exports", () => {

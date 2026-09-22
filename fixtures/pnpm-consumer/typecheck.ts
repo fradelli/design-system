@@ -10,6 +10,7 @@ import type { LabelProps } from "@fradelli/ui/label";
 import type { SeparatorProps } from "@fradelli/ui/separator";
 import type { SheetContentProps } from "@fradelli/ui/sheet";
 import type { SkeletonProps } from "@fradelli/ui/skeleton";
+import type { SwitchProps } from "@fradelli/ui/switch";
 
 type PublicProps =
   | AlertProps
@@ -21,7 +22,8 @@ type PublicProps =
   | LabelProps
   | SeparatorProps
   | SheetContentProps
-  | SkeletonProps;
+  | SkeletonProps
+  | SwitchProps;
 declare const props: PublicProps;
 void props;
 void cn("px-2", "px-4");

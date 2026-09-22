@@ -21,6 +21,7 @@ import {
   SheetTrigger,
 } from "../../components/sheet/index.js";
 import { Skeleton } from "../../components/skeleton/index.js";
+import { Switch } from "../../components/switch/index.js";
 
 const meta = { title: "Components/Primitives", parameters: { layout: "padded" } } satisfies Meta;
 export default meta;
@@ -55,6 +56,25 @@ export const Actions: Story = {
       <Badge variant="success">Success</Badge>
       <Badge variant="warning">Warning</Badge>
       <Badge variant="info">Information</Badge>
+    </div>
+  ),
+};
+
+export const Switches: Story = {
+  render: () => (
+    <div className="flex flex-wrap items-center gap-6">
+      <label className="flex items-center gap-2 text-sm text-foreground">
+        <Switch checked={false} aria-label="Disabled notifications" />
+        Disabled
+      </label>
+      <label className="flex items-center gap-2 text-sm text-foreground">
+        <Switch checked aria-label="Enabled notifications" />
+        Enabled
+      </label>
+      <label className="flex items-center gap-2 text-sm text-muted-foreground">
+        <Switch checked={false} aria-label="Unavailable option" disabled />
+        Unavailable
+      </label>
     </div>
   ),
 };

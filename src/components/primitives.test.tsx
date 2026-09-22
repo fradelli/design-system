@@ -3,8 +3,10 @@
  */
 
 import "@testing-library/jest-dom/vitest";
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import type { FormEvent } from "react";
+import { render, screen, within } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
 
 import { Alert, AlertDescription, AlertTitle } from "./alert/index.js";
 import { Badge } from "./badge/index.js";
@@ -14,6 +16,7 @@ import { Field, FieldDescription, FieldError, FieldLabel } from "./field/index.j
 import { Input } from "./input/index.js";
 import { Separator } from "./separator/index.js";
 import { Skeleton } from "./skeleton/index.js";
+import { Switch } from "./switch/index.js";
 
 describe("shared primitives", () => {
   it("composes accessible form and feedback primitives", () => {
@@ -61,5 +64,52 @@ describe("shared primitives", () => {
     expect(screen.getByRole("button", { name: "Save" })).toBeDisabled();
     expect(screen.getByTestId("skeleton")).toHaveAttribute("aria-hidden", "true");
     expect(screen.getByTestId("skeleton")).toHaveClass("motion-reduce:animate-none");
+  });
+
+  it("exposes an accessible controlled switch", () => {
+    const { rerender } = render(<Switch checked={false} aria-label="Enable reminders" />);
+
+    expect(screen.getByRole("switch", { name: "Enable reminders" })).toHaveAttribute(
+      "aria-checked",
+      "false",
+    );
+
+    rerender(<Switch checked aria-label="Enable reminders" disabled />);
+
+    const switchControl = screen.getByRole("switch", { name: "Enable reminders" });
+    expect(switchControl).toHaveAttribute("aria-checked", "true");
+    expect(switchControl).toBeDisabled();
+  });
+
+  it("supports keyboard activation without submitting a form by default", async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    const onSubmit = vi.fn((event: FormEvent) => event.preventDefault());
+    const { container } = render(
+      <form onSubmit={onSubmit}>
+        <Switch checked={false} aria-label="Enable reminders" onClick={onClick} />
+      </form>,
+    );
+
+    const switchControl = within(container).getByRole("switch", { name: "Enable reminders" });
+    expect(switchControl).toHaveAttribute("type", "button");
+    switchControl.focus();
+    expect(switchControl).toHaveFocus();
+    await user.keyboard(" ");
+    await user.keyboard("{Enter}");
+    expect(onClick).toHaveBeenCalledTimes(2);
+    expect(onSubmit).not.toHaveBeenCalled();
+    expect(switchControl).toHaveAttribute("aria-checked", "false");
+  });
+
+  it("does not activate when disabled", async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    const { container } = render(
+      <Switch checked={false} aria-label="Unavailable option" disabled onClick={onClick} />,
+    );
+
+    await user.click(within(container).getByRole("switch", { name: "Unavailable option" }));
+    expect(onClick).not.toHaveBeenCalled();
   });
 });
