@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+### Minor Changes
+
+- 09488a8: Adiciona a primitive acessível `Switch` com estados controlado, desabilitado e foco visível.
+
 ## 0.1.0
 
 ### Minor Changes
