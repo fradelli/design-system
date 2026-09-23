@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 const expected = [
   ".",
   "./alert",
+  "./alert-dialog",
   "./badge",
   "./button",
   "./card",
@@ -12,11 +13,14 @@ const expected = [
   "./icons",
   "./input",
   "./label",
+  "./loading-region",
   "./navigation-item",
   "./package.json",
+  "./pending-button",
   "./separator",
   "./sheet",
   "./skeleton",
+  "./status-badge",
   "./styles.css",
   "./switch",
 ];

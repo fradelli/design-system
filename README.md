@@ -75,10 +75,11 @@ import { Input } from "@fradelli/ui/input";
 import { cn } from "@fradelli/ui/cn";
 ```
 
-Os subpaths disponíveis são `alert`, `badge`, `button`, `card`, `cn`, `field`,
-`icons`, `input`, `label`, `navigation-item`, `separator`, `sheet`, `skeleton` e
-`switch`. O entrypoint raiz permanece
-vazio intencionalmente para não unir boundaries de cliente e servidor.
+Os subpaths disponíveis são `alert`, `alert-dialog`, `badge`, `button`, `card`,
+`cn`, `field`, `icons`, `input`, `label`, `loading-region`, `navigation-item`,
+`pending-button`, `separator`, `sheet`, `skeleton`, `status-badge` e `switch`.
+O entrypoint raiz permanece vazio intencionalmente para não unir boundaries de
+cliente e servidor.
 
 `NavigationItem` oferece um link com área mínima de toque, foco visível e
 estado ativo nativo por `aria-current`. Não determina rotas, posicionamento,

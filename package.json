@@ -21,6 +21,10 @@
       "types": "./dist/components/alert/index.d.ts",
       "import": "./dist/components/alert/index.js"
     },
+    "./alert-dialog": {
+      "types": "./dist/components/alert-dialog/index.d.ts",
+      "import": "./dist/components/alert-dialog/index.js"
+    },
     "./badge": {
       "types": "./dist/components/badge/index.d.ts",
       "import": "./dist/components/badge/index.js"
@@ -49,6 +53,10 @@
       "types": "./dist/components/label/index.d.ts",
       "import": "./dist/components/label/index.js"
     },
+    "./loading-region": {
+      "types": "./dist/components/loading-region/index.d.ts",
+      "import": "./dist/components/loading-region/index.js"
+    },
     "./separator": {
       "types": "./dist/components/separator/index.d.ts",
       "import": "./dist/components/separator/index.js"
@@ -61,6 +69,10 @@
       "types": "./dist/components/skeleton/index.d.ts",
       "import": "./dist/components/skeleton/index.js"
     },
+    "./status-badge": {
+      "types": "./dist/components/status-badge/index.d.ts",
+      "import": "./dist/components/status-badge/index.js"
+    },
     "./switch": {
       "types": "./dist/components/switch/index.d.ts",
       "import": "./dist/components/switch/index.js"
@@ -68,6 +80,10 @@
     "./navigation-item": {
       "types": "./dist/components/navigation-item/index.d.ts",
       "import": "./dist/components/navigation-item/index.js"
+    },
+    "./pending-button": {
+      "types": "./dist/components/pending-button/index.d.ts",
+      "import": "./dist/components/pending-button/index.js"
     },
     "./icons": {
       "types": "./dist/icons/index.d.ts",
@@ -157,6 +173,7 @@
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",
+    "@radix-ui/react-alert-dialog": "1.1.23",
     "@radix-ui/react-dialog": "1.1.23",
     "@radix-ui/react-label": "2.1.15",
     "@radix-ui/react-separator": "1.1.15",
