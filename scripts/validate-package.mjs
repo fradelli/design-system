@@ -35,6 +35,8 @@ const expectedFiles = [
   "dist/components/sheet/index.js",
   "dist/components/skeleton/index.d.ts",
   "dist/components/skeleton/index.js",
+  "dist/components/switch/index.d.ts",
+  "dist/components/switch/index.js",
   "dist/index.d.ts",
   "dist/index.js",
   "dist/lib/cn.d.ts",
