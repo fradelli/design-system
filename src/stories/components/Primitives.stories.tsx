@@ -1,6 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Alert, AlertDescription, AlertTitle } from "../../components/alert/index.js";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../../components/alert-dialog/index.js";
 import { Badge } from "../../components/badge/index.js";
 import { Button } from "../../components/button/index.js";
 import {
@@ -12,6 +23,8 @@ import {
 } from "../../components/card/index.js";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../../components/field/index.js";
 import { Input } from "../../components/input/index.js";
+import { LoadingRegion } from "../../components/loading-region/index.js";
+import { PendingButton } from "../../components/pending-button/index.js";
 import { Separator } from "../../components/separator/index.js";
 import {
   Sheet,
@@ -21,6 +34,7 @@ import {
   SheetTrigger,
 } from "../../components/sheet/index.js";
 import { Skeleton } from "../../components/skeleton/index.js";
+import { StatusBadge } from "../../components/status-badge/index.js";
 
 const meta = { title: "Components/Primitives", parameters: { layout: "padded" } } satisfies Meta;
 export default meta;
@@ -96,5 +110,45 @@ export const Overlay: Story = {
         <Input aria-label="Panel value" />
       </SheetContent>
     </Sheet>
+  ),
+};
+
+export const AsyncFeedback: Story = {
+  render: () => (
+    <div className="grid max-w-md gap-4">
+      <LoadingRegion label="Loading content">
+        <Skeleton className="h-20 w-full" />
+      </LoadingRegion>
+      <div className="flex flex-wrap items-center gap-3">
+        <PendingButton pending pendingLabel="Saving changes">
+          Save changes
+        </PendingButton>
+        <StatusBadge label="Available" tone="success" />
+      </div>
+    </div>
+  ),
+};
+
+export const Confirmation: Story = {
+  render: () => (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive">Remove item</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Remove item?</AlertDialogTitle>
+          <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel asChild>
+            <Button variant="outline">Cancel</Button>
+          </AlertDialogCancel>
+          <AlertDialogAction asChild>
+            <Button variant="destructive">Remove</Button>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   ),
 };

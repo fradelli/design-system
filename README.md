@@ -75,9 +75,10 @@ import { Input } from "@fradelli/ui/input";
 import { cn } from "@fradelli/ui/cn";
 ```
 
-Os subpaths disponíveis são `alert`, `badge`, `button`, `card`, `cn`, `field`,
-`input`, `label`, `separator`, `sheet` e `skeleton`. O entrypoint raiz permanece
-vazio intencionalmente para não unir boundaries de cliente e servidor.
+Os subpaths disponíveis são `alert`, `alert-dialog`, `badge`, `button`, `card`,
+`cn`, `field`, `input`, `label`, `loading-region`, `pending-button`, `separator`,
+`sheet`, `skeleton` e `status-badge`. O entrypoint raiz permanece vazio
+intencionalmente para não unir boundaries de cliente e servidor.
 
 Labels, descrições e erros são associados pelo consumidor com atributos HTML:
 
