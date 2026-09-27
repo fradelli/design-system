@@ -15,6 +15,13 @@ export default defineConfig({
       },
       {
         plugins: [storybookTest({ configDir: ".storybook" })],
+        optimizeDeps: {
+          include: [
+            "@phosphor-icons/react/dist/ssr/Barbell",
+            "@phosphor-icons/react/dist/ssr/ForkKnife",
+            "@phosphor-icons/react/X",
+          ],
+        },
         test: {
           name: "storybook",
           browser: {

@@ -7,6 +7,8 @@ import { cn } from "@fradelli/ui/cn";
 import type { FieldProps } from "@fradelli/ui/field";
 import type { InputProps } from "@fradelli/ui/input";
 import type { LabelProps } from "@fradelli/ui/label";
+import type { NavigationItemProps } from "@fradelli/ui/navigation-item";
+import { BarbellIcon, ForkKnifeIcon } from "@fradelli/ui/icons";
 import type { SeparatorProps } from "@fradelli/ui/separator";
 import type { SheetContentProps } from "@fradelli/ui/sheet";
 import type { SkeletonProps } from "@fradelli/ui/skeleton";
@@ -20,6 +22,7 @@ type PublicProps =
   | FieldProps
   | InputProps
   | LabelProps
+  | NavigationItemProps
   | SeparatorProps
   | SheetContentProps
   | SkeletonProps
@@ -27,3 +30,5 @@ type PublicProps =
 declare const props: PublicProps;
 void props;
 void cn("px-2", "px-4");
+void BarbellIcon;
+void ForkKnifeIcon;
