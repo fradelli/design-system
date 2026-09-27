@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0
+
+### Minor Changes
+
+- 2f43398: Adiciona NavigationItem como primitive de link de navegação com estado ativo,
+  foco visível e área mínima de toque. Expõe BarbellIcon e ForkKnifeIcon por
+  subpath explícito, reutilizando Phosphor sem dependências novas.
+
 ## 0.2.0
 
 ### Minor Changes
