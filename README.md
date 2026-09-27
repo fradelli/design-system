@@ -76,8 +76,26 @@ import { cn } from "@fradelli/ui/cn";
 ```
 
 Os subpaths disponíveis são `alert`, `badge`, `button`, `card`, `cn`, `field`,
-`input`, `label`, `separator`, `sheet` e `skeleton`. O entrypoint raiz permanece
+`icons`, `input`, `label`, `navigation-item`, `separator`, `sheet`, `skeleton` e
+`switch`. O entrypoint raiz permanece
 vazio intencionalmente para não unir boundaries de cliente e servidor.
+
+`NavigationItem` oferece um link com área mínima de toque, foco visível e
+estado ativo nativo por `aria-current`. Não determina rotas, posicionamento,
+breakpoints ou copy. O app compõe sua barra e preserva seus parâmetros de URL.
+
+```tsx
+import { NavigationItem } from "@fradelli/ui/navigation-item";
+import { BarbellIcon } from "@fradelli/ui/icons";
+
+<NavigationItem href="/example" aria-label="Example" aria-current="page">
+  <BarbellIcon aria-hidden="true" />
+</NavigationItem>;
+```
+
+Com routers de consumidores, use `asChild` para fornecer um único link, sem
+âncoras aninhadas. O subpath `icons` também expõe `ForkKnifeIcon`; ambos usam
+Phosphor já instalado, sem dependência direta adicional no aplicativo.
 
 Labels, descrições e erros são associados pelo consumidor com atributos HTML:
 

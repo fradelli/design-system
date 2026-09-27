@@ -65,6 +65,14 @@
       "types": "./dist/components/switch/index.d.ts",
       "import": "./dist/components/switch/index.js"
     },
+    "./navigation-item": {
+      "types": "./dist/components/navigation-item/index.d.ts",
+      "import": "./dist/components/navigation-item/index.js"
+    },
+    "./icons": {
+      "types": "./dist/icons/index.d.ts",
+      "import": "./dist/icons/index.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./package.json": "./package.json"
   },

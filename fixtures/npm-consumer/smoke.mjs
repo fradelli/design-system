@@ -11,6 +11,8 @@ import { cn } from "@fradelli/ui/cn";
 import { Field, FieldLabel } from "@fradelli/ui/field";
 import { Input } from "@fradelli/ui/input";
 import { Label } from "@fradelli/ui/label";
+import { NavigationItem } from "@fradelli/ui/navigation-item";
+import { BarbellIcon, ForkKnifeIcon } from "@fradelli/ui/icons";
 import { Separator } from "@fradelli/ui/separator";
 import * as sheetApi from "@fradelli/ui/sheet";
 import { Skeleton } from "@fradelli/ui/skeleton";
@@ -27,6 +29,16 @@ const markup = renderToStaticMarkup(
       createElement(Alert, null, createElement(AlertTitle, null, "Portable")),
       createElement(Badge, null, "Ready"),
       createElement(Button, null, "Continue"),
+      createElement(
+        NavigationItem,
+        { href: "#first", "aria-label": "First", "aria-current": "page" },
+        createElement(BarbellIcon, { "aria-hidden": true }),
+      ),
+      createElement(
+        NavigationItem,
+        { href: "#second", "aria-label": "Second" },
+        createElement(ForkKnifeIcon, { "aria-hidden": true }),
+      ),
       createElement(
         Field,
         null,

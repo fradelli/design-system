@@ -8,6 +8,7 @@ const boundaries = new Map([
   ["src/components/alert/index.tsx", false],
   ["src/components/badge/index.tsx", false],
   ["src/components/button/index.tsx", false],
+  ["src/components/navigation-item/index.tsx", false],
   ["src/components/card/index.tsx", false],
   ["src/components/field/index.tsx", false],
   ["src/components/input/index.tsx", false],
