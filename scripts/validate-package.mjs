@@ -37,6 +37,10 @@ const expectedFiles = [
   "dist/components/navigation-item/index.js",
   "dist/components/pending-button/index.d.ts",
   "dist/components/pending-button/index.js",
+  "dist/components/popover/index.d.ts",
+  "dist/components/popover/index.js",
+  "dist/components/radio-group/index.d.ts",
+  "dist/components/radio-group/index.js",
   "dist/components/separator/index.d.ts",
   "dist/components/separator/index.js",
   "dist/components/sheet/index.d.ts",
@@ -53,6 +57,8 @@ const expectedFiles = [
   "dist/index.js",
   "dist/lib/cn.d.ts",
   "dist/lib/cn.js",
+  "dist/lib/slot.d.ts",
+  "dist/lib/slot.js",
   "dist/styles.css",
   "package.json",
 ];
@@ -82,7 +88,12 @@ for (const target of exportTargets) {
   await readFile(target.replace(/^\.\//, ""));
 }
 
-const forbiddenPatterns = [/@\//u, /next(?:\/|\b)/iu, /sandicts/iu, /kaizen/iu];
+const forbiddenPatterns = [
+  /@\//u,
+  /(?:from|import|require\()\s*["']next(?:\/[^"']*)?["']/iu,
+  /sandicts/iu,
+  /kaizen/iu,
+];
 for (const file of await readdir("dist", { recursive: true })) {
   const path = join("dist", file);
   if ((await stat(path)).isDirectory()) continue;

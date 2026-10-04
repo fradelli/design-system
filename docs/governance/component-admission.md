@@ -27,6 +27,8 @@ admissão. O ajuste deve permanecer no consumidor ou ser resolvido por composiç
 | Candidato | Decisão inicial | Motivo |
 | --- | --- | --- |
 | `Button` | Admitir | Primitive visual fundamental, sem domínio |
+| `Popover` | Admitir | Primitive fundamental; posicionamento e comportamento semântico compartilhados |
+| `RadioGroup` | Admitir | Primitive fundamental de seleção única com teclado e estado desabilitado |
 | `StatusBadge` | Manter local | O mapeamento de status ainda pertence aos apps; somente o primitive genérico pode ser reavaliado |
 | `Calendar` | Manter local | Agenda, eventos, permissões e ações ainda têm composições de domínio diferentes |
 | Tokens categóricos | Admitir | O package oferece as cores; cada app define seu significado |

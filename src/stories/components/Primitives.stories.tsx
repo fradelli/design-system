@@ -25,6 +25,8 @@ import { Field, FieldDescription, FieldError, FieldLabel } from "../../component
 import { Input } from "../../components/input/index.js";
 import { LoadingRegion } from "../../components/loading-region/index.js";
 import { PendingButton } from "../../components/pending-button/index.js";
+import { Popover } from "../../components/popover/index.js";
+import { RadioGroup } from "../../components/radio-group/index.js";
 import { Separator } from "../../components/separator/index.js";
 import {
   Sheet,
@@ -71,6 +73,39 @@ export const Actions: Story = {
       <Badge variant="warning">Warning</Badge>
       <Badge variant="info">Information</Badge>
     </div>
+  ),
+};
+
+export const Selection: Story = {
+  render: () => (
+    <RadioGroup.Root aria-label="Preferred court" defaultValue="north" className="grid gap-2">
+      <RadioGroup.Item
+        value="north"
+        className="rounded-md border border-border p-3 text-left data-[state=checked]:border-primary"
+      >
+        North court
+      </RadioGroup.Item>
+      <RadioGroup.Item
+        value="south"
+        className="rounded-md border border-border p-3 text-left data-[state=checked]:border-primary"
+      >
+        South court
+      </RadioGroup.Item>
+    </RadioGroup.Root>
+  ),
+};
+
+export const Popovers: Story = {
+  render: () => (
+    <Popover.Root>
+      <Popover.Trigger asChild>
+        <Button variant="outline">Account actions</Button>
+      </Popover.Trigger>
+      <Popover.Content align="start" className="grid gap-3">
+        <p className="text-sm font-medium">Manage your account</p>
+        <Button variant="destructive">Sign out</Button>
+      </Popover.Content>
+    </Popover.Root>
   ),
 };
 

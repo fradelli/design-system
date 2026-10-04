@@ -17,6 +17,8 @@ const expected = [
   "./navigation-item",
   "./package.json",
   "./pending-button",
+  "./popover",
+  "./radio-group",
   "./separator",
   "./sheet",
   "./skeleton",

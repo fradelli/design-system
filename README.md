@@ -72,12 +72,15 @@ Components e o helper `cn` são expostos somente por subpaths explícitos:
 import { Button } from "@fradelli/ui/button";
 import { Field, FieldDescription, FieldLabel } from "@fradelli/ui/field";
 import { Input } from "@fradelli/ui/input";
+import { Popover } from "@fradelli/ui/popover";
+import { RadioGroup } from "@fradelli/ui/radio-group";
 import { cn } from "@fradelli/ui/cn";
 ```
 
 Os subpaths disponíveis são `alert`, `alert-dialog`, `badge`, `button`, `card`,
 `cn`, `field`, `icons`, `input`, `label`, `loading-region`, `navigation-item`,
-`pending-button`, `separator`, `sheet`, `skeleton`, `status-badge` e `switch`.
+`pending-button`, `popover`, `radio-group`, `separator`, `sheet`, `skeleton`,
+`status-badge` e `switch`.
 O entrypoint raiz permanece vazio intencionalmente para não unir boundaries de
 cliente e servidor.
 
@@ -140,13 +143,15 @@ verificação e rollback.
 
 ## Fonte normativa
 
-- [ADR 0001 — Fundação do Design System compartilhado](docs/decisions/0001-shared-design-system-foundation.md)
+- [ADR 0002 — Primitives acessíveis sem dependência headless](docs/decisions/0002-native-accessible-primitives.md)
+- [ADR 0001 — Fundação do Design System compartilhado](docs/decisions/0001-shared-design-system-foundation.md) (histórico; direção técnica de primitives substituída pelo ADR 0002)
 - [Admissão de componentes](docs/governance/component-admission.md)
 - [Versionamento e releases](docs/governance/versioning-and-releases.md)
 - [Operação de releases](docs/governance/releasing.md)
 
-O ADR 0001 é a fonte normativa. Documentos nos aplicativos consumidores devem
-apontar para ele, sem manter cópias independentes da decisão.
+O ADR 0002 define a implementação dos primitives. O ADR 0001 continua normativo
+para as demais fronteiras e ownership. Documentos nos aplicativos consumidores
+devem apontar para esses ADRs, sem manter cópias independentes das decisões.
 
 ## Limites
 
