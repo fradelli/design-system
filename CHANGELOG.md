@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0
+
+### Minor Changes
+
+- ae46423: Replace Radix-backed primitives with accessible native implementations and add generic Popover and RadioGroup components.
+- 2dd2eaf: Add generic accessible AlertDialog, LoadingRegion, PendingButton, and StatusBadge primitives.
+
 ## 0.3.0
 
 ### Minor Changes
