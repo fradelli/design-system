@@ -1,7 +1,7 @@
-import { Slot } from "@radix-ui/react-slot";
 import type { ComponentProps } from "react";
 
 import { cn } from "../../lib/cn.js";
+import { Slot } from "../../lib/slot.js";
 
 export type NavigationItemProps = ComponentProps<"a"> & { asChild?: boolean };
 

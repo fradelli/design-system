@@ -1,6 +1,6 @@
 @import "./tokens.generated.css" layer(fradelli-ui.tokens);
 
-@layer fradelli-ui.tokens, fradelli-ui.base;
+@layer fradelli-ui.tokens, fradelli-ui.base, fradelli-ui.components;
 
 :root {
   color-scheme: dark;
@@ -96,6 +96,121 @@
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer fradelli-ui.components {
+  dialog[data-slot="alert-dialog-content"][open],
+  dialog[data-slot="sheet-content"][open] {
+    animation: fradelli-dialog-enter 160ms ease-out both;
+  }
+
+  dialog[data-slot="sheet-content"][open][data-side="right"] {
+    animation-name: fradelli-sheet-enter-right;
+  }
+
+  dialog[data-slot="sheet-content"][open][data-side="left"] {
+    animation-name: fradelli-sheet-enter-left;
+  }
+
+  dialog[data-slot="sheet-content"][open][data-side="top"] {
+    animation-name: fradelli-sheet-enter-top;
+  }
+
+  dialog[data-slot="sheet-content"][open][data-side="bottom"] {
+    animation-name: fradelli-sheet-enter-bottom;
+  }
+
+  dialog::backdrop {
+    animation: fradelli-backdrop-enter 160ms ease-out both;
+  }
+
+  [data-slot="popover-content"] {
+    animation: fradelli-popover-enter 120ms ease-out both;
+  }
+
+  @keyframes fradelli-dialog-enter {
+    from {
+      opacity: 0;
+      transform: translateY(0.25rem) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes fradelli-sheet-enter-right {
+    from {
+      opacity: 0;
+      transform: translateX(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fradelli-sheet-enter-left {
+    from {
+      opacity: 0;
+      transform: translateX(-1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fradelli-sheet-enter-top {
+    from {
+      opacity: 0;
+      transform: translateY(-1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fradelli-sheet-enter-bottom {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fradelli-backdrop-enter {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fradelli-popover-enter {
+    from {
+      opacity: 0;
+      transform: translateY(-0.125rem) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog,
+    dialog::backdrop,
+    [data-slot="popover-content"] {
+      animation: none !important;
+      transition: none !important;
     }
   }
 }

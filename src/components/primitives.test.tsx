@@ -27,6 +27,8 @@ import { Field, FieldDescription, FieldError, FieldLabel } from "./field/index.j
 import { Input } from "./input/index.js";
 import { LoadingRegion } from "./loading-region/index.js";
 import { PendingButton } from "./pending-button/index.js";
+import { Popover } from "./popover/index.js";
+import { RadioGroup } from "./radio-group/index.js";
 import { Separator } from "./separator/index.js";
 import { Skeleton } from "./skeleton/index.js";
 import { StatusBadge } from "./status-badge/index.js";
@@ -176,5 +178,46 @@ describe("shared primitives", () => {
     await user.click(screen.getByRole("button", { name: "Cancel" }));
     expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument();
     expect(trigger).toHaveFocus();
+  });
+
+  it("opens a popover, closes on Escape and restores trigger focus", async () => {
+    const user = userEvent.setup();
+    render(
+      <Popover.Root>
+        <Popover.Trigger>Account actions</Popover.Trigger>
+        <Popover.Portal>
+          <Popover.Content>
+            <Button>Sign out</Button>
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover.Root>,
+    );
+
+    const trigger = screen.getByRole("button", { name: "Account actions" });
+    await user.click(trigger);
+    const panel = await screen.findByRole("dialog", { name: "Account actions" });
+    expect(screen.getByRole("button", { name: "Sign out" })).toHaveFocus();
+    await user.keyboard("{Escape}");
+    expect(panel).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+
+  it("supports radio selection and arrow-key navigation", async () => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    render(
+      <RadioGroup.Root aria-label="Preferred court" value="north" onValueChange={onValueChange}>
+        <RadioGroup.Item value="north">North</RadioGroup.Item>
+        <RadioGroup.Item value="south">South</RadioGroup.Item>
+      </RadioGroup.Root>,
+    );
+
+    const north = screen.getByRole("radio", { name: "North" });
+    const south = screen.getByRole("radio", { name: "South" });
+    expect(north).toHaveAttribute("aria-checked", "true");
+    north.focus();
+    await user.keyboard("{ArrowRight}");
+    expect(south).toHaveFocus();
+    expect(onValueChange).toHaveBeenCalledWith("south");
   });
 });

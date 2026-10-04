@@ -12,6 +12,8 @@ import { Field, FieldLabel } from "@fradelli/ui/field";
 import { Input } from "@fradelli/ui/input";
 import { Label } from "@fradelli/ui/label";
 import { NavigationItem } from "@fradelli/ui/navigation-item";
+import { Popover } from "@fradelli/ui/popover";
+import { RadioGroup } from "@fradelli/ui/radio-group";
 import { BarbellIcon, ForkKnifeIcon } from "@fradelli/ui/icons";
 import { Separator } from "@fradelli/ui/separator";
 import * as sheetApi from "@fradelli/ui/sheet";
@@ -47,6 +49,12 @@ const markup = renderToStaticMarkup(
       ),
       createElement(Label, { htmlFor: "other" }, "Other"),
       createElement(Separator),
+      createElement(
+        RadioGroup.Root,
+        { defaultValue: "north", "aria-label": "Court" },
+        createElement(RadioGroup.Item, { value: "north" }, "North"),
+      ),
+      createElement(Popover.Root, null, createElement(Popover.Trigger, null, "More")),
       createElement(Skeleton),
     ),
   ),

@@ -12,6 +12,12 @@ related-repository: fradelli/design-system
 
 # KAN-220 — primitives compartilhados e portabilidade do package
 
+> **Histórico:** este guia descreve o plano técnico original. A escolha de
+> Radix/shadcn e o uso de seus primitives foram substituídos pelo
+> [ADR 0002 — Primitives acessíveis sem dependência headless](../decisions/0002-native-accessible-primitives.md).
+> Código novo deve seguir o ADR 0002; as tabelas de dependências abaixo servem
+> apenas para entender decisões anteriores.
+
 ## Status do documento
 
 - **Card:** `KAN-220 — [Design System] Migrate and test shared UI primitives`.

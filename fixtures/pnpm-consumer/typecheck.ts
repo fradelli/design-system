@@ -11,6 +11,8 @@ import type { LabelProps } from "@fradelli/ui/label";
 import type { LoadingRegionProps } from "@fradelli/ui/loading-region";
 import type { NavigationItemProps } from "@fradelli/ui/navigation-item";
 import type { PendingButtonProps } from "@fradelli/ui/pending-button";
+import type { PopoverContentProps } from "@fradelli/ui/popover";
+import type { RadioGroupRootProps } from "@fradelli/ui/radio-group";
 import { BarbellIcon, ForkKnifeIcon } from "@fradelli/ui/icons";
 import type { SeparatorProps } from "@fradelli/ui/separator";
 import type { SheetContentProps } from "@fradelli/ui/sheet";
@@ -30,6 +32,8 @@ type PublicProps =
   | LoadingRegionProps
   | NavigationItemProps
   | PendingButtonProps
+  | PopoverContentProps
+  | RadioGroupRootProps
   | SeparatorProps
   | SheetContentProps
   | SkeletonProps
