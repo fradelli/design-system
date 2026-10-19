@@ -183,3 +183,11 @@ O Storybook se organiza em Foundations (tokens e materiais), Components (uma pas
 Consulte a [ADR 0003](docs/decisions/0003-shared-glass-visual-language.md), a [ADR 0004](docs/decisions/0004-consistent-component-composition.md) e o [guia de migração](docs/governance/glass-migration.md) antes de atualizar consumidores.
 
 Para ampliar a validação local de navegador, use `DS_BROWSERS=chromium,firefox,webkit` e `DS_VIEWPORT_WIDTH=320` como variáveis do processo de `npm run test:storybook`. Os navegadores oficiais correspondentes devem estar instalados pelo Playwright. O gate padrão usa Chromium a 1280px.
+
+## Storybook público
+
+O catálogo é publicado no [GitHub Pages](https://fradelli.github.io/design-system/) pelo workflow CI após validação de main. PRs não publicam o site. Os exemplos são interativos e usam conteúdo demonstrativo, sem operações reais de produto.
+
+O catálogo acompanha main e pode conter mudanças ainda não publicadas em uma versão do pacote. Hospedar o Storybook não altera o acesso ao pacote no GitHub Packages nem atualiza consumidores.
+
+Consulte o [guia de publicação](docs/governance/storybook-publishing.md) para configuração, verificação e recuperação.
