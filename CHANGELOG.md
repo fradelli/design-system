@@ -6,7 +6,7 @@
 
 - 5478cfa: Adota a linguagem visual de vidro aprovada no portfólio como fundação compartilhada. Card passa a usar vidro por padrão, com `surface="solid"` como alternativa opaca; CardTitle e SheetTitle adotam a hierarquia de título e Input recebe fundo elevado a 60%.
 
-  Mudança visual incompatível em 0.x: revisar contraste, composição e espaçamento antes do upgrade. Inclui tokens e classes públicas de superfície e tipografia, fallback opaco e redução de transparência. Consulte `docs/governance/glass-migration.md`. A publicação depende da validação do candidato nos três consumidores.
+  Mudança visual incompatível em 0.x: revisar contraste, composição e espaçamento antes do upgrade. Inclui tokens e classes públicas de superfície e tipografia, fallback opaco e redução de transparência. Consulte `docs/governance/glass-migration.md`. A publicação inicial foi autorizada por etapas, com o portfólio como consumidor validado; os demais aplicativos exigem validação própria antes do upgrade. Consulte a ADR 0005.
 
   Padroniza a composição entre superfícies: Card passa a concentrar padding na raiz (24px/default, 16px/sm), sem padding lateral nos slots; papéis de seção e corpo passam a 24/32 e 16/24. Inclui papéis display/interface/label, correções de Sheet, Alert, PendingButton, Switch, RadioGroup e Popover, e stories por família. Button textual usa altura mínima e permite quebra; AlertAction ocupa uma linha reservada. Essas mudanças visuais exigem revisão dos overrides no consumidor.
 

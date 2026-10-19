@@ -2,7 +2,7 @@
 
 ## Estado
 
-Candidato local baseado em `0.4.0`, ainda sem versão publicada. Implementa a [ADR 0003](../decisions/0003-shared-glass-visual-language.md). O Changeset registra uma minor incompatível em `0.x`; não fixa antecipadamente seu número.
+Release 0.5.0 preparada a partir de `0.4.0`, com publicação e adoção por etapas conforme a [ADR 0005](../decisions/0005-staged-glass-release.md). Implementa a [ADR 0003](../decisions/0003-shared-glass-visual-language.md). O Changeset registra uma minor incompatível em `0.x`; não fixa antecipadamente seu número.
 
 ## Contrato público
 
@@ -62,7 +62,7 @@ Não depender do blur para hierarquia. Conferir contraste sobre o resultado comp
 2. Portfólio: comparar a referência aprovada antes de remover as classes locais de vidro e tipografia; preservar o hover com movimento em seu wrapper e revisar padding.
 3. Kaizen: migrar cards e overrides reais, mantendo estados de treino, agenda e formulários; avaliar listas longas e temporizadores sem mudar domínio.
 4. Sandicts: revisar fontes, paleta e política visual; integrar o pacote e revisar geradores que reintroduzem valores antigos. Identidade dos logos permanece local. Não basta substituir CSS gerado.
-5. Registrar comparação visual, contraste, desempenho, teclado e fallback nos três aplicativos antes de liberar a versão.
+5. Registrar comparação visual, contraste, desempenho, teclado e fallback por aplicativo antes de seu upgrade. A primeira publicação usa o portfólio como consumidor validado, conforme a ADR 0005.
 6. Após publicação autorizada, fixar a versão nos aplicativos e atualizar seus lockfiles em PRs separadas, respeitando o fluxo de cada projeto.
 
 As [evidências do candidato](glass-validation.md) registram os comandos executados e as pendências reais.
@@ -71,7 +71,7 @@ As [evidências do candidato](glass-validation.md) registram os comandos executa
 
 Executar `npm run ci` no pacote e os gates aplicáveis de cada consumidor. Storybook inclui superfícies opacas, elevadas, fundos variados, campos inválidos e composição aninhada. Esses exemplos não substituem validação das telas reais nem comprovam suporte em todos os navegadores.
 
-A publicação deve aguardar evidência dos três consumidores. Publicar somente pelo workflow Release. Reversão exige voltar código, CSS, manifesto e lockfile do consumidor como unidade; nunca sobrescrever versão publicada.
+A publicação 0.5.0 usa evidência do pacote e do portfólio, autorizada explicitamente na ADR 0005. Kaizen e Sandicts exigem migrações e validações próprias antes de adotar essa versão. Publicar somente pelo workflow Release. Reversão exige voltar código, CSS, manifesto e lockfile do consumidor como unidade; nunca sobrescrever versão publicada.
 
 ## Composição de overlays nativos
 
