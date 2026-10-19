@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 import { cn } from "../../lib/cn.js";
 
 const alertVariants = cva(
-  "relative grid w-full grid-cols-[0_1fr] items-start gap-y-1 rounded-lg border px-4 py-3 text-sm has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] has-[>svg]:gap-x-3 [&>svg]:size-4 [&>svg]:translate-y-0.5",
+  "fd-alert relative grid w-full min-w-0 items-start gap-x-3 gap-y-1 rounded-lg border px-4 py-3 text-sm leading-5",
   {
     variants: {
       variant: {
@@ -27,14 +27,23 @@ export function Alert({ className, variant, ...props }: AlertProps) {
 }
 
 export function AlertTitle({ className, ...props }: ComponentProps<"div">) {
-  return <div data-slot="alert-title" className={cn("font-semibold", className)} {...props} />;
+  return (
+    <div
+      data-slot="alert-title"
+      className={cn("min-w-0 break-words font-semibold", className)}
+      {...props}
+    />
+  );
 }
 
 export function AlertDescription({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="alert-description"
-      className={cn("text-muted-foreground col-start-2 grid gap-1 text-sm", className)}
+      className={cn(
+        "min-w-0 grid gap-1 break-words text-sm leading-5 text-muted-foreground",
+        className,
+      )}
       {...props}
     />
   );
@@ -42,7 +51,7 @@ export function AlertDescription({ className, ...props }: ComponentProps<"div">)
 
 export function AlertAction({ className, ...props }: ComponentProps<"div">) {
   return (
-    <div data-slot="alert-action" className={cn("absolute top-3 right-3", className)} {...props} />
+    <div data-slot="alert-action" className={cn("min-w-0 self-start", className)} {...props} />
   );
 }
 

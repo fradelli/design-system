@@ -32,7 +32,7 @@ export function FieldGroup({ className, ...props }: ComponentProps<"div">) {
 }
 
 const fieldVariants = cva(
-  "group/field flex w-full gap-3 data-[invalid=true]:text-status-destructive",
+  "group/field flex min-w-0 w-full gap-2 data-[invalid=true]:text-status-destructive",
   {
     variants: {
       orientation: {
@@ -60,7 +60,11 @@ export function Field({ className, orientation, ...props }: FieldProps) {
 
 export function FieldContent({ className, ...props }: ComponentProps<"div">) {
   return (
-    <div data-slot="field-content" className={cn("grid flex-1 gap-1", className)} {...props} />
+    <div
+      data-slot="field-content"
+      className={cn("grid min-w-0 flex-1 gap-1", className)}
+      {...props}
+    />
   );
 }
 
@@ -86,13 +90,16 @@ export function FieldDescription({ className, ...props }: ComponentProps<"p">) {
 
 export function FieldSeparator({ children, className, ...props }: ComponentProps<"div">) {
   return (
-    <div data-slot="field-separator" className={cn("relative my-2 h-5", className)} {...props}>
-      <Separator className="absolute inset-x-0 top-1/2" />
+    <div
+      data-slot="field-separator"
+      className={cn("my-2 flex items-center gap-2", className)}
+      {...props}
+    >
+      <Separator className="min-w-0 flex-1" />
       {children ? (
-        <span className="relative mx-auto block w-fit bg-background px-2 text-xs text-muted-foreground">
-          {children}
-        </span>
+        <span className="shrink-0 text-xs leading-4 text-muted-foreground">{children}</span>
       ) : null}
+      {children ? <Separator className="min-w-0 flex-1" /> : null}
     </div>
   );
 }

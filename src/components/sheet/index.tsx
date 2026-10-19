@@ -113,10 +113,10 @@ export function SheetOverlay(_props: ComponentProps<"div">) {
 }
 
 const sideClasses = {
-  top: "inset-x-0 top-0 max-h-[85vh] border-b",
-  right: "inset-y-0 right-0 h-full w-3/4 max-w-sm border-l",
-  bottom: "inset-x-0 bottom-0 max-h-[85vh] border-t",
-  left: "inset-y-0 left-0 h-full w-3/4 max-w-sm border-r",
+  top: "inset-x-0 top-0 bottom-auto max-h-[85dvh] w-full max-w-none border-b",
+  right: "inset-y-0 right-0 left-auto h-dvh w-3/4 max-w-sm border-l",
+  bottom: "inset-x-0 bottom-0 top-auto max-h-[85dvh] w-full max-w-none border-t",
+  left: "inset-y-0 left-0 right-auto h-dvh w-3/4 max-w-sm border-r",
 } as const;
 
 export type SheetContentProps = Omit<ComponentProps<"dialog">, "open" | "onClose"> & {
@@ -167,12 +167,13 @@ export function SheetContent({
       ref={dialogRef}
       data-slot="sheet-content"
       data-side={side}
+      data-close-button={showCloseButton || undefined}
       data-state={context.open ? "open" : "closed"}
       aria-labelledby={context.titleId}
       aria-describedby={context.descriptionId}
       aria-modal="true"
       className={cn(
-        "fixed m-0 flex flex-col gap-4 border-border bg-surface p-6 text-foreground shadow-lg backdrop:bg-black/70",
+        "fixed m-0 hidden open:flex max-h-dvh overflow-y-auto flex-col gap-4 border-border bg-surface p-6 text-foreground shadow-lg backdrop:bg-black/70",
         sideClasses[side],
         className,
       )}
@@ -196,7 +197,7 @@ export function SheetContent({
       {showCloseButton ? (
         <SheetClose
           aria-label={closeLabel}
-          className="absolute top-4 right-4 rounded-sm text-muted-foreground opacity-80 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring disabled:pointer-events-none"
+          className="fd-focus-managed absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground opacity-80 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring disabled:pointer-events-none"
         >
           <XIcon aria-hidden="true" className="size-4" />
         </SheetClose>
@@ -225,7 +226,7 @@ export function SheetTitle({ className, ...props }: ComponentProps<"h2">) {
     <h2
       id={props.id ?? context.titleId}
       data-slot="sheet-title"
-      className={cn("font-semibold", className)}
+      className={cn("fd-text-card", className)}
       {...props}
     />
   );

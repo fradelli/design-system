@@ -1,5 +1,7 @@
 import { cloneElement, isValidElement, type ReactElement, type ReactNode, type Ref } from "react";
 
+import { cn } from "./cn.js";
+
 type SlotProps = Readonly<{
   children?: ReactNode;
   className?: string | undefined;
@@ -31,7 +33,10 @@ export function Slot({ children, className, ...slotProps }: SlotProps) {
   }
 
   if (className || typeof childProps.className === "string") {
-    mergedProps.className = [className, childProps.className].filter(Boolean).join(" ");
+    mergedProps.className = cn(
+      className,
+      typeof childProps.className === "string" ? childProps.className : undefined,
+    );
   }
   if (slotProps.style || childProps.style) {
     mergedProps.style = { ...(slotProps.style as object), ...(childProps.style as object) };

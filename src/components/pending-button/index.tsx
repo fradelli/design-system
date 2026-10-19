@@ -13,28 +13,47 @@ export function PendingButton({
   disabled,
   pending,
   pendingLabel,
+  size,
   ...props
 }: PendingButtonProps) {
+  const iconOnly = size?.startsWith("icon") ?? false;
   return (
     <Button
       {...props}
+      size={size}
       data-slot="pending-button"
-      className={cn("relative", className)}
+      className={className}
       disabled={disabled || pending}
       aria-busy={pending || undefined}
+      aria-label={pending ? pendingLabel : props["aria-label"]}
     >
-      <span aria-hidden={pending} className={cn(pending && "invisible")}>
-        {children}
-      </span>
-      {pending ? (
-        <span className="absolute inset-0 inline-flex items-center justify-center gap-2">
+      <span className="grid min-w-0 items-center justify-items-center">
+        <span
+          aria-hidden={pending || undefined}
+          className={cn(
+            "col-start-1 row-start-1 inline-flex items-center gap-2",
+            pending && "invisible",
+          )}
+        >
+          {children}
+        </span>
+        <span
+          aria-hidden={!pending || undefined}
+          className={cn(
+            "col-start-1 row-start-1 inline-flex items-center justify-center gap-2",
+            !pending && "invisible",
+          )}
+        >
           <SpinnerGapIcon
             aria-hidden="true"
-            className="size-4 animate-spin motion-reduce:animate-none"
+            className={cn(
+              "shrink-0 animate-spin motion-reduce:animate-none",
+              size === "xs" || size === "icon-xs" ? "size-3" : "size-4",
+            )}
           />
-          {pendingLabel}
+          {!iconOnly ? pendingLabel : null}
         </span>
-      ) : null}
+      </span>
     </Button>
   );
 }
