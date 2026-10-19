@@ -14,6 +14,8 @@ import { createPortal } from "react-dom";
 import { cn } from "../../lib/cn.js";
 import { Slot } from "../../lib/slot.js";
 
+import { usePopoverPosition } from "./use-popover-position.js";
+
 type PopoverContextValue = {
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -105,7 +107,15 @@ function Content({
 }: PopoverContentProps) {
   const context = usePopoverContext();
   const [mounted, setMounted] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const position = usePopoverPosition(
+    context.open && mounted,
+    context.triggerRef,
+    context.contentRef,
+    side,
+    align,
+    sideOffset,
+    collisionPadding,
+  );
   const wasOpen = useRef(false);
 
   useEffect(() => setMounted(true), []);
@@ -114,40 +124,6 @@ function Content({
     const trigger = context.triggerRef.current;
     const content = context.contentRef.current;
     if (!trigger || !content) return;
-    const anchor = trigger.getBoundingClientRect();
-    const panel = content.getBoundingClientRect();
-    const spacing = sideOffset;
-    let top =
-      side === "top"
-        ? anchor.top - panel.height - spacing
-        : side === "bottom"
-          ? anchor.bottom + spacing
-          : anchor.top;
-    let left =
-      side === "left"
-        ? anchor.left - panel.width - spacing
-        : side === "right"
-          ? anchor.right + spacing
-          : align === "start"
-            ? anchor.left
-            : align === "end"
-              ? anchor.right - panel.width
-              : anchor.left + (anchor.width - panel.width) / 2;
-    if (
-      side === "bottom" &&
-      top + panel.height > window.innerHeight - collisionPadding &&
-      anchor.top - panel.height - spacing >= collisionPadding
-    )
-      top = anchor.top - panel.height - spacing;
-    top = Math.max(
-      collisionPadding,
-      Math.min(top, window.innerHeight - panel.height - collisionPadding),
-    );
-    left = Math.max(
-      collisionPadding,
-      Math.min(left, window.innerWidth - panel.width - collisionPadding),
-    );
-    setPosition({ top, left });
     const event = {
       defaultPrevented: false,
       preventDefault() {
@@ -190,16 +166,23 @@ function Content({
       ref={context.contentRef}
       id={`${context.triggerId}-content`}
       data-slot="popover-content"
-      data-side={side}
+      data-side={position.side}
       data-state="open"
       role="dialog"
       aria-labelledby={context.triggerId}
       tabIndex={-1}
       className={cn(
-        "z-50 rounded-md border border-border bg-surface p-4 text-foreground shadow-md outline-none",
+        "z-50 min-w-0 overflow-y-auto break-words rounded-xl border border-border bg-surface p-4 text-sm leading-5 text-foreground shadow-md outline-none",
         className,
       )}
-      style={{ position: "fixed", top: position.top, left: position.left, ...style }}
+      style={{
+        position: "fixed",
+        top: position.top,
+        left: position.left,
+        maxWidth: `calc(100vw - ${collisionPadding * 2}px)`,
+        maxHeight: `calc(100dvh - ${collisionPadding * 2}px)`,
+        ...style,
+      }}
       onKeyDown={(event) => {
         onKeyDown?.(event);
         if (event.defaultPrevented) return;

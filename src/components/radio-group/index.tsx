@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useContext, useRef, useState, type ComponentProps } from "react";
+import {
+  createContext,
+  useContext,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ComponentProps,
+} from "react";
 import { cn } from "../../lib/cn.js";
 
 type RadioGroupContextValue = {
@@ -37,6 +44,7 @@ function Root({
   required = false,
   onValueChange,
   children,
+  ref: consumerRef,
   ...props
 }: RadioGroupRootProps) {
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
@@ -45,14 +53,42 @@ function Root({
     if (controlledValue === undefined) setUncontrolledValue(nextValue);
     if (nextValue !== value) onValueChange?.(nextValue);
   };
+  const groupRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const root = groupRef.current;
+    if (!root) return;
+    const sync = () => {
+      const items = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="radio"]')).filter(
+        (item) => item.closest('[role="radiogroup"]') === root,
+      );
+      const entry =
+        items.find((item) => !item.disabled && item.getAttribute("aria-checked") === "true") ??
+        items.find((item) => !item.disabled);
+      for (const item of items) item.tabIndex = item === entry ? 0 : -1;
+    };
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["disabled", "aria-checked"],
+    });
+    return () => observer.disconnect();
+  }, [value, disabled]);
   return (
     <RadioGroupContext.Provider value={{ value, name, disabled, required, setValue }}>
       <div
+        ref={(node) => {
+          groupRef.current = node;
+          if (typeof consumerRef === "function") consumerRef(node);
+          else if (consumerRef) consumerRef.current = node;
+        }}
         role="radiogroup"
         data-slot="radio-group"
         aria-required={required || undefined}
         aria-disabled={disabled || undefined}
-        className={className}
+        className={cn("grid gap-2", className)}
         {...props}
       >
         {children}
@@ -84,7 +120,7 @@ function Item({
     const groupElement = current?.closest('[role="radiogroup"]');
     const items = Array.from(
       groupElement?.querySelectorAll<HTMLButtonElement>('[role="radio"]') ?? [],
-    ).filter((item) => !item.disabled);
+    ).filter((item) => !item.disabled && item.closest('[role="radiogroup"]') === groupElement);
     if (!items.length || !current) return false;
     const currentIndex = items.indexOf(current);
     const nextIndex =
@@ -119,7 +155,10 @@ function Item({
           tabIndex={disabled ? -1 : checked || !group.value ? 0 : -1}
           data-slot="radio-group-item"
           data-state={checked ? "checked" : "unchecked"}
-          className={cn("relative", className)}
+          className={cn(
+            "fd-focus-managed relative min-w-0 rounded-lg border border-border bg-surface px-4 py-3 text-left text-sm leading-5 break-words transition-colors hover:bg-surface-interactive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring disabled:opacity-50 data-[state=checked]:border-primary data-[state=checked]:bg-surface-interactive",
+            className,
+          )}
           onClick={(event) => {
             onClick?.(event);
             if (!event.defaultPrevented && !disabled) group.setValue(itemValue);
@@ -152,7 +191,15 @@ function Item({
             disabled={disabled}
             required={group.required}
             className="sr-only"
-            readOnly
+            onChange={() => group.setValue(itemValue)}
+            onInvalid={(event) => {
+              event.preventDefault();
+              const root = buttonRef.current?.closest('[role="radiogroup"]');
+              const entry = Array.from(
+                root?.querySelectorAll<HTMLButtonElement>('[role="radio"]') ?? [],
+              ).find((item) => !item.disabled && item.closest('[role="radiogroup"]') === root);
+              entry?.focus();
+            }}
           />
         ) : null}
       </span>

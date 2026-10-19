@@ -170,7 +170,7 @@ export function AlertDialogContent({
       aria-describedby={context.descriptionId}
       aria-modal="true"
       className={cn(
-        "m-auto w-[calc(100%-2rem)] max-w-lg rounded-xl border border-border bg-surface p-6 text-foreground shadow-lg backdrop:bg-black/70",
+        "m-auto hidden open:grid gap-4 max-h-[calc(100dvh-2rem)] overflow-y-auto w-[calc(100%-2rem)] max-w-lg rounded-xl border border-border bg-surface p-6 text-foreground shadow-lg backdrop:bg-black/70",
         className,
       )}
       onCancel={(event) => {
@@ -249,7 +249,7 @@ export function AlertDialogTitle({ className, id, ...props }: ComponentProps<"h2
     <h2
       id={id ?? context.titleId}
       data-slot="alert-dialog-title"
-      className={cn("text-lg font-semibold", className)}
+      className={cn("fd-text-card", className)}
       {...props}
     />
   );

@@ -5,7 +5,7 @@ import { cn } from "../../lib/cn.js";
 import { Slot } from "../../lib/slot.js";
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-semibold whitespace-nowrap transition-colors outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&>svg]:pointer-events-none [&>svg]:shrink-0",
+  "fd-focus-managed inline-flex max-w-full shrink-0 items-center justify-center gap-2 rounded-md text-sm font-semibold whitespace-normal break-words text-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&>svg]:pointer-events-none [&>svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -17,10 +17,10 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 px-4 py-2 [&>svg]:size-4",
-        xs: "h-6 gap-1 rounded-sm px-2 text-xs [&>svg]:size-3",
-        sm: "h-8 gap-1.5 px-3 [&>svg]:size-4",
-        lg: "h-10 px-6 [&>svg]:size-5",
+        default: "min-h-9 px-4 py-2 [&>svg]:size-4",
+        xs: "min-h-6 gap-1 rounded-sm px-2 py-1 text-xs [&>svg]:size-3",
+        sm: "min-h-8 gap-1.5 px-3 py-1.5 [&>svg]:size-4",
+        lg: "min-h-10 px-6 py-2 [&>svg]:size-5",
         icon: "size-9 [&>svg]:size-4",
         "icon-xs": "size-6 rounded-sm [&>svg]:size-3",
         "icon-sm": "size-8 [&>svg]:size-4",

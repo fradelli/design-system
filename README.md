@@ -119,6 +119,13 @@ aplicativo:
 <SheetContent closeLabel={messages.closePanel}>...</SheetContent>
 ```
 
+## Linguagem visual de vidro
+
+O candidato atual estende a fundação com Card de vidro por padrão e opção
+`surface="solid"`. Consulte a [ADR 0002](docs/decisions/0003-shared-glass-visual-language.md)
+e o [guia de migração](docs/governance/glass-migration.md) antes de atualizar.
+A implementação ainda depende da validação nos consumidores e de publicação.
+
 ## Consumidores
 
 - [Sandicts](https://github.com/fradelli/reactjs-sandicts-web): agendamento e
@@ -168,3 +175,11 @@ Este repositório público ainda não possui um arquivo `LICENSE`. A visibilidad
 do código-fonte não deve ser interpretada como concessão automática de direito
 de reutilização. A política de licença será decidida antes de uma eventual
 distribuição pública do package.
+
+## Catálogo e composição
+
+O Storybook se organiza em Foundations (tokens e materiais), Components (uma pasta por família) e Patterns (integrações). Glass e solid são superfícies do mesmo Card, com geometria compartilhada. O padding pertence à raiz: 24px no padrão e 16px em sm; slots não duplicam esse recuo.
+
+Consulte a [ADR 0003](docs/decisions/0003-shared-glass-visual-language.md), a [ADR 0004](docs/decisions/0004-consistent-component-composition.md) e o [guia de migração](docs/governance/glass-migration.md) antes de atualizar consumidores.
+
+Para ampliar a validação local de navegador, use `DS_BROWSERS=chromium,firefox,webkit` e `DS_VIEWPORT_WIDTH=320` como variáveis do processo de `npm run test:storybook`. Os navegadores oficiais correspondentes devem estar instalados pelo Playwright. O gate padrão usa Chromium a 1280px.

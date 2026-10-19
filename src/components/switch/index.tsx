@@ -16,7 +16,7 @@ export function Switch({ checked, className, disabled, type = "button", ...props
       data-slot="switch"
       data-state={checked ? "checked" : "unchecked"}
       className={cn(
-        "group/switch relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-border bg-surface-interactive p-0.5 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-status-info-border data-[state=checked]:bg-status-info-solid motion-reduce:transition-none",
+        "fd-focus-managed group/switch relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-border bg-surface-interactive p-0.5 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-status-info-border data-[state=checked]:bg-status-info motion-reduce:transition-none",
         className,
       )}
       disabled={disabled}

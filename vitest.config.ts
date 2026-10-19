@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vitest/config";
@@ -14,7 +15,7 @@ export default defineConfig({
         },
       },
       {
-        plugins: [storybookTest({ configDir: ".storybook" })],
+        plugins: [tailwindcss(), storybookTest({ configDir: ".storybook" })],
         optimizeDeps: {
           include: [
             "@phosphor-icons/react/dist/ssr/Barbell",
@@ -28,7 +29,10 @@ export default defineConfig({
             enabled: true,
             headless: true,
             provider: playwright(),
-            instances: [{ browser: "chromium" }],
+            viewport: { width: Number(process.env.DS_VIEWPORT_WIDTH ?? 1280), height: 900 },
+            instances: (process.env.DS_BROWSERS ?? "chromium")
+              .split(",")
+              .map((browser) => ({ browser: browser as "chromium" | "firefox" | "webkit" })),
           },
           setupFiles: [".storybook/vitest.setup.ts"],
         },

@@ -5,7 +5,7 @@ import { cn } from "../../lib/cn.js";
 import { Slot } from "../../lib/slot.js";
 
 const badgeVariants = cva(
-  "inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-full border px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring disabled:pointer-events-none disabled:opacity-50 [&>svg]:size-3",
+  "fd-focus-managed inline-flex h-fit max-w-full w-fit self-center items-center justify-center gap-1 rounded-full border px-2 py-0.5 text-xs leading-4 font-medium whitespace-normal break-words transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring disabled:pointer-events-none disabled:opacity-50 [&>svg]:size-3 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
