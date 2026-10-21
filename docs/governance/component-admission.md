@@ -1,48 +1,35 @@
-# Admissão de componentes
+# Component admission
 
-Este checklist protege `@fradelli/ui` de dependências de produto e abstrações
-prematuras. Primitives fundamentais podem ser adicionados quando necessários;
-padrões compostos precisam de uso real em Sandicts e Kaizen.
+This checklist protects `@fradelli/ui` from product dependencies and premature abstractions. Fundamental primitives may be added when needed; composed patterns require real use in both Sandicts and Kaizen.
 
-## Checklist obrigatório
+## Required checklist
 
-Um candidato só entra no package quando todas as respostas aplicáveis forem
-“sim”:
+A candidate enters the package only when every applicable answer is yes:
 
-1. O nome descreve uma função visual, não um conceito de negócio?
-2. As props não importam DTO, schema, rota, permissão ou status de um app?
-3. O componente funciona sem Next.js e sem provider do consumidor?
-4. Diferenças entre produtos são resolvidas por composição, slots, tokens ou
-   `className`, sem flags de produto?
-5. Existe uso real nos dois produtos, salvo no caso de primitive fundamental?
-6. Teclado, foco, disabled, loading, erro e reduced motion são testáveis?
-7. A API pode ser mantida e evoluída segundo SemVer?
-8. O componente não determina copy, navegação, autorização ou regras de negócio?
+1. Does its name describe a visual function rather than a business concept?
+2. Do its props avoid importing an app DTO, schema, route, permission, or status?
+3. Does it work without Next.js or a consumer provider?
+4. Can product differences be handled through composition, slots, tokens, or `className`, without product flags?
+5. Is there real use in both products, except for a fundamental primitive?
+6. Can keyboard, focus, disabled, loading, error, and reduced-motion states be tested?
+7. Can the API be maintained and evolved under SemVer?
+8. Does the component avoid deciding copy, navigation, authorization, or business rules?
 
-Qualquer prop como `product`, `sandictsVariant` ou `kaizenVariant` reprova a
-admissão. O ajuste deve permanecer no consumidor ou ser resolvido por composição.
+Any prop such as `product`, `sandictsVariant`, or `kaizenVariant` fails admission. Keep the adjustment in the consumer or resolve it through composition.
 
-## Exemplos iniciais
+## Initial examples
 
-| Candidato | Decisão inicial | Motivo |
+| Candidate | Initial decision | Reason |
 | --- | --- | --- |
-| `Button` | Admitir | Primitive visual fundamental, sem domínio |
-| `Popover` | Admitir | Primitive fundamental; posicionamento e comportamento semântico compartilhados |
-| `RadioGroup` | Admitir | Primitive fundamental de seleção única com teclado e estado desabilitado |
-| `StatusBadge` | Manter local | O mapeamento de status ainda pertence aos apps; somente o primitive genérico pode ser reavaliado |
-| `Calendar` | Manter local | Agenda, eventos, permissões e ações ainda têm composições de domínio diferentes |
-| Tokens categóricos | Admitir | O package oferece as cores; cada app define seu significado |
+| `Button` | Admit | Fundamental visual primitive without domain behavior |
+| `Popover` | Admit | Fundamental primitive with shared positioning and semantics |
+| `RadioGroup` | Admit | Fundamental single-selection primitive with keyboard and disabled states |
+| `StatusBadge` | Keep local | Status mapping still belongs to apps; reconsider only the generic primitive |
+| `Calendar` | Keep local | Schedules, events, permissions, and actions still compose differently by domain |
+| Categorical tokens | Admit | The package supplies colors; each app defines their meaning |
 
-## Registro da decisão
+## Decision record
 
-Toda admissão de padrão composto deve registrar na PR:
+Every admission of a composed pattern must record in its PR: consumers and links to both real use cases, proposed public API, states and accessibility criteria, added dependencies, migration and rollback strategy, and SemVer classification.
 
-- consumidores e links dos dois usos reais;
-- API pública proposta;
-- estados e critérios de acessibilidade;
-- dependências adicionadas;
-- estratégia de migração e rollback;
-- classificação SemVer.
-
-Se o segundo uso exigir muitas exceções, a conclusão correta pode ser manter
-duas composições locais sobre primitives compartilhados.
+If the second use requires many exceptions, keep two local compositions over shared primitives.

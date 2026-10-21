@@ -1,57 +1,41 @@
-# Versionamento e releases
+# Versioning and releases
 
-`@fradelli/ui` segue Semantic Versioning e usa Changesets para documentar a
-intenção de cada mudança. A automação será criada em histórias posteriores; este
-documento governa esse trabalho.
+`@fradelli/ui` follows Semantic Versioning and uses Changesets to record the intent of each change.
 
-## Fase inicial `0.x`
+## Initial `0.x` phase
 
-Versões `0.x` permitem evolução rápida, mas não tornam breaking changes
-silenciosos. Toda incompatibilidade exige Changeset, changelog, guia de migração
-e validação nos consumidores afetados.
+`0.x` versions allow rapid evolution, but do not make breaking changes silent. Every incompatibility requires a Changeset, changelog, migration guide, and validation in affected consumers. Release `1.0.0` only when Sandicts and Kaizen consume the package, the public API has been reviewed, and the build, tests, packing, and installation of the actual artifact are stable.
 
-O release `1.0.0` só ocorre quando Sandicts e Kaizen consumirem o package, a API
-pública estiver revisada e build, testes, pack e instalação do artefato real
-forem estáveis.
+## Classification
 
-## Classificação
-
-| Mudança | Release |
+| Change | Release |
 | --- | --- |
-| Correção interna sem alteração observável de contrato | Patch |
-| Novo componente, export, token ou variante compatível | Minor |
-| Remoção/renomeação de export, prop ou token | Major; em `0.x`, minor incompatível documentado |
-| Alteração visual material no valor semântico de um token | Major; em `0.x`, minor incompatível documentado |
-| Correção de contraste, foco ou comportamento acessível | Patch quando preserva a API; caso contrário, conforme a quebra |
-| Nova deprecação sem remoção | Minor |
-| Documentação sem efeito no artefato | Sem release, salvo se corrigir contrato publicado |
+| Internal fix with no observable contract change | Patch |
+| Compatible new component, export, token, or variant | Minor |
+| Removed or renamed export, prop, or token | Major; documented breaking minor in `0.x` |
+| Material change to the semantic value of a token | Major; documented breaking minor in `0.x` |
+| Contrast, focus, or accessibility behavior fix | Patch if the API is preserved; otherwise classify by the break |
+| New deprecation without removal | Minor |
+| Documentation with no artifact effect | No release unless it corrects a published contract |
 
-## Deprecação
+## Deprecation
 
-Uma API pública deve ser marcada como deprecated no tipo e na documentação,
-com alternativa e exemplo de migração. A remoção ocorre somente em release
-incompatível posterior. Exceções de segurança exigem comunicação explícita e
-podem reduzir o período de transição.
+Mark a public API as deprecated in its type and documentation, with an alternative and migration example. Remove it only in a later breaking release. Security exceptions require explicit communication and may shorten the transition period.
 
-## Processo
+## Process
 
-1. A PR declara impacto público e classificação SemVer.
-2. CI valida tokens, lint, tipos, testes, Storybook, build e package tarball.
-3. O owner frontend/design-system aprova mudanças públicas ou incompatíveis.
-4. A release produz versão imutável e changelog; nunca sobrescreve uma versão.
-5. Cada app abre sua própria PR de upgrade e fixa a versão no lockfile.
+1. The PR declares public impact and SemVer classification.
+2. CI validates tokens, lint, types, tests, Storybook, build, and package tarball.
+3. The frontend/design-system owner approves public or breaking changes.
+4. A release creates an immutable version and changelog; it never overwrites a version.
+5. Each app opens its own upgrade PR and pins the version in its lockfile.
 
-Enquanto houver um único mantenedor, o owner nominal continua sendo
-`frontend/design-system`; a aprovação ainda deve ficar registrada na PR.
+While there is a single maintainer, the named owner remains `frontend/design-system`; approval must still be recorded in the PR.
 
 ## Rollback
 
-Consumidores revertem para a versão exata anterior. Uma release defeituosa recebe
-patch corretivo; nunca se sobrescreve ou republica o mesmo número de versão.
+Consumers revert to the exact previous version. A faulty release gets a corrective patch; never overwrite or republish the same version number.
 
-## Registry e credenciais
+## Registry and credentials
 
-O package começa privado no GitHub Packages. Tokens de acesso vivem somente nos
-ambientes apropriados e nunca em `.npmrc`, documentação, fixture, log ou commit.
-Falha de autenticação deve interromper instalação/publicação; não existe fallback
-para copiar código ou consumir uma versão flutuante.
+The package starts private on GitHub Packages. Access tokens live only in the appropriate environments and never in `.npmrc`, documentation, fixtures, logs, or commits. Authentication failures must stop installation or publishing; there is no fallback to copied code or a floating version.

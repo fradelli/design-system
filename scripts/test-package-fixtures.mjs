@@ -10,10 +10,10 @@ const pnpmCli = join(root, "node_modules", "pnpm", "bin", "pnpm.mjs");
 const tarballs = (await readdir(packageDirectory)).filter((file) => file.endsWith(".tgz"));
 
 if (!npmCli)
-  throw new Error("npm_execpath não está disponível. Execute via npm run fixtures:check.");
+  throw new Error("npm_execpath is not available. Run this through npm run fixtures:check.");
 
 if (tarballs.length !== 1) {
-  throw new Error("Execute npm run pack:check antes das fixtures.");
+  throw new Error("Run npm run pack:check before validating the fixtures.");
 }
 
 const tarball = join(packageDirectory, tarballs[0]);
@@ -54,7 +54,7 @@ async function validateFixture(name, manager) {
     for (const dependency of ["react", "react-dom"]) {
       const versions = collectVersions(tree, dependency);
       if (versions.size !== 1)
-        throw new Error(`${name}: ${dependency} possui ${versions.size} versões.`);
+        throw new Error(`${name}: ${dependency} has ${versions.size} versions.`);
     }
     return;
   }
@@ -70,10 +70,10 @@ async function validateFixture(name, manager) {
   for (const dependency of ["react", "react-dom"]) {
     const versions = collectVersions(tree, dependency);
     if (versions.size !== 1)
-      throw new Error(`${name}: ${dependency} possui ${versions.size} versões.`);
+      throw new Error(`${name}: ${dependency} has ${versions.size} versions.`);
   }
 }
 
 await validateFixture("npm-consumer", "npm");
 await validateFixture("pnpm-consumer", "pnpm");
-console.log("Fixtures npm e pnpm validadas com um único React.");
+console.log("npm and pnpm fixtures validated with a single React instance.");

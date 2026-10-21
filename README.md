@@ -1,44 +1,33 @@
 # Fradelli Design System
 
-Fonte compartilhada da identidade visual e dos primitives usados por Sandicts,
-Kaizen e futuros produtos do ecossistema Fradelli.
+The shared source of visual identity and primitives used by Sandicts, Kaizen, and future products in the Fradelli ecosystem.
 
-## Estado atual
+## Current status
 
-Este repositório contém o contrato arquitetural, as regras de governança e o
-package `@fradelli/ui`. A fundação visual é dark-first e inclui tokens de cor,
-tipografia, espaçamento, radius, foco e motion, além dos primeiros primitives
-compartilhados. O workflow de release está preparado para publicar o package
-privadamente no GitHub Packages.
+This repository contains the architectural contract, governance rules, and the `@fradelli/ui` package. Its dark-first visual foundation includes color, typography, spacing, radius, focus, and motion tokens, along with shared primitives. The package is distributed privately through GitHub Packages. Releases use an automated Changesets workflow.
 
-O scaffold da [KAN-222](https://sandicts.atlassian.net/browse/KAN-222) produz um
-tarball ESM com declarações TypeScript e um entrypoint CSS explícito. A primeira
-versão será criada por uma PR automática de Changesets; a integração do workflow
-não publica diretamente a partir da PR técnica.
+The KAN-222 scaffold produces an ESM tarball with TypeScript declarations and an explicit CSS entry point. Release automation validates the package, creates a version PR, and publishes only after that PR merges.
 
-## Desenvolvimento
+## Development
 
-Use Node.js `24.20.0` e npm `11.19.0`:
+Use Node.js `24.20.0` and npm `11.19.0`:
 
 ```bash
 npm ci
 npm run ci
 ```
 
-Os gates incluem formatação, lint, tipos, testes, build, inspeção do tarball,
-compatibilidade com consumidores npm e pnpm e auditoria de dependências. Para
-validar apenas o artefato instalável, execute `npm run pack:check`.
+The gates cover formatting, lint, types, tests, build, tarball inspection, compatibility with npm and pnpm consumers, and dependency auditing. To validate only the installable artifact, run `npm run pack:check`.
 
-Mudanças públicas devem incluir sua intenção de versão:
+Public changes must include their release intent:
 
 ```bash
 npm run changeset
 ```
 
-### Tokens e Storybook
+### Tokens and Storybook
 
-Os arquivos `tokens/*.json` são a fonte editável. O CSS gerado é versionado para
-revisão, mas não deve ser alterado manualmente:
+Files in `tokens/*.json` are the editable source. Generated CSS is versioned for review, but must not be edited manually:
 
 ```bash
 npm run tokens:build
@@ -46,14 +35,13 @@ npm run tokens:check
 npm run storybook
 ```
 
-O consumidor importa o CSS uma vez:
+Consumers import the CSS once:
 
 ```css
 @import "@fradelli/ui/styles.css";
 ```
 
-Em Tailwind CSS 4, importe também o framework e declare explicitamente o source
-do package instalado. O caminho pode variar conforme a folha de estilo do app:
+With Tailwind CSS 4, also import the framework and explicitly declare the installed package source. The path may vary depending on the app's stylesheet:
 
 ```css
 @import "tailwindcss";
@@ -61,12 +49,11 @@ do package instalado. O caminho pode variar conforme a folha de estilo do app:
 @source "../node_modules/@fradelli/ui/dist";
 ```
 
-Cada aplicativo carrega Inter no root e define `--font-inter`. O package usa
-fallbacks de sistema e não distribui arquivos da fonte.
+Each application loads Inter at its root and defines `--font-inter`. The package uses system fallbacks and does not distribute font files.
 
 ### Components
 
-Components e o helper `cn` são expostos somente por subpaths explícitos:
+Components and the `cn` helper are exposed only through explicit subpaths:
 
 ```tsx
 import { Button } from "@fradelli/ui/button";
@@ -77,16 +64,9 @@ import { RadioGroup } from "@fradelli/ui/radio-group";
 import { cn } from "@fradelli/ui/cn";
 ```
 
-Os subpaths disponíveis são `alert`, `alert-dialog`, `badge`, `button`, `card`,
-`cn`, `field`, `icons`, `input`, `label`, `loading-region`, `navigation-item`,
-`pending-button`, `popover`, `radio-group`, `separator`, `sheet`, `skeleton`,
-`status-badge` e `switch`.
-O entrypoint raiz permanece vazio intencionalmente para não unir boundaries de
-cliente e servidor.
+Available subpaths are `alert`, `alert-dialog`, `badge`, `button`, `card`, `cn`, `field`, `icons`, `input`, `label`, `loading-region`, `navigation-item`, `pending-button`, `popover`, `radio-group`, `separator`, `sheet`, `skeleton`, `status-badge`, and `switch`. The root entry point intentionally stays empty to keep client and server boundaries separate.
 
-`NavigationItem` oferece um link com área mínima de toque, foco visível e
-estado ativo nativo por `aria-current`. Não determina rotas, posicionamento,
-breakpoints ou copy. O app compõe sua barra e preserva seus parâmetros de URL.
+`NavigationItem` provides a link with a minimum touch target, visible focus, and native active state through `aria-current`. It does not determine routes, positioning, breakpoints, or copy. The app composes its own navigation and preserves its URL parameters.
 
 ```tsx
 import { NavigationItem } from "@fradelli/ui/navigation-item";
@@ -97,11 +77,9 @@ import { BarbellIcon } from "@fradelli/ui/icons";
 </NavigationItem>;
 ```
 
-Com routers de consumidores, use `asChild` para fornecer um único link, sem
-âncoras aninhadas. O subpath `icons` também expõe `ForkKnifeIcon`; ambos usam
-Phosphor já instalado, sem dependência direta adicional no aplicativo.
+With consumer routers, use `asChild` to provide a single link without nested anchors. The `icons` subpath also exports `ForkKnifeIcon`; both icons use the existing Phosphor dependency without adding a direct application dependency.
 
-Labels, descrições e erros são associados pelo consumidor com atributos HTML:
+Consumers associate labels, descriptions, and errors using HTML attributes:
 
 ```tsx
 <Field data-invalid="true">
@@ -112,82 +90,61 @@ Labels, descrições e erros são associados pelo consumidor com atributos HTML:
 </Field>
 ```
 
-O `SheetContent` exige `closeLabel`. Essa copy deve vir do sistema de i18n do
-aplicativo:
+`SheetContent` requires `closeLabel`. Supply this copy from the application's i18n system:
 
 ```tsx
 <SheetContent closeLabel={messages.closePanel}>...</SheetContent>
 ```
 
-## Linguagem visual de vidro
+### Glass visual language
 
-O candidato atual estende a fundação com Card de vidro por padrão e opção
-`surface="solid"`. Consulte a [ADR 0002](docs/decisions/0003-shared-glass-visual-language.md)
-e o [guia de migração](docs/governance/glass-migration.md) antes de atualizar.
-A implementação ainda depende da validação nos consumidores e de publicação.
+Card uses glass by default and offers `surface="solid"`. Read [ADR 0003](docs/decisions/0003-shared-glass-visual-language.md), [ADR 0004](docs/decisions/0004-consistent-component-composition.md), and the [migration guide](docs/governance/glass-migration.md) before upgrading. The staged release and consumer-validation requirements are recorded in [ADR 0005](docs/decisions/0005-staged-glass-release.md).
 
-## Consumidores
+### Consumers
 
-- [Sandicts](https://github.com/fradelli/reactjs-sandicts-web): agendamento e
-  gestão de esportes.
-- [Kaizen](https://github.com/fradelli/kaizen-app): organização da vida pessoal,
-  rotina saudável, dieta e tarefas.
+- [Sandicts](https://github.com/fradelli/reactjs-sandicts-web): scheduling and sports management.
+- [Kaizen](https://github.com/fradelli/kaizen-app): personal organization, healthy routines, diet, and tasks.
 
-Cada aplicativo mantém suas páginas, features, regras de negócio, integrações,
-marca e ciclo de release. O Design System compartilha somente identidade,
-tokens, primitives e padrões visuais sem domínio.
+Each application owns its pages, features, business rules, integrations, brand, and release cycle. The Design System shares only identity, tokens, primitives, and domain-agnostic visual patterns.
 
 ## Releases
 
-Releases usam Semantic Versioning e são produzidas exclusivamente pelo workflow
-`Release`. Um merge com Changesets cria ou atualiza uma PR de versão; somente o
-merge dessa PR publica no GitHub Packages e cria a tag e o GitHub Release.
+Releases follow Semantic Versioning and are created exclusively by the `Release` workflow. A merge with Changesets creates or updates a version PR; merging that PR publishes to GitHub Packages and creates the tag and GitHub Release.
 
-Credenciais nunca são versionadas. O produtor usa o `GITHUB_TOKEN` efêmero, e
-cada consumidor recebe apenas acesso de leitura ao package. Consulte o
-[runbook de releases](docs/governance/releasing.md) para revisão, autenticação,
-verificação e rollback.
+Credentials are never committed. The producer uses an ephemeral `GITHUB_TOKEN`, and each consumer receives read-only package access. See the [release runbook](docs/governance/releasing.md) for review, authentication, verification, and rollback.
 
-## Fonte normativa
+## Normative sources
 
-- [ADR 0002 — Primitives acessíveis sem dependência headless](docs/decisions/0002-native-accessible-primitives.md)
-- [ADR 0001 — Fundação do Design System compartilhado](docs/decisions/0001-shared-design-system-foundation.md) (histórico; direção técnica de primitives substituída pelo ADR 0002)
-- [Admissão de componentes](docs/governance/component-admission.md)
-- [Versionamento e releases](docs/governance/versioning-and-releases.md)
-- [Operação de releases](docs/governance/releasing.md)
+- [ADR 0002 — Accessible native primitives without a headless dependency](docs/decisions/0002-native-accessible-primitives.md)
+- [ADR 0001 — Shared Design System foundation](docs/decisions/0001-shared-design-system-foundation.md) (historical; its primitive technical direction was superseded by ADR 0002)
+- [Component admission](docs/governance/component-admission.md)
+- [Versioning and releases](docs/governance/versioning-and-releases.md)
+- [Release operations](docs/governance/releasing.md)
 
-O ADR 0002 define a implementação dos primitives. O ADR 0001 continua normativo
-para as demais fronteiras e ownership. Documentos nos aplicativos consumidores
-devem apontar para esses ADRs, sem manter cópias independentes das decisões.
+ADR 0002 governs primitive implementation. ADR 0001 remains normative for its other boundaries and ownership decisions. Consumer application documents should link to these ADRs instead of keeping independent copies of the decisions.
 
-## Limites
+## Boundaries
 
-Pertencem ao Design System: tokens, tipografia, radius, foco, motion, estados
-visuais genéricos, primitives acessíveis e padrões comprovadamente comuns.
+The Design System owns tokens, typography, radius, focus, motion, generic visual states, accessible primitives, and patterns proven to be shared.
 
-Não pertencem ao Design System: calendários completos, reservas, quadras,
-treinos, dieta, hábitos, tarefas, rotas, autenticação, API, i18n, providers,
-shells, páginas, logos ou arte específica de produto.
+The Design System does not own complete calendars, reservations, courts, workouts, diet, habits, tasks, routes, authentication, APIs, i18n, providers, shells, pages, logos, or product-specific artwork.
 
-## Licença
+## License
 
-Este repositório público ainda não possui um arquivo `LICENSE`. A visibilidade
-do código-fonte não deve ser interpretada como concessão automática de direito
-de reutilização. A política de licença será decidida antes de uma eventual
-distribuição pública do package.
+This public repository does not currently have a `LICENSE` file. Source visibility must not be interpreted as an automatic grant of reuse rights. Decide the license policy before any potential public package distribution.
 
-## Catálogo e composição
+## Catalog and composition
 
-O Storybook se organiza em Foundations (tokens e materiais), Components (uma pasta por família) e Patterns (integrações). Glass e solid são superfícies do mesmo Card, com geometria compartilhada. O padding pertence à raiz: 24px no padrão e 16px em sm; slots não duplicam esse recuo.
+Storybook is organized into Foundations (tokens and materials), Components (one folder per family), and Patterns (integrations). Glass and solid are surfaces of the same Card and share geometry. Padding belongs to the root: 24px by default and 16px at `sm`; slots do not duplicate that inset.
 
-Consulte a [ADR 0003](docs/decisions/0003-shared-glass-visual-language.md), a [ADR 0004](docs/decisions/0004-consistent-component-composition.md) e o [guia de migração](docs/governance/glass-migration.md) antes de atualizar consumidores.
+See [ADR 0003](docs/decisions/0003-shared-glass-visual-language.md), [ADR 0004](docs/decisions/0004-consistent-component-composition.md), and the [migration guide](docs/governance/glass-migration.md) before upgrading consumers.
 
-Para ampliar a validação local de navegador, use `DS_BROWSERS=chromium,firefox,webkit` e `DS_VIEWPORT_WIDTH=320` como variáveis do processo de `npm run test:storybook`. Os navegadores oficiais correspondentes devem estar instalados pelo Playwright. O gate padrão usa Chromium a 1280px.
+To expand local browser validation, set `DS_BROWSERS=chromium,firefox,webkit` and `DS_VIEWPORT_WIDTH=320` in the environment for `npm run test:storybook`. Install the corresponding official browsers through Playwright. The default gate uses Chromium at 1280px.
 
-## Storybook público
+## Public Storybook
 
-O catálogo é publicado no [GitHub Pages](https://fradelli.github.io/design-system/) pelo workflow CI após validação de main. PRs não publicam o site. Os exemplos são interativos e usam conteúdo demonstrativo, sem operações reais de produto.
+The catalog is published to [GitHub Pages](https://fradelli.github.io/design-system/) by the CI workflow after validating `main`. Pull requests do not publish the site. Stories are interactive and use demonstration content without real product operations.
 
-O catálogo acompanha main e pode conter mudanças ainda não publicadas em uma versão do pacote. Hospedar o Storybook não altera o acesso ao pacote no GitHub Packages nem atualiza consumidores.
+The catalog follows `main` and may include changes that have not been published in a package version. Hosting Storybook does not change package access on GitHub Packages or update consumers.
 
-Consulte o [guia de publicação](docs/governance/storybook-publishing.md) para configuração, verificação e recuperação.
+See the [publishing guide](docs/governance/storybook-publishing.md) for configuration, verification, and recovery.

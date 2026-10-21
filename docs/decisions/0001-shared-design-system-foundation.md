@@ -1,26 +1,19 @@
-# ADR 0001 — Fundação do Design System compartilhado
+# ADR 0001 — Shared Design System foundation
 
-- **Status:** aceito
-- **Data:** 2026-09-07
-- **Decisores:** frontend/design-system
-- **História:** [KAN-223](https://sandicts.atlassian.net/browse/KAN-223)
+- **Status:** Accepted
+- **Date:** 2026-09-07
+- **Decision makers:** frontend/design-system
+- **Issue:** [KAN-223](https://sandicts.atlassian.net/browse/KAN-223)
 
-## Contexto
+## Context
 
-Sandicts e Kaizen são produtos relacionados, desenvolvidos pelo mesmo owner e
-com agendas como elemento relevante. Eles precisam compartilhar identidade e
-qualidade visual sem acoplar seus domínios ou seus ciclos de entrega.
+Sandicts and Kaizen are related products developed by the same owner, with schedules as a relevant part of their work. They need to share identity and visual quality without coupling their domains or release cycles.
 
-Copiar estilos entre repositórios produziria divergência. Um monorepo uniria
-ciclos que hoje são independentes. Um package que conhecesse reservas, dieta ou
-tarefas criaria uma camada `common` difícil de evoluir. Precisamos, portanto, de
-uma fonte normativa pequena e de fronteiras verificáveis.
+Copying styles between repositories would create divergence. A monorepo would combine cycles that are currently independent. A package that knew about reservations, diet, or tasks would create a `common` layer that is difficult to evolve. We therefore need a small normative source with verifiable boundaries.
 
-## Decisão
+## Decision
 
-O repositório `fradelli/design-system` é a fonte normativa do Design System. Ele
-terá inicialmente um único package, `@fradelli/ui`, com versões fixadas
-independentemente por Sandicts e Kaizen.
+The `fradelli/design-system` repository is the normative source for the Design System. It initially contains one package, `@fradelli/ui`, with versions pinned independently by Sandicts and Kaizen.
 
 ~~~text
 fradelli/design-system
@@ -29,49 +22,43 @@ fradelli/design-system
        └─ Kaizen
 ~~~
 
-O primeiro release será dark-first. Isso define a prioridade de implementação,
-não proíbe um modo light futuro. Inter variável será a família proporcional
-comum. Os aplicativos carregam a fonte uma vez no root, expõem
-`--font-inter` e o package somente referencia essa variável com fallback de
-sistema; o package não depende de `next/font` nem distribui binários da fonte.
+The first release is dark first. This sets implementation priority and does not prohibit a future light mode. Variable Inter is the shared proportional typeface. Applications load the font once at the root, expose `--font-inter`, and the package references that variable with a system fallback. The package does not depend on `next/font` or distribute font binaries.
 
 ## Ownership
 
-| Item | Owner | Observação |
+| Item | Owner | Notes |
 | --- | --- | --- |
-| Tokens semânticos, tipografia, radius, foco e motion | `@fradelli/ui` | Contrato visual sem domínio |
-| Status visuais genéricos | `@fradelli/ui` | `success`, `warning`, `info` e `destructive` |
-| Primitives e seus testes de acessibilidade | `@fradelli/ui` | Ex.: Button, Input, Alert e Dialog |
-| Padrão visual comprovado em dois produtos | `@fradelli/ui` | Sujeito ao checklist de admissão |
-| Logo, nome, metadata e artwork | aplicativo | Identidade específica do produto |
-| Shell, página, rota e composição de feature | aplicativo | Inclui agenda composta |
-| Reserva, quadra, treino, dieta, hábito e tarefa | aplicativo | Domínio nunca é exportado pelo package |
-| API, persistência, query, i18n e autenticação | aplicativo | Integrações permanecem locais |
-| Mapeamento entre categoria e significado de negócio | aplicativo | O package fornece cor, não semântica de domínio |
+| Semantic tokens, typography, radius, focus, and motion | `@fradelli/ui` | Domain agnostic visual contract |
+| Generic visual statuses | `@fradelli/ui` | `success`, `warning`, `info`, and `destructive` |
+| Primitives and their accessibility tests | `@fradelli/ui` | For example: Button, Input, Alert, and Dialog |
+| Visual patterns proven in two products | `@fradelli/ui` | Subject to the admission checklist |
+| Logo, name, metadata, and artwork | Application | Product specific identity |
+| Shell, page, route, and feature composition | Application | Includes composed schedules |
+| Reservation, court, workout, diet, habit, and task | Application | Domain is never exported by the package |
+| API, persistence, query, i18n, and authentication | Application | Integrations stay local |
+| Mapping between a category and business meaning | Application | The package provides color, not domain semantics |
 
-## Fundação visual
+## Visual foundation
 
-### Tipografia
+### Typography
 
-Inter variável é usada por papel, sem famílias concorrentes:
+Variable Inter is used by role, without competing type families:
 
-| Papel | Peso inicial |
+| Role | Initial weight |
 | --- | ---: |
 | Body | 400 |
-| Label e navegação | 500 |
-| Ênfase e ações | 600 |
-| Títulos | 700 |
-| Display e wordmark textual | 800 |
+| Label and navigation | 500 |
+| Emphasis and actions | 600 |
+| Headings | 700 |
+| Display and text wordmark | 800 |
 
-Uma fonte monoespaçada do sistema pode continuar sendo usada quando a semântica
-exigir alinhamento técnico de caracteres.
+A system monospace font may still be used when the content requires technical character alignment.
 
-### Cores
+### Colors
 
-Os valores abaixo são o contrato inicial a ser convertido em tokens e validado
-pela KAN-221. Eles não autorizam CSS duplicado nos consumidores.
+The values below are the initial contract to be converted into tokens and validated by KAN-221. They do not authorize duplicated CSS in consumers.
 
-| Papel | Valor inicial |
+| Role | Initial value |
 | --- | --- |
 | Background | `#0B0B0C` |
 | Surface | `#141416` |
@@ -82,9 +69,9 @@ pela KAN-221. Eles não autorizam CSS duplicado nos consumidores.
 | Brand red | `#F07878` |
 | Primary yellow | `#F2CF63` |
 
-A paleta categórica contém oito cores pastéis:
+The categorical palette contains eight pastel colors:
 
-| Categoria visual | Valor inicial |
+| Visual category | Initial value |
 | --- | --- |
 | Yellow | `#F2CF63` |
 | Orange | `#F0A866` |
@@ -95,77 +82,48 @@ A paleta categórica contém oito cores pastéis:
 | Cyan | `#65C8D0` |
 | Green | `#7BC8A4` |
 
-Esses nomes descrevem aparência, não domínio. Sandicts decide, por exemplo,
-qual categoria representa uma modalidade; Kaizen decide qual representa dieta
-ou treino. Cor sempre deve ser acompanhada por texto, ícone ou outro indicador.
+These names describe appearance, not domain. For example, Sandicts decides which category represents an activity; Kaizen decides which one represents diet or training. Color must always be accompanied by text, an icon, or another indicator.
 
-`brand` e `destructive` são tokens diferentes mesmo quando ambos parecem
-vermelhos. Identidade não pode carregar automaticamente a semântica de erro.
+`brand` and `destructive` are separate tokens even when both look red. Identity must not automatically imply error semantics.
 
-## Contrato técnico
+## Technical contract
 
-- React e React DOM serão peer dependencies.
-- TypeScript, Tailwind CSS 4, shadcn/ui sobre Radix Nova e Phosphor formam a
-  direção técnica inicial.
-- O package não depende de Next.js e preserva os limites necessários para React
-  Server Components.
-- Tokens-fonte seguirão o formato DTCG e gerarão CSS determinístico.
-- CSS, helper `cn` e componentes serão expostos por subpaths explícitos.
-- Storybook documentará foundations, estados e variantes.
-- O calendário completo permanece local até existirem dois usos reais e uma
-  API sem domínio demonstrável. Primitives menores de data podem ser avaliados
-  separadamente.
+- React and React DOM are peer dependencies.
+- TypeScript, Tailwind CSS 4, shadcn/ui over Radix Nova, and Phosphor form the initial technical direction.
+- The package does not depend on Next.js and preserves the boundaries required for React Server Components.
+- Source tokens follow the DTCG format and generate deterministic CSS.
+- CSS, the `cn` helper, and components are exposed through explicit subpaths.
+- Storybook documents foundations, states, and variants.
+- The complete calendar stays local until there are two real uses and a demonstrably domain agnostic API. Smaller date primitives can be evaluated separately.
 
-Nenhuma dessas ferramentas está configurada pela KAN-223. A implementação
-pertence às histórias KAN-222, KAN-221, KAN-220 e KAN-226.
+None of these tools were configured by KAN-223. Implementation belongs to issues KAN-222, KAN-221, KAN-220, and KAN-226.
 
-## Distribuição e evolução
+## Distribution and evolution
 
-O package começará privado no GitHub Packages, embora este repositório seja
-público. Nenhuma credencial será versionada. Os consumidores instalam uma versão
-exata e escolhem quando atualizar; publicar uma versão não atualiza os apps.
+The package starts private on GitHub Packages even though this repository is public. No credentials are committed. Consumers install an exact version and choose when to upgrade; publishing a version does not update applications.
 
-Usaremos Semantic Versioning e Changesets. Enquanto a API estiver em `0.x`,
-mudanças incompatíveis continuam exigindo changelog e guia de migração. O marco
-`1.0.0` exige uso validado pelos dois consumidores, API pública revisada e
-processo de release estável.
+We use Semantic Versioning and Changesets. While the API is in `0.x`, breaking changes still require a changelog and migration guide. Reaching `1.0.0` requires validated use by both consumers, a reviewed public API, and a stable release process.
 
-As regras detalhadas vivem em
-[`versioning-and-releases.md`](../governance/versioning-and-releases.md).
+Detailed rules are in [`versioning-and-releases.md`](../governance/versioning-and-releases.md).
 
-## Admissão de componentes
+## Component admission
 
-Primitives básicos podem nascer no package. Padrões compostos só entram depois
-de uso real em dois produtos e aprovação do
-[`component-admission.md`](../governance/component-admission.md). Flags como
-`product`, `sandictsVariant` ou `kaizenVariant` indicam uma abstração inadequada.
+Basic primitives may originate in the package. Composed patterns enter only after real use in two products and approval under [`component-admission.md`](../governance/component-admission.md). Flags such as `product`, `sandictsVariant`, or `kaizenVariant` indicate an unsuitable abstraction.
 
-## Alternativas rejeitadas
+## Rejected alternatives
 
-- **Copiar estilos entre apps:** produz fontes de verdade divergentes.
-- **Unir os produtos em monorepo:** acopla ciclos de entrega sem necessidade.
-- **Criar vários packages agora:** adiciona versionamento sem owners ou ciclos
-  distintos comprovados.
-- **Compartilhar páginas ou domínio:** transforma o package visual em camada de
-  negócio.
-- **Extrair um calendário completo no primeiro release:** antecipa uma API antes
-  de conhecermos os dois usos reais.
+- **Copying styles between apps:** creates divergent sources of truth.
+- **Combining products in a monorepo:** couples release cycles without need.
+- **Creating multiple packages now:** adds versioning without proven separate owners or cycles.
+- **Sharing pages or domain:** turns the visual package into a business layer.
+- **Extracting a complete calendar in the first release:** commits to an API before we know both real use cases.
 
-## Consequências e riscos
+## Consequences and risks
 
-A decisão reduz duplicação visual e permite evolução independente por versão.
-Em troca, exige disciplina de release, teste do artefato real, revisão de
-breaking changes e manutenção temporária de compatibilidade durante migrações.
+This decision reduces visual duplication and allows independent versioned evolution. In return, it requires release discipline, testing the actual artifact, reviewing breaking changes, and temporarily maintaining compatibility during migrations.
 
-Os principais riscos são abstração prematura, dependência acidental de Next.js,
-duas cópias de React, classes Tailwind não detectadas e divergência de tokens.
-Eles serão controlados por checklist de admissão, peers, fixtures de consumidor,
-`@source` explícito e geração determinística.
+The main risks are premature abstraction, accidental Next.js dependency, duplicate React copies, Tailwind classes that go undetected, and token divergence. The admission checklist, peer dependencies, consumer fixtures, explicit `@source`, and deterministic generation control these risks.
 
-## Revisão e substituição
+## Review and supersession
 
-Esta decisão deve ser revisada se surgirem ciclos de release realmente
-independentes, um terceiro consumidor com requisitos incompatíveis ou a
-necessidade comprovada de separar tokens de componentes. Uma mudança estrutural
-deve criar um novo ADR que declare substituir este; não se altera silenciosamente
-uma decisão já usada por releases.
+Review this decision if release cycles become genuinely independent, a third consumer has incompatible requirements, or separating tokens from components becomes necessary. A structural change requires a new ADR that explicitly supersedes this one; do not silently alter a decision already used by releases.

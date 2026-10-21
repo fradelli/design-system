@@ -11,7 +11,7 @@ export function getToken(document: TokenNode, path: string): TokenNode {
   let current: unknown = document;
   for (const segment of path.split(".")) {
     if (!current || typeof current !== "object" || !(segment in current)) {
-      throw new Error(`Token inexistente: ${path}`);
+      throw new Error(`Token does not exist: ${path}`);
     }
     current = (current as TokenNode)[segment];
   }
@@ -23,7 +23,7 @@ export function resolveToken(
   path: string,
   visited = new Set<string>(),
 ): unknown {
-  if (visited.has(path)) throw new Error(`Ciclo de alias: ${[...visited, path].join(" -> ")}`);
+  if (visited.has(path)) throw new Error(`Alias cycle: ${[...visited, path].join(" -> ")}`);
   visited.add(path);
   const token = documents
     .map((document) => {
@@ -34,7 +34,7 @@ export function resolveToken(
       }
     })
     .find(Boolean);
-  if (!token || token.$value === undefined) throw new Error(`Token sem valor: ${path}`);
+  if (!token || token.$value === undefined) throw new Error(`Token has no value: ${path}`);
   if (typeof token.$value === "string") {
     const alias = token.$value.match(/^\{(.+)\}$/u)?.[1];
     if (alias) return resolveToken(documents, alias, visited);
@@ -62,7 +62,7 @@ function channel(value: number): number {
 export function contrastRatio(first: string, second: string): number {
   const luminance = (hex: string) => {
     const channels = hex.match(/[a-f\d]{2}/giu)?.map((part) => Number.parseInt(part, 16));
-    if (!channels || channels.length !== 3) throw new Error(`Cor hexadecimal inválida: ${hex}`);
+    if (!channels || channels.length !== 3) throw new Error(`Invalid hexadecimal color: ${hex}`);
     return (
       0.2126 * channel(channels[0]!) +
       0.7152 * channel(channels[1]!) +

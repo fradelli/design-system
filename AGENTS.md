@@ -1,55 +1,36 @@
 # Repository instructions
 
-## Contexto obrigatório
+## Required context
 
-- Leia `docs/decisions/0001-shared-design-system-foundation.md` antes de mudar
-  arquitetura, API pública, tokens ou ownership.
-- Leia o documento correspondente em `docs/governance/` antes de admitir um
-  componente ou classificar um release.
-- Escreva documentação normativa em português do Brasil e mantenha nomes de API
-  em inglês.
+- Read `docs/decisions/0001-shared-design-system-foundation.md` before changing architecture, public APIs, tokens, or ownership.
+- Read the relevant document in `docs/governance/` before admitting a component or classifying a release.
+- Write all project-maintained content in American English (`en-US`). Keep public API names in English as well.
+- Write branch slugs, commit messages, PR titles, and PR descriptions in English. Include the Jira key when one is available; do not invent one.
 
-## Fronteiras
+## Boundaries
 
-- Este repositório compartilha identidade, tokens, primitives e padrões visuais
-  sem domínio.
-- Não adicione reservas, quadras, treinos, dieta, hábitos, tarefas, páginas,
-  rotas, autenticação, API, i18n, providers, logos ou arte de produto.
-- Não adicione dependência de Next.js. React e React DOM devem permanecer peers.
-- Não crie flags de produto como `product`, `sandictsVariant` ou
-  `kaizenVariant`.
-- Não adicione dependência, abstraction ou componente sem consumidor e
-  justificativa verificável.
+- This repository shares identity, tokens, primitives, and domain agnostic visual patterns.
+- Do not add reservations, courts, workouts, diet, habits, tasks, pages, routes, authentication, APIs, i18n, providers, logos, or product artwork.
+- Do not add a Next.js dependency. React and React DOM must remain peer dependencies.
+- Do not create product flags such as `product`, `sandictsVariant`, or `kaizenVariant`.
+- Do not add a dependency, abstraction, or component without a consumer and verifiable justification.
 
-## Segurança e publicação
+## Security and publishing
 
-- Nunca versione tokens, credenciais, `.env`, `.npmrc` autenticado, caminhos
-  pessoais ou dados de usuário.
-- O repositório é público. Revise novos arquivos assumindo leitura externa.
-- Versões publicadas são imutáveis; use patch corretivo ou rollback no
-  consumidor.
+- Never commit tokens, credentials, `.env`, authenticated `.npmrc` files, personal paths, or user data.
+- This repository is public. Review new files as if they were visible to anyone.
+- Published versions are immutable; issue a corrective patch or roll consumers back.
 
-## Entrega
+## Delivery
 
-- Relacione branches, commits e PRs ao card Jira correspondente, usando o padrão
-  `codex/KAN-123-descricao` quando aplicável.
-- Classifique mudanças públicas segundo SemVer e inclua Changeset quando a
-  automação existir.
-- Valide formatação, lint, tipos, testes, build e tarball conforme os scripts
-  disponíveis. O gate completo é `npm run ci`; para mudanças apenas documentais,
-  execute ao menos `npm run format:check` e `git diff --check`.
-- Não edite `dist/`, `.tmp/`, tarballs ou lockfiles de fixtures manualmente. São
-  artefatos gerados e não devem ser versionados.
-- Mantenha imports relativos do source compatíveis com NodeNext, incluindo a
-  extensão `.js` quando houver módulo relativo emitido.
-- Nunca edite `src/styles/tokens.generated.css` manualmente. Altere os arquivos
-  DTCG em `tokens/` e execute `npm run tokens:build`.
-- Releases são feitas exclusivamente pelo workflow `Release`, a partir de `main`, com Changesets.
-- Nunca execute `npm publish` localmente nem adicione PAT, `_authToken`, `.env` ou `.npmrc`
-  autenticado ao repositório.
-- Toda mudança pública deve declarar impacto SemVer e incluir Changeset, salvo justificativa
-  documental explícita na PR.
-- Versões publicadas são imutáveis; corrija com nova versão e faça rollback nos consumidores pela
-  versão exata anterior.
-- Um novo ADR substitui uma decisão aceita; não reescreva silenciosamente o
-  histórico arquitetural.
+- Link branches, commits, and PRs to the corresponding Jira issue when applicable. Use `codex/KAN-123-description` when an issue key is available.
+- Classify public changes according to SemVer and include a Changeset when the automation is available.
+- Run formatting, lint, type, test, build, and tarball checks as appropriate. The full gate is `npm run ci`; for documentation-only changes, run at least `npm run format:check` and `git diff --check`.
+- Do not edit `dist/`, `.tmp/`, tarballs, or fixture lockfiles manually. These are generated artifacts and must not be committed.
+- Keep source relative imports compatible with NodeNext, including the `.js` extension for emitted relative modules.
+- Never edit `src/styles/tokens.generated.css` manually. Change the DTCG files in `tokens/` and run `npm run tokens:build`.
+- Releases are made exclusively by the `Release` workflow from `main`, using Changesets.
+- Never run `npm publish` locally or add a PAT, `_authToken`, `.env`, or authenticated `.npmrc` to the repository.
+- Every public change must declare its SemVer impact and include a Changeset, unless the PR explicitly justifies a documentation-only change.
+- Published versions are immutable; issue a new version to fix them and roll consumers back to the exact previous version when needed.
+- A new ADR supersedes an accepted decision; do not silently rewrite architectural history.

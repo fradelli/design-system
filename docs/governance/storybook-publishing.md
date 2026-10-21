@@ -1,51 +1,45 @@
-# Publicação do Storybook
+# Storybook publishing
 
-## Escopo
+## Scope
 
-O site público do catálogo é `https://fradelli.github.io/design-system/`. A hospedagem usa GitHub Pages, com GitHub Actions como origem. O catálogo acompanha main e pode mostrar mudanças ainda não distribuídas em uma versão do pacote. Publicação de pacote permanece exclusivamente no workflow Release; este fluxo não executa npm publish.
+The public catalog is hosted at `https://fradelli.github.io/design-system/` through GitHub Pages, with GitHub Actions as its source. The catalog follows `main` and may show changes that are not yet in a package release. Package publication remains exclusive to the `Release` workflow; this flow never runs `npm publish`.
 
-## Fluxo
+## Workflow
 
-1. PRs executam o check Validate package, sem upload ou deploy de Pages.
-2. Em push para main ou execução manual nessa branch, o job validate instala as dependências e executa npm run ci.
-3. Depois do gate aprovado, o job envia storybook-static como artefato github-pages, com retenção de sete dias.
-4. O job Publish Storybook depende de validate, usa o environment github-pages e publica exatamente esse artefato.
-5. A URL efetiva é registrada no environment pelo output da ação de deploy.
+1. Pull requests run `Validate package`; they do not upload or deploy Pages.
+2. A push to `main` or a manual run on that branch installs dependencies and runs `npm run ci`.
+3. After validation passes, the job uploads `storybook-static` as a `github-pages` artifact with seven-day retention.
+4. The `Publish Storybook` job depends on validation, uses the `github-pages` environment, and deploys that exact artifact.
+5. The deploy action records the effective URL in the environment output.
 
-As execuções de main são serializadas pelo grupo de concorrência do CI; não se cancela uma publicação em andamento para iniciar outra. PRs continuam cancelando execuções anteriores da própria ref. Execuções pendentes intermediárias podem ser substituídas pela mais recente. Nenhuma execução de PR recebe permissões de publicação.
+Runs on `main` are serialized by the CI concurrency group; an in-progress deployment is not cancelled to start another. Pull requests continue to cancel previous runs on the same ref. No pull-request run receives publishing permissions.
 
-## Configuração do repositório
+## Repository configuration
 
-- Pages: origem GitHub Actions, sem domínio customizado inicialmente.
-- Environment github-pages: política de branches customizada permitindo somente main.
-- Token do workflow: contents read no padrão; pages write e id-token write apenas no job deploy.
-- Ações oficiais configure-pages v6.0.0, upload-pages-artifact v5.0.0 e deploy-pages v5.0.1 fixadas por SHA. Não há PAT ou segredo novo para hospedar o site.
+- Pages uses GitHub Actions as its source and has no custom domain initially.
+- The `github-pages` environment permits only `main` through a custom branch policy.
+- The workflow uses the default `contents: read`; `pages: write` and `id-token: write` are granted only to the deploy job.
+- Official `configure-pages` v6.0.0, `upload-pages-artifact` v5.0.0, and `deploy-pages` v5.0.1 actions are pinned by SHA. Hosting requires no PAT or new secret.
+- The build uses relative paths for manager, iframe, and assets. Do not force a global base path that changes development or tests. Review this configuration if an absolute path is introduced. `storybook-static` remains ignored and is never committed.
 
-O build usa caminhos relativos para manager, iframe e assets. Não se força uma base global que altere desenvolvimento ou testes. A configuração deve ser revista caso um caminho absoluto seja introduzido futuramente. storybook-static continua ignorado e não é commitado.
+## Verification
 
-## Verificação
+Confirm the `Validate package` check and `Publish Storybook` job passed for the deployed commit. Open the site and direct story links under `/design-system/?path=...`, including after reload. Check Foundations, Card, PendingButton, Alert, Sheet, Popover, and Patterns/Form, including keyboard interaction. Verify manager, iframe, CSS, JavaScript, and icon paths, and inspect the mobile preview. Demonstration stories must not perform real email, account, or product operations. Record the SHA, run, and URL in the delivery record; never record tokens or authentication data.
 
-- Confirmar o check Validate package e o job Publish Storybook aprovados no commit publicado.
-- Abrir a página e links diretos de stories sob /design-system/?path=..., recarregando-os.
-- Verificar Foundations, Card, PendingButton, Alert, Sheet, Popover e Patterns/Form, incluindo interações e teclado.
-- Conferir manager, iframe, CSS, JavaScript e ícones sem erros de caminho; verificar a prévia móvel.
-- Conferir que exemplos demonstrativos não executam operações reais de email, conta ou produto.
-- Registrar SHA, execução e URL no diário de entrega. Não registrar tokens ou dados de autenticação.
+## Manual runs and recovery
 
-## Execução manual e recuperação
+To republish the current version, run the CI workflow manually with ref `main`. It repeats the full gate before deployment. A dispatch on another branch does not publish.
 
-Para repetir a publicação da versão atual, executar o workflow CI por workflow_dispatch com ref main. O gate completo será repetido antes do deploy. Dispatch em outra branch não publica.
+A validation or build failure prevents upload and deployment, preserving the last published site. To restore an earlier version, prefer a revert PR to `main`, with CI and a new deployment. Do not force-push or disable checks. Republishing an exact earlier artifact requires review of the run and artifact retention, and must use a GitHub-supported procedure with the required authorization; the standard manual run deploys current `main`.
 
-Uma falha de validação ou build impede o upload/deploy e preserva o último site publicado. Para recuperar uma versão anterior, preferir uma PR de reversão para main, com CI e nova publicação. Não usar force push nem desativar checks. Se for necessária uma republicação exata de artefato anterior, revisar o run e a retenção e executar pelo procedimento suportado pelo GitHub, com autorização correspondente; a execução manual padrão publica a main atual.
+## Versioning and limits
 
-## Versionamento e limites
+This flow and its documentation do not change the library API, styles, or behavior and need no Changeset. Component and token changes still require their own classification. The public site does not grant access to the private package or update applications.
 
-Este fluxo e sua documentação não alteram API, estilos ou comportamento da biblioteca e dispensam Changeset. Alterações de componentes/tokens continuam exigindo sua classificação própria. O site público não concede acesso ao pacote privado e não atualiza aplicativos.
+The catalog uses the available font environment; consumers provide Inter or the configured fallback is used. Screen-reader and real-consumer review remain part of Design System adoption.
 
-O catálogo usa o ambiente de fonte disponível; a família Inter é fornecida pelo consumidor ou cai no fallback configurado. Avaliação com leitores de tela e telas reais dos consumidores permanece parte da adoção do Design System.
+## Initial configuration validation
 
-## Validação da configuração inicial
+The local gate passed with 43 unit tests and 49 Chromium stories, plus token checks, build, tarball, npm/pnpm fixtures, and a root repository audit with no findings. The CSS fixture retains the preexisting alerts recorded in the history. YAML structure and permissions were checked; configuration tests verify validation dependency and the absence of deploy permissions in pull-request jobs.
 
-O gate local passou com 43 testes unitários e 49 exemplos em Chromium, além de tokens, build, tarball, fixtures npm/pnpm e auditoria do repositório com zero achados. A fixture de CSS mantém os alertas preexistentes registrados no histórico. A estrutura YAML e as permissões foram conferidas; testes de configuração verificam dependência de validação e ausência de permissões de deploy no job de PR.
-
-O build estático foi servido em /design-system/ e inspecionado no navegador: Card e PendingButton carregaram, a interação de carregamento funcionou e o link direto preservou a seleção após recarregar. O backend Pages está configurado por workflow, com HTTPS e branch main exclusiva no environment. O primeiro deployment público deve ser confirmado pela execução de main.
+The static build was served at `/design-system/` and inspected in a browser: Card and PendingButton loaded, the loading interaction worked, and a direct story link retained its selection after reload. Pages uses a workflow, HTTPS, and a `main`-only environment. Confirm the first public deployment from the `main` run.

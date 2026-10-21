@@ -4,13 +4,13 @@
 
 ### Minor Changes
 
-- 5478cfa: Adota a linguagem visual de vidro aprovada no portfólio como fundação compartilhada. Card passa a usar vidro por padrão, com `surface="solid"` como alternativa opaca; CardTitle e SheetTitle adotam a hierarquia de título e Input recebe fundo elevado a 60%.
+- 5478cfa: Adopt the portfolio's approved glass visual language as the shared foundation. Card uses glass by default, with `surface="solid"` as an opaque option; CardTitle and SheetTitle adopt the title hierarchy, and Input receives a 60% elevated background.
 
-  Mudança visual incompatível em 0.x: revisar contraste, composição e espaçamento antes do upgrade. Inclui tokens e classes públicas de superfície e tipografia, fallback opaco e redução de transparência. Consulte `docs/governance/glass-migration.md`. A publicação inicial foi autorizada por etapas, com o portfólio como consumidor validado; os demais aplicativos exigem validação própria antes do upgrade. Consulte a ADR 0005.
+  Breaking visual change in 0.x: review contrast, composition, and spacing before upgrading. Includes public surface and typography tokens and classes, an opaque fallback, and reduced-transparency support. See `docs/governance/glass-migration.md`. The staged release was approved with the portfolio as the validated consumer; the other applications require their own validation before upgrading. See ADR 0005.
 
-  Padroniza a composição entre superfícies: Card passa a concentrar padding na raiz (24px/default, 16px/sm), sem padding lateral nos slots; papéis de seção e corpo passam a 24/32 e 16/24. Inclui papéis display/interface/label, correções de Sheet, Alert, PendingButton, Switch, RadioGroup e Popover, e stories por família. Button textual usa altura mínima e permite quebra; AlertAction ocupa uma linha reservada. Essas mudanças visuais exigem revisão dos overrides no consumidor.
+  Standardize composition across surfaces: Card now owns root padding (24px/default, 16px/sm), with no horizontal padding on slots; section and body roles use 24/32 and 16/24. Adds display/interface/label roles, Sheet, Alert, PendingButton, Switch, RadioGroup, and Popover fixes, plus family-based stories. Text Buttons use a minimum height and allow wrapping; AlertAction occupies a reserved row. These visual changes require reviewing consumer overrides.
 
-  Corrige também a validade nativa de RadioGroup obrigatório sem seleção: inputs internos deixam de usar readOnly, preservam FormData e direcionam o foco de erro ao item visível. Mensagens localizadas permanecem responsabilidade do consumidor.
+  Also fixes native validity for a required RadioGroup with no selection: internal inputs no longer use readOnly, preserve FormData, and direct invalid focus to a visible item. Localized messages remain the consumer's responsibility.
 
 ## 0.4.0
 
@@ -23,22 +23,19 @@
 
 ### Minor Changes
 
-- 2f43398: Adiciona NavigationItem como primitive de link de navegação com estado ativo,
-  foco visível e área mínima de toque. Expõe BarbellIcon e ForkKnifeIcon por
-  subpath explícito, reutilizando Phosphor sem dependências novas.
+- 2f43398: Add NavigationItem as a navigation-link primitive with an active state, visible focus, and a minimum touch target. Export BarbellIcon and ForkKnifeIcon through an explicit subpath, reusing Phosphor without new dependencies.
 
 ## 0.2.0
 
 ### Minor Changes
 
-- 09488a8: Adiciona a primitive acessível `Switch` com estados controlado, desabilitado e foco visível.
+- 09488a8: Add the accessible `Switch` primitive with controlled, disabled, and visible-focus states.
 
 ## 0.1.0
 
 ### Minor Changes
 
-- 1d695cb: Adiciona o helper `cn` e os primeiros primitives compartilhados com subpaths explícitos, testes de acessibilidade e validação em consumidores npm e pnpm.
-- 858657f: Adiciona a fundação visual dark-first com tokens DTCG, Inter por variável do consumidor e CSS compatível com Tailwind 4.
+- 1d695cb: Add the `cn` helper and the first shared primitives with explicit subpaths, accessibility tests, and validation with npm and pnpm consumers.
+- 858657f: Add the dark-first visual foundation with DTCG tokens, Inter through a consumer variable, and CSS compatible with Tailwind 4.
 
-Todas as mudanças relevantes de `@fradelli/ui` são registradas neste arquivo pela automação de
-Changesets.
+All relevant `@fradelli/ui` changes are recorded in this file by Changesets automation.

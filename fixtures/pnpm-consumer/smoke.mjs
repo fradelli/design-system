@@ -51,12 +51,12 @@ const markup = renderToStaticMarkup(
     ),
   ),
 );
-if (!markup.includes("Portable")) throw new Error("Primitives estáticos não renderizaram.");
-if (cn("px-2", "px-4") !== "px-4") throw new Error("Helper cn inválido.");
+if (!markup.includes("Portable")) throw new Error("Static primitives did not render.");
+if (cn("px-2", "px-4") !== "px-4") throw new Error("The cn helper returned an invalid result.");
 const stylesheet = import.meta.resolve("@fradelli/ui/styles.css");
 const css = await readFile(new URL(stylesheet), "utf8");
-if (!css.includes("--fd-color-background")) throw new Error("Entrypoint CSS inválido.");
+if (!css.includes("--fd-color-background")) throw new Error("The CSS entry point is invalid.");
 const compiled = await readFile("output.css", "utf8");
 for (const expected of [".bg-primary", ".motion-reduce\\:animate-none", "prefers-reduced-motion"]) {
-  if (!compiled.includes(expected)) throw new Error(`Classe compartilhada ausente: ${expected}`);
+  if (!compiled.includes(expected)) throw new Error(`Shared class is missing: ${expected}`);
 }

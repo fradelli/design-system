@@ -1,23 +1,23 @@
-# ADR 0004 — Composição consistente entre superfícies
+# ADR 0004 — Consistent composition across surfaces
 
-- **Status:** aceita para implementação pelo usuário; publicação pendente
-- **Data:** 2026-10-19
-- **Decisão:** substitui a preservação de padding/slots da ADR 0003; mantém suas decisões de material e fronteiras da ADR 0001.
+- **Status:** Accepted by the user for implementation; publication pending
+- **Date:** 2026-10-19
+- **Decision:** Supersedes ADR 0003's preservation of padding and slots; retains its material decisions and ADR 0001's boundaries.
 
-## Contexto
+## Context
 
-A revisão do catálogo mostrou título direto sem recuo, alertas sobrepostos, estados pendentes comprimidos e diferenças de tipografia. Material e composição precisam variar independentemente.
+Catalog review found unindented direct titles, overlapping alerts, compressed pending states, and inconsistent typography. Material and composition must vary independently.
 
-## Decisão
+## Decision
 
-Card tem um único responsável pelo padding: sua raiz. O padrão usa 24 px e gap 16 px; `sm` usa 16 px e gap 12 px. Slots não duplicam recuos. Glass e solid têm mesma geometria, raio e papéis de texto. Não há uma família GlassCard concorrente.
+Card has a single owner for padding: its root. The default uses 24px padding and a 16px gap; `sm` uses 16px padding and a 12px gap. Slots do not duplicate insets. Glass and solid share geometry, radius, and text roles. There is no competing GlassCard family.
 
-Papéis tipográficos completos definem tamanho, entrelinha e peso: display 32/40, seção 24/32, painel/card 20/28, editorial 16/24, interface/rótulo 14/20. A fonte é fornecida pelo consumidor. Os tokens geram o CSS; utilitários explícitos continuam disponíveis para contextos legítimos.
+Complete typography roles define size, line height, and weight: display 32/40, section 24/32, panel/card 20/28, editorial 16/24, and interface/label 14/20. Consumers provide the font. Tokens generate CSS; explicit utilities remain available for legitimate contexts.
 
-O catálogo se organiza em Foundations, Components por família e Patterns de integração. Pastas de stories refletem a navegação. Cada estado relevante precisa ser verificável com CSS compilado e conteúdo variável.
+The catalog is organized into Foundations, Components by family, and integration Patterns. Story folders match the navigation. Every relevant state must be verifiable with compiled CSS and variable content.
 
-Overlays mantêm suas APIs públicas e corrigem visibilidade, ancoragem, limites e foco. Popover separa efeitos de observação de cálculo puro. Composição asChild resolve conflitos de utilitários preservando handlers e refs.
+Overlays keep their public APIs and fix visibility, anchoring, boundaries, and focus. Popover separates observation effects from pure calculations. `asChild` composition resolves utility conflicts while preserving handlers and refs.
 
-## Compatibilidade
+## Compatibility
 
-Minor incompatível em 0.x. Revisar overrides de Card, alturas rígidas de Button e posição de AlertAction conforme o guia de migração. Não há atualização automática de aplicativos. Os defeitos corrigidos e a suíte do pacote não substituem validação das telas reais antes da publicação.
+This is a breaking minor change in `0.x`. Review Card overrides, fixed Button heights, and AlertAction placement using the migration guide. Applications are not updated automatically. Fixes and package tests do not replace validation on real screens before publication.
