@@ -1,47 +1,29 @@
-# ADR 0002 — Primitives acessíveis sem dependência headless
+# ADR 0002 — Accessible native primitives without a headless dependency
 
-- **Status:** aceito
-- **Data:** 2026-10-04
-- **Decisores:** responsável pelo produto Sandicts e frontend/design-system
-- **Substitui:** a direção técnica de primitives descrita no ADR 0001
+- **Status:** Accepted
+- **Date:** 2026-10-04
+- **Decision makers:** Sandicts product owner and frontend/design-system
+- **Supersedes:** The technical direction for primitives recorded in ADR 0001
 
-## Contexto
+## Context
 
-O ADR 0001 registrou shadcn/ui sobre Radix como direção técnica inicial. A
-integração mostrou que aplicativos consumidores passaram a depender de
-primitives e estilos externos além do package compartilhado. Sandicts definiu
-que não terá dependência de Radix nem de bibliotecas headless equivalentes; o
-Design System é responsável pelas APIs visuais e seus comportamentos acessíveis.
+ADR 0001 recorded shadcn/ui over Radix as the initial technical direction. Integration showed that consuming applications would depend on external primitives and styles beyond the shared package. Sandicts decided not to depend on Radix or equivalent headless libraries; the Design System owns visual APIs and their accessible behavior.
 
-## Decisão
+## Decision
 
-`@fradelli/ui` implementa primitives em React sobre elementos HTML e recursos
-nativos do navegador. O package não depende de Radix, shadcn, ou outra
-biblioteca de primitives headless. Dependências utilitárias sem comportamento
-headless, como `class-variance-authority`, continuam permitidas quando usadas
-pelo package.
+`@fradelli/ui` implements React primitives using HTML elements and native browser features. The package does not depend on Radix, shadcn, or another headless primitive library. Utility dependencies without headless behavior, such as `class-variance-authority`, remain allowed when the package uses them.
 
-Diálogos usam o elemento nativo `<dialog>` e `showModal()`, com foco, Escape e
-camada superior fornecidos pelo navegador. Popover implementa posicionamento,
-teclado, fechamento por Escape e interação externa na camada visual do package.
-RadioGroup usa controles nativos e expõe a navegação de grupo por teclado. Label
-e Separator usam HTML sem wrapper de terceiros. A composição `asChild` existente
-usa um helper interno pequeno, sem dependência externa.
+Dialogs use native `<dialog>` and `showModal()`, relying on the browser for focus, Escape, and the top layer. Popover implements positioning, keyboard behavior, Escape dismissal, and outside interaction in the package's visual layer. RadioGroup uses native controls and exposes keyboard group navigation. Label and Separator use HTML without third-party wrappers. Existing `asChild` composition uses a small internal helper without an external dependency.
 
-Tokens, CSS publicado e testes acessíveis permanecem responsabilidade do
-Design System. Cada componente é validado em Storybook e nas fixtures de
-consumidor; diferenças de produto são tratadas por composição e tokens.
+The Design System owns tokens, published CSS, and accessibility tests. Each component is validated in Storybook and consumer fixtures; product differences are handled through composition and tokens.
 
-## Consequências
+## Consequences
 
-- Aplicativos importam primitives somente de `@fradelli/ui`.
-- Mudanças de comportamento nativo exigem testes em navegadores compatíveis e
-  fallback previsível nos ambientes de teste.
-- O CSS do package fornece transições e respeita movimento reduzido.
-- O ADR 0001 continua como registro histórico; decisões não técnicas de ownership,
-  tokens, fronteiras e versionamento permanecem vigentes.
+- Applications import primitives only from `@fradelli/ui`.
+- Native behavior changes require tests in supported browsers and predictable fallbacks in test environments.
+- Package CSS supplies transitions and respects reduced motion.
+- ADR 0001 remains as a historical record. Its nontechnical decisions about ownership, tokens, boundaries, and versioning remain in force.
 
-## Reversão
+## Reversal
 
-Uma futura mudança de estratégia exige novo ADR que substitua esta decisão e
-justifique as dependências e o ownership do comportamento acessível.
+A future strategy change requires a new ADR that supersedes this decision and explains the dependencies and ownership of accessible behavior.

@@ -1,37 +1,37 @@
-# ADR 0003 — Linguagem visual compartilhada de vidro
+# ADR 0003 — Shared glass visual language
 
-- **Status:** aceita para implementação; validação dos consumidores e publicação pendentes
-- **Data:** 2026-10-19
-- **Decisão:** estende a ADR 0001 quanto aos consumidores e ao tratamento visual; preserva suas fronteiras arquiteturais
+- **Status:** Accepted for implementation; consumer validation and publication pending
+- **Date:** 2026-10-19
+- **Decision:** Extends ADR 0001 for consumers and visual treatment while preserving its architectural boundaries
 
-## Contexto
+## Context
 
-O portfólio pessoal adotou a paleta e as primitivas de `@fradelli/ui`, acrescentando vidro e hierarquia tipográfica locais. O usuário aprovou essa aparência como referência para portfólio, Kaizen e Sandicts. Copiar o CSS para cada produto criaria fontes de verdade concorrentes.
+The personal portfolio adopted the `@fradelli/ui` palette and primitives, then added local glass surfaces and typographic hierarchy. The user approved this appearance as a reference for the portfolio, Kaizen, and Sandicts. Copying CSS into each product would create competing sources of truth.
 
-A base remota consultada já publica `0.4.0`. Esta evolução parte dela, sem alterar versões publicadas nem editar a ADR anterior.
+The consulted remote base publishes `0.4.0`. This change builds on that version without changing published versions or editing the previous ADR.
 
-## Decisão
+## Decision
 
-O pacote compartilha superfícies de vidro e papéis tipográficos, preservando os tokens opacos e as cores existentes. Card passa a usar vidro por padrão e oferece `surface="solid"` para densidade, contraste e composição sem blur aninhado. Tamanhos, slots, padding e semântica permanecem; CardTitle adota o papel de título de card. SheetTitle usa esse mesmo papel e Input recebe o fundo elevado a 60% já utilizado no portfólio.
+The package shares glass surfaces and typographic roles while preserving existing opaque tokens and colors. Card uses glass by default and offers `surface="solid"` for density, contrast, and compositions that should not nest blur. Sizes, slots, padding, and semantics remain; CardTitle adopts the card-title role. SheetTitle uses the same role, and Input receives the 60% elevated background already used by the portfolio.
 
-As classes públicas `fd-surface-glass`, `fd-surface-glass-elevated`, `fd-text-card`, `fd-text-section` e `fd-text-body` atendem composições que não exigem um novo componente. Superfícies não definem padding, raio, largura de borda ou interação. Não há uma família pública GlassCard concorrente.
+The public classes `fd-surface-glass`, `fd-surface-glass-elevated`, `fd-text-card`, `fd-text-section`, and `fd-text-body` support compositions that do not need a new component. Surfaces do not set padding, radius, border width, or interaction. There is no competing public GlassCard family.
 
-Os tokens visuais usam dimensões e aliases DTCG onde aplicável. Valores CSS derivados, como `color-mix` e sombra com cor derivada, são tokens DTCG de tipo `string`, explicitamente destinados ao CSS. Não são declarados como cores DTCG estruturadas. Style Dictionary resolve suas referências e mantém a geração determinística.
+Visual tokens use DTCG dimensions and aliases where applicable. Derived CSS values such as `color-mix` and shadows with derived colors are DTCG string tokens intended for CSS, not structured DTCG colors. Style Dictionary resolves their references deterministically.
 
-Há fallback opaco na ausência de suporte, preferência de redução de transparência, cores forçadas e opt-out explícito em `html[data-fd-transparency="reduce"]`. A declaração padrão de backdrop-filter vem após a prefixed para preservar o CSS compilado. Redução de movimento continua independente.
+The implementation provides an opaque fallback when unsupported, reduced-transparency preference, forced-colors support, and an explicit opt-out through `html[data-fd-transparency="reduce"]`. The standard backdrop-filter declaration follows its prefixed form to preserve compiled CSS. Reduced motion remains independent.
 
-O pacote não carrega fontes. Os consumidores fornecem Inter. Títulos de hero, estrelas, gravidade, imagens, domínio e layout de telas continuam locais. Controles com contraste e estados já adequados preservam seu tratamento; não se aplica blur indiscriminadamente a badges, tabelas e overlays.
+The package does not load fonts; consumers provide Inter. Hero titles, stars, gravity, imagery, domain, and screen layout remain local. Controls that already have suitable contrast and states keep their treatment; blur is not applied indiscriminately to badges, tables, or overlays.
 
-## Compatibilidade e admissão
+## Compatibility and admission
 
-A evolução de tokens e da primitiva Card não introduz um padrão composto de domínio. Continuam vigentes os critérios de admissão da ADR 0001 para composições futuras.
+Token and Card primitive changes do not introduce a composed domain pattern. The ADR 0001 admission criteria continue to govern future compositions.
 
-A alteração padrão de Card, CardTitle, SheetTitle e Input é material e será uma minor incompatível em `0.x`, documentada em Changeset e guia de migração. O número final depende da fila de versões. Não há publicação nesta implementação.
+The default changes to Card, CardTitle, SheetTitle, and Input are material and form a breaking minor change in `0.x`, documented by a Changeset and migration guide. The final version depends on the release queue. This decision does not publish a package.
 
-A validação do artefato nos três consumidores e a revisão visual precedem o release. Cada aplicativo atualiza sua versão exata por PR própria. O Sandicts precisa revisar sua política visual e seus geradores; o Kaizen precisa revisar overrides locais. Essas migrações não são efeitos automáticos de publicar o pacote.
+Validate the artifact in all three consumers and complete visual review before release. Each application updates its exact version through its own PR. Sandicts must review its visual policy and generators; Kaizen must review local overrides. Publishing does not migrate consumers automatically.
 
-## Riscos e reversão
+## Risks and rollback
 
-Vidro pode reduzir contraste sobre fundos claros e aumentar custo de composição. Usar uma camada por painel, fundo opaco onde necessário, revisar estados sem depender apenas de cor e comparar desempenho nas telas reais.
+Glass can reduce contrast over light backgrounds and increase compositing cost. Use one layer per panel, opaque backgrounds where needed, review states without relying on color alone, and compare performance on real screens.
 
-Reverter alterações do consumidor como unidade de código, estilos, manifesto e lockfile. Versões publicadas são imutáveis. Falta de evidência visual ou de consumo bloqueia a publicação, não é aprovação implícita.
+Roll back consumer code, styles, manifest, and lockfile together. Published versions are immutable. Missing visual or consumption evidence blocks publication; it is not implicit approval.

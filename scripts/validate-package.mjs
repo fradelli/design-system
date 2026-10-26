@@ -7,7 +7,7 @@ const npmCli = process.env.npm_execpath;
 const publintCli = join("node_modules", "publint", "src", "cli.js");
 const attwCli = join("node_modules", "@arethetypeswrong", "cli", "dist", "index.js");
 
-if (!npmCli) throw new Error("npm_execpath não está disponível. Execute via npm run pack:check.");
+if (!npmCli) throw new Error("npm_execpath is not available. Run this through npm run pack:check.");
 
 function runNodeCli(cli, args, options = {}) {
   return execFileSync(process.execPath, [cli, ...args], options);
@@ -104,7 +104,7 @@ for (const file of await readdir("dist", { recursive: true })) {
   const content = await readFile(path, "utf8");
   for (const pattern of forbiddenPatterns) {
     if (pattern.test(content)) {
-      throw new Error(`Conteúdo proibido ${pattern} encontrado em ${path}.`);
+      throw new Error(`Forbidden content ${pattern} found in ${path}.`);
     }
   }
 }

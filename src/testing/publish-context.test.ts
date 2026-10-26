@@ -23,26 +23,26 @@ function run(overrides: NodeJS.ProcessEnv = {}) {
 }
 
 const invalidContexts: Array<[string, NodeJS.ProcessEnv]> = [
-  ["execução local", { GITHUB_ACTIONS: "false" }],
+  ["local execution", { GITHUB_ACTIONS: "false" }],
   ["pull request", { GITHUB_EVENT_NAME: "pull_request" }],
-  ["outro repositório", { GITHUB_REPOSITORY: "fradelli/fork" }],
-  ["outra ref", { GITHUB_REF: "refs/heads/feature" }],
-  ["sem token", { NODE_AUTH_TOKEN: "" }],
+  ["another repository", { GITHUB_REPOSITORY: "fradelli/fork" }],
+  ["another ref", { GITHUB_REF: "refs/heads/feature" }],
+  ["missing token", { NODE_AUTH_TOKEN: "" }],
 ];
 
 describe("publish context guard", () => {
-  it("aceita somente o workflow de push em main", () => {
+  it("accepts only a push workflow on main", () => {
     const result = run();
 
     expect(result.status).toBe(0);
-    expect(result.stdout).toContain("Contexto de publicação validado");
+    expect(result.stdout).toContain("Publishing context validated");
   });
 
-  it.each(invalidContexts)("recusa %s", (_scenario, environment) => {
+  it.each(invalidContexts)("denies %s", (_scenario, environment) => {
     const result = run(environment);
 
     expect(result.status).toBe(1);
-    expect(result.stderr).toContain("Publicação recusada");
+    expect(result.stderr).toContain("Publishing denied");
     expect(result.stdout).not.toContain("non-secret-test-value");
     expect(result.stderr).not.toContain("non-secret-test-value");
   });

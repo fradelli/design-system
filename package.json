@@ -1,7 +1,7 @@
 {
   "name": "@fradelli/ui",
   "version": "0.5.0",
-  "description": "Design System compartilhado pelos produtos Fradelli.",
+  "description": "Shared design system for Fradelli products.",
   "license": "UNLICENSED",
   "type": "module",
   "repository": {

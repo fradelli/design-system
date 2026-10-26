@@ -1,55 +1,74 @@
-# Evidências do candidato de vidro — 19/10/2026
+# Glass candidate validation evidence — 2026-10-19
 
-## Escopo
+## Scope
 
-Fundação implementada na branch local `codex/shared-glass-foundation`, baseada em `origin/main` no commit `b302e0e`, versão base `0.4.0`. Não houve commit, push, PR, publicação ou migração de aplicativo nesta etapa.
+The foundation was implemented on local branch `codex/shared-glass-foundation`, based on `origin/main` at commit `b302e0e`, with base version `0.4.0`. This record covers that implementation stage; it contains no package release or consumer migration.
 
-A implementação inclui tokens, classes compartilhadas, Card glass/solid, CardTitle, SheetTitle, fundo de Input, exemplos, testes e documentação. A paleta, os peers e os comportamentos de domínio permanecem fora desta mudança.
+The implementation includes tokens, shared classes, glass/solid Card, CardTitle, SheetTitle, an Input background, examples, tests, and documentation. The palette, peer dependencies, and domain behavior stay unchanged.
 
-## Verificações recebidas
+## Validation results
 
-| Verificação                                | Resultado                                                                             |
-| ------------------------------------------ | ------------------------------------------------------------------------------------- |
-| Instalação limpa `npm ci --ignore-scripts` | Passou após encerrar o servidor local que mantinha esbuild aberto no Windows          |
-| `npm run ci`                               | Passou, incluindo todos os gates abaixo                                               |
-| Formato, lint e tipos                      | Passaram                                                                              |
-| Testes unitários                           | 37 passaram em 13 arquivos                                                            |
-| Tokens                                     | Geração e verificação determinística passaram                                         |
-| Build do Storybook                         | Passou; há aviso de tamanho dos chunks do catálogo                                    |
-| Testes Storybook Chromium                  | 18 passaram em quatro arquivos, incluindo verificações de acessibilidade configuradas |
-| Empacotamento                              | Build, publint e resolução de tipos nos modos suportados passaram                     |
-| Fixtures npm/pnpm                          | Instalação, tipos, CSS e smoke passaram com uma única versão de React                 |
-| Auditoria do repositório do pacote         | Zero vulnerabilidades após correções compatíveis                                      |
-| Whitespace e padrões de segredos           | Revisados nos arquivos alterados, incluindo novos                                     |
+| Check | Result |
+| --- | --- |
+| Clean install with `npm ci --ignore-scripts` | Passed after stopping a local server that held esbuild open on Windows |
+| `npm run ci` | Passed, including all gates below |
+| Formatting, lint, and types | Passed |
+| Unit tests | 37 passed across 13 files |
+| Tokens | Deterministic generation and check passed |
+| Storybook build | Passed; catalog chunk-size warning remains |
+| Chromium Storybook tests | 18 passed across four files, including configured accessibility checks |
+| Packaging | Build, publint, and supported type-resolution modes passed |
+| npm and pnpm fixtures | Install, types, CSS, and smoke checks passed with one React version |
+| Package repository audit | No vulnerabilities after compatible fixes |
+| Whitespace and secret patterns | Reviewed across changed files, including new files |
 
-O exemplo final de sobrescrita foi reforçado para usar o vidro padrão. Formato, build do Storybook e seus testes foram repetidos após esse ajuste. O CSS compilado comprova blur de 12px, raio de 16px, padding horizontal de 24px, título de 20px, sobrescrita por classes do consumidor, associação de erro ao campo, teclado e opt-out opaco.
+The final override example uses the default glass surface. Formatting, Storybook build, and its tests were repeated after that adjustment. Compiled CSS confirms 12px blur, 16px radius, 24px horizontal padding, 20px title, consumer class overrides, field error association, keyboard operation, and opaque opt-out.
 
-Os novos estilos compartilhados ficam na camada CSS de componentes para que as utilities do consumidor tenham prioridade. A configuração de testes em navegador agora inclui o plugin Tailwind que já era usado no build; antes disso, o teste não exercitava as utilities compiladas.
+Shared styles live in the component CSS layer so consumer utilities retain priority. Browser tests now include the Tailwind plugin already used by the build; before this, tests did not exercise compiled utilities.
 
-## Correções necessárias para validar a base
+## Base issues resolved for validation
 
-A instalação inicial revelou duas dependências transitivas de desenvolvimento vulneráveis, já presentes na base:
+The first install exposed two vulnerable development transitive dependencies already present in the base:
 
-| Pacote        | Antes  | Depois | Caminho e evidência                                              |
-| ------------- | ------ | ------ | ---------------------------------------------------------------- |
-| shell-quote   | 1.10.0 | 1.12.0 | Changesets → launch-editor; GHSA-pqg4-j6r4-53mv, crítico         |
-| source-map-js | 1.2.1  | 1.2.2  | jsdom/css-tree e ferramentas Tailwind; GHSA-68fv-2mgg-jv7q, alto |
+| Package | Before | After | Path and evidence |
+| --- | ---: | ---: | --- |
+| `shell-quote` | 1.10.0 | 1.12.0 | Changesets → launch-editor; GHSA-pqg4-j6r4-53mv, critical |
+| `source-map-js` | 1.2.1 | 1.2.2 | jsdom/css-tree and Tailwind tools; GHSA-68fv-2mgg-jv7q, high |
 
-A simulação indicou somente essas duas atualizações compatíveis. Foram aplicadas pelo npm, sem overrides, edição manual do lockfile ou mudança no manifesto. O npm também alinhou a versão raiz do lockfile, que ainda declarava 0.3.0, à versão 0.4.0 já existente no manifesto da base. A instalação limpa e os gates foram repetidos.
+The audit simulation indicated only these compatible updates. They were applied by npm without overrides.
 
-## Pendências e limites
+## Consumer compatibility read-through
 
-- O ambiente temporário npm-consumer tem quatro achados altos ligados a `@tailwindcss/cli` → `@parcel/watcher` → `micromatch` → `braces` (GHSA-vfj7-8cjw-p6xm). A auditoria dessa fixture foi consultada separadamente. O gate existente valida instalação e funcionamento, não executa uma auditoria obrigatória de cada fixture. Esses avisos não foram ocultados e não significam quatro vulnerabilidades no artefato distribuído. A correção exige avaliação própria da ferramenta; não foi aplicado audit fix com force.
-- Falta validar o candidato nas telas reais de portfólio, Kaizen e Sandicts. Fixtures genéricas não substituem os consumidores.
-- Faltam comparação visual aprovada, inventário final dos overrides, responsividade completa, zoom, desempenho e verificações em Firefox/WebKit.
-- O fallback por preferência e por atributo está implementado; o teste Chromium confirma o atributo explícito. Não se declara teste automatizado de todas as preferências do sistema ou de navegadores sem suporte.
-- Texto secundário sobre fundos claros pode exigir a superfície elevada ou opaca. A cobertura atual não garante contraste para qualquer imagem futura.
-- Publicação deve aguardar as evidências de consumo e a revisão do conjunto. Não há versão nova publicada.
+The portfolio's local glass layer adds padding, and its contact form uses `px-0` and inner slots. Those usages need a coordinated migration so the form keeps its inset. The portfolio remains on its installed version; this review changed neither its source nor lockfile. Kaizen and Sandicts were not modified.
 
-## Próxima etapa
+## Open items before broader adoption
 
-Revisar os exemplos locais e usar o artefato candidato para comparar primeiro o portfólio com sua aparência aprovada. Migrar consumidores em entregas separadas, seguindo o guia de migração e o fluxo de cada repositório.
+- Human review with Inter actually loaded, a screen reader, and real 200% zoom. The preview declares a system fallback and does not prove that Inter loads in every environment.
+- Visual comparison and approval on real consumer screens, especially padding and height overrides; measure performance in real compositions.
+- Contrast over specific backgrounds, system preferences, and fallback in unsupported environments, in addition to existing opt-out tests.
+- RadioGroup with no initial selection and a disabled item was checked. RequiredForm passed in all three browsers (nine family scenarios), covering required validity, focus on the first visible item, and FormData after selection. This does not replace screen-reader review of localized messages.
+- The npm-consumer Tailwind fixture still reports four high findings in `@tailwindcss/cli` and its dependency tree. The warning was documented already; a functional gate is not the same as a clean fixture audit. No forced fix or override was applied without evaluation.
 
-## Revisão posterior de consistência
+These limits are not claims of approval. Publication and migrations remain separate steps after candidate review.
 
-A revisão posterior substitui os exemplos isolados de Glass pelo catálogo por família e corrige defeitos de geometria não cobertos pelos checks iniciais. As [evidências de padronização](component-consistency-validation.md) registram os novos contratos, testes em três navegadores e limites atuais. O texto anterior permanece como histórico da primeira etapa.
+## Additional native validity fix
+
+RequiredForm reproduced an incorrectly positive validity state in all three browsers before the fix: `readOnly` on internal inputs removed them from validation. Inputs now use `onChange` to update the group; an invalid state keeps focus on a visible control. The regression passed in Chromium, Firefox, and WebKit.
+
+## Focus without duplication
+
+Controls with their own indicator use the internal `fd-focus-managed` style marker; the global outline is a fallback for other elements. This avoids stacking an outline and ring on one control. Input retains a visible ring without reducing its color to 30%; invalid state preserves the error color. CompiledStyles confirmed no outline and a present ring on the focused field in all three browsers (18 Card-family scenarios).
+
+## Final technical run
+
+The final `npm run ci` passed with `DS_BROWSERS=chromium,firefox,webkit` and `DS_VIEWPORT_WIDTH=320`: 41 unit tests, 147 Storybook scenarios (49 per browser), token generation and check, build, tarball, npm/pnpm fixtures, and a repository audit with no findings. Final review covered 58 new or changed files, with no secret patterns, invalid characters, or residual whitespace; relative links in new documents were checked.
+
+The final catalog metadata adjustment removed ineffective controls from comparison galleries; editable Playgrounds retain those controls. Lint, types, and Storybook build passed again, with no further library artifact changes.
+
+The candidate is ready for local review with publication and human-validation items listed above.
+
+## Catalog language review — 2026-10-19
+
+All visible Storybook examples were standardized in English. Remaining PendingButton, Alert, Badge, Card, Label, and Popover examples were translated while retaining long content to exercise composition. The button test now expects “Saving changes” and still checks width stability.
+
+Formatting, lint, types, 20 affected example tests in Chromium, Storybook build, and `git diff --check` passed. Inspection of the Interactive example confirmed “Pending state” and “Saving changes”. A search found no remaining Portuguese text in stories. The change affected the catalog and tests only; it did not change the library's API or public artifact.

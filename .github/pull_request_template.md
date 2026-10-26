@@ -1,23 +1,23 @@
 ## Jira
 
-- Card: KAN-
+- Issue:
 
-## O que mudou
+## Changes
 
 -
 
-## Impacto público
+## Public impact
 
-- [ ] Sem impacto público
+- [ ] No public impact
 - [ ] Patch
 - [ ] Minor
 - [ ] Major
-- [ ] Changeset incluído ou justificativa registrada
+- [ ] Changeset included or rationale documented
 
-## Validação
+## Validation
 
-- [ ] Formatação, lint, tipos e testes
-- [ ] Build e allowlist do tarball
-- [ ] Fixtures npm e pnpm
-- [ ] React e React DOM permanecem peer dependencies
-- [ ] Sem código de domínio, credenciais ou dependência de Next.js
+- [ ] Formatting, lint, types, and tests
+- [ ] Build and tarball allowlist
+- [ ] npm and pnpm fixtures
+- [ ] React and React DOM remain peer dependencies
+- [ ] No product domain code, credentials, or Next.js dependency

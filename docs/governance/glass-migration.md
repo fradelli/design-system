@@ -1,88 +1,79 @@
-# Migração para a linguagem visual de vidro
+# Glass visual language migration
 
-## Estado
+## Status
 
-Release 0.5.0 preparada a partir de `0.4.0`, com publicação e adoção por etapas conforme a [ADR 0005](../decisions/0005-staged-glass-release.md). Implementa a [ADR 0003](../decisions/0003-shared-glass-visual-language.md). O Changeset registra uma minor incompatível em `0.x`; não fixa antecipadamente seu número.
+Version 0.5.0 was prepared from 0.4.0 for staged publication and adoption under [ADR 0005](../decisions/0005-staged-glass-release.md). It implements [ADR 0003](../decisions/0003-shared-glass-visual-language.md). The Changeset records a breaking minor change in `0.x`; it does not preassign the release number.
 
-## Contrato público
+## Public contract
 
 ```tsx
 import { Card, CardHeader, CardTitle, CardContent } from "@fradelli/ui/card";
 
 <Card>
   <CardHeader>
-    <CardTitle>Resumo</CardTitle>
+    <CardTitle>Summary</CardTitle>
   </CardHeader>
-  <CardContent>Conteúdo com vidro por padrão.</CardContent>
+  <CardContent>Content with glass by default.</CardContent>
 </Card>;
 
 <Card surface="solid" size="sm">
-  Conteúdo denso ou card interno.
+  Dense content or a nested card.
 </Card>;
 ```
 
-Card continua uma div informativa, sem role interativo nem tabIndex automático. O recuo agora pertence à raiz: 24 px no tamanho padrão e 16 px em `sm`, com gaps de 16 e 12 px. Header, Content e Footer não acrescentam padding lateral. Todas as superfícies compartilham essa geometria. `data-size` e `data-surface` permitem inspeção.
+Card remains an informational `div` with no interactive role or automatic `tabIndex`. Padding belongs to the root: 24px at the default size and 16px at `sm`, with 16px and 12px gaps. Header, Content, and Footer add no horizontal padding. All surfaces share this geometry. `data-size` and `data-surface` support inspection.
 
-### Migração do espaçamento
+### Spacing migration
 
-- Remover compensações locais nos slots quando o objetivo era acompanhar o recuo padrão. Não somar `px-6` em Header/Content/Footer ao novo padding da raiz.
-- Overrides explícitos na raiz continuam possíveis; revisar `p-0`, `px-0`, margens negativas e mídias que ocupam toda a largura.
-- Títulos diretos passam a receber o recuo da raiz. `sm` fica compacto também horizontalmente.
-- Button permite quebra de texto e usa altura mínima nas variantes textuais; tamanhos de ícone continuam fixos. Revisar alinhamentos que dependiam de altura rígida.
-- AlertAction passa a ocupar uma linha própria após a mensagem, reservando espaço e evitando sobreposição em telas estreitas.
-- PendingButton considera as larguras dos dois estados. Para `size="icon*"`, o nome pendente é acessível e apenas o spinner fica visível.
-- As stories ficam em `Components/Card`, com superfícies e densidades; `Components/Glass` e `Components/Primitives` foram substituídos por famílias próprias.
+- Remove local slot compensation intended to match the previous inset. Do not add `px-6` to Header, Content, or Footer on top of the new root padding.
+- Explicit root overrides remain possible; review `p-0`, `px-0`, negative margins, and full-width media.
+- Direct titles now receive the root inset. `sm` is also compact horizontally.
+- Button allows text wrapping and has a minimum height for text variants; icon sizes remain fixed. Review alignments that depended on a fixed height.
+- AlertAction occupies its own row after the message to reserve room and avoid overlap on narrow screens.
+- PendingButton accounts for both state widths. With `size="icon*"`, the pending name is accessible while only the spinner is visible.
+- Stories live under `Components/Card`, with surfaces and densities. `Components/Glass` and `Components/Primitives` were replaced by family-specific entries.
 
-Classes CSS públicas, disponíveis ao importar `@fradelli/ui/styles.css`:
+### Public CSS classes
 
-| Classe                      | Responsabilidade                                    |
-| --------------------------- | --------------------------------------------------- |
-| `fd-surface-glass`          | Fundo com 80%, borda, sombra e blur de 12px         |
-| `fd-surface-glass-elevated` | Fundo elevado com 94%, borda, sombra e blur de 12px |
-| `fd-text-card`              | Título 20/28px, peso 700, tracking -0.015em         |
-| `fd-text-section`           | Título 24/32px, peso 700, tracking -0.025em         |
-| `fd-text-display`           | Título principal 32/40px, peso 700                  |
-| `fd-text-interface`         | Texto de interface 14/20px, peso 400                |
-| `fd-text-label`             | Rótulo 14/20px, peso 500                            |
-| `fd-text-body`              | Texto editorial 16/24px, peso 400                   |
+Import `@fradelli/ui/styles.css` to use these classes:
 
-As superfícies não aplicam raio, padding, largura de borda ou hover por conta própria. Card acrescenta transição e borda em hover sem torná-lo clicável. Classes utilitárias do consumidor podem sobrescrever os estilos da camada de componentes, inclusive estados semânticos de borda.
+| Class | Responsibility |
+| --- | --- |
+| `fd-surface-glass` | 80% background, border, shadow, and 12px blur |
+| `fd-surface-glass-elevated` | 94% elevated background, border, shadow, and 12px blur |
+| `fd-text-card` | 20/28px title, weight 700, tracking -0.015em |
+| `fd-text-section` | 24/32px section title |
+| `fd-text-body` | 16/24px body text |
 
-Os tokens `--fd-surface-*` e `--fd-text-*` são gerados dos arquivos em `tokens/`. A paleta opaca `--fd-color-*` permanece. CardTitle e SheetTitle passam a usar a hierarquia de card; Input passa de transparente para superfície elevada a 60%. Button, Badge, estados de erro e demais controles mantêm a paleta e a semântica existentes.
+Surface classes do not set padding, radius, or interaction. Use `surface="solid"` to avoid nested blur or when an opaque background is needed. Consumers continue to provide Inter; the package does not ship fonts.
 
-## Acessibilidade e custo visual
+## Adoption by consumer
 
-O vidro só é habilitado com suporte a blur e color-mix. Sem suporte, o fundo é opaco. O atributo `data-fd-transparency="reduce"` no html oferece opt-out sem provider; preferência de redução de transparência e cores forçadas também removem blur. Escolher `surface="solid"` para regiões densas e cards dentro de painéis já desfocados.
+1. Install the candidate through the fixture workflow and verify CSS, exports, peers, and build. Temporary references do not belong in final lockfiles.
+2. In the portfolio, compare with the approved reference before removing local glass and typography classes. Preserve hover motion in its wrapper and review padding.
+3. In Kaizen, migrate real cards and overrides while preserving workout, schedule, and form states. Evaluate long lists and timers without changing domain behavior.
+4. In Sandicts, review fonts, palette, and visual policy; integrate the package and inspect generators that reintroduce old values. Logos remain local. Replacing generated CSS alone is insufficient.
+5. Record visual comparison, contrast, performance, keyboard behavior, and fallback per app before its upgrade. The first publication uses the portfolio as the validated consumer under ADR 0005.
+6. After authorized publication, pin the exact version in each application and update its lockfile through separate PRs, following each project's process.
 
-Não depender do blur para hierarquia. Conferir contraste sobre o resultado composto, navegação por teclado, zoom e textos longos. A redução de movimento não substitui a de transparência. Manter a ordem WebKit/padrão de backdrop-filter no CSS gerado.
+See [glass validation evidence](glass-validation.md) for executed checks and outstanding work.
 
-## Passos por consumidor
+## Gates and limits
 
-1. Instalar o artefato candidato pelo fluxo de fixtures e verificar CSS, exports, peers e build; referências temporárias não entram nos lockfiles finais.
-2. Portfólio: comparar a referência aprovada antes de remover as classes locais de vidro e tipografia; preservar o hover com movimento em seu wrapper e revisar padding.
-3. Kaizen: migrar cards e overrides reais, mantendo estados de treino, agenda e formulários; avaliar listas longas e temporizadores sem mudar domínio.
-4. Sandicts: revisar fontes, paleta e política visual; integrar o pacote e revisar geradores que reintroduzem valores antigos. Identidade dos logos permanece local. Não basta substituir CSS gerado.
-5. Registrar comparação visual, contraste, desempenho, teclado e fallback por aplicativo antes de seu upgrade. A primeira publicação usa o portfólio como consumidor validado, conforme a ADR 0005.
-6. Após publicação autorizada, fixar a versão nos aplicativos e atualizar seus lockfiles em PRs separadas, respeitando o fluxo de cada projeto.
+Run `npm run ci` in the package and the applicable gates in each consumer. Storybook includes opaque and elevated surfaces, varied backgrounds, invalid fields, and nested compositions. These examples do not replace real-screen validation or prove support in every browser.
 
-As [evidências do candidato](glass-validation.md) registram os comandos executados e as pendências reais.
+The 0.5.0 publication uses package and portfolio evidence, explicitly authorized by ADR 0005. Kaizen and Sandicts need their own migrations and validation before adopting this version. Publish only through the `Release` workflow. Rollback requires restoring consumer code, CSS, manifest, and lockfile together; never overwrite a published version.
 
-## Gates e limites
+## Native overlay composition
 
-Executar `npm run ci` no pacote e os gates aplicáveis de cada consumidor. Storybook inclui superfícies opacas, elevadas, fundos variados, campos inválidos e composição aninhada. Esses exemplos não substituem validação das telas reais nem comprovam suporte em todos os navegadores.
+Sheet and AlertDialog use `dialog.showModal()` and the native backdrop. Their Portal components preserve composition without adding a second portal layer; SheetOverlay renders no extra element, and AlertDialogOverlay is a compatibility component without its own visual layer. Backdrop appearance is provided by native Content/CSS. Popover.Content creates its own portal in `body`; Popover.Portal preserves composition.
 
-A publicação 0.5.0 usa evidência do pacote e do portfólio, autorizada explicitamente na ADR 0005. Kaizen e Sandicts exigem migrações e validações próprias antes de adotar essa versão. Publicar somente pelo workflow Release. Reversão exige voltar código, CSS, manifesto e lockfile do consumidor como unidade; nunca sobrescrever versão publicada.
+Popover constrains its box to the viewport, tracks resize and scroll as well as size changes, and may flip sides when the opposite side has room. Color, position, and material do not change dialog semantics. Apps remain responsible for names, labels, and content.
 
-## Composição de overlays nativos
+## RadioGroup form validation
 
-Sheet e AlertDialog usam `dialog.showModal()` e o backdrop nativo. Seus componentes Portal preservam a composição sem criar uma segunda camada de portal; SheetOverlay não desenha um elemento adicional e AlertDialogOverlay é compatibilidade sem uma camada visual própria. A aparência do backdrop está no Content/CSS nativo. Popover.Content cria seu próprio portal no body; Popover.Portal preserva a composição.
+Internal inputs preserve `required` and FormData. On native validation failure, the group focuses the first visible enabled item and suppresses the hidden input's validation bubble. The application provides its localized message with FieldError/onInvalid and associates the description with the group. The Design System does not inject validation copy. In controlled groups, the app remains responsible for updating `value` and handling form reset.
 
-Popover limita a caixa ao viewport, acompanha resize/scroll e mudanças de tamanho, e pode inverter o lado quando o lado oposto comporta o conteúdo. Cor, posição e material não alteram a semântica de diálogo. Apps continuam responsáveis por nomes, rótulos e conteúdo.
+## Shared focus
 
-## Validação de RadioGroup em formulários
-
-Inputs internos preservam required e FormData. Em erro nativo, o grupo direciona o foco ao primeiro item habilitado visível e suprime o balão do input interno oculto. O aplicativo apresenta sua mensagem localizada com FieldError/onInvalid e associa a descrição ao grupo. O Design System não injeta texto de validação. Em grupos controlados, o aplicativo continua responsável por atualizar value e por tratar reset do formulário.
-
-## Foco compartilhado
-
-Controles do pacote mantêm seu indicador de foco próprio e não recebem um segundo outline global. Elementos nativos sem esse tratamento usam o fallback global por tokens. Evitar adicionar outro ring/outline no wrapper de um controle; revisar o resultado no CSS compilado.
+Package controls keep their own focus indicator and do not receive a second global outline. Native elements without this treatment use the token-based global fallback. Avoid adding another ring or outline to a control's wrapper; review the compiled CSS.

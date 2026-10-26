@@ -1,21 +1,9 @@
-# Admissão de NavigationItem
+# NavigationItem admission
 
-Primitive fundamental de link, não uma barra composta ou shell. Não conhece
-rotas, providers, textos, permissões ou tipos de atividade. O consumidor atual
-é a navegação responsiva do Kaizen; a exceção de primitive fundamental permite
-admissão sem antecipar um segundo produto.
+NavigationItem is a fundamental link primitive, not a composed bar or shell. It knows nothing about routes, providers, text, permissions, or activity types. Its current consumer is Kaizen's responsive navigation; the fundamental-primitive exception permits admission without assuming a second product.
 
-API: props nativas de anchor, `asChild` para composição, `className` e
-`aria-current="page"` para o estado ativo. O consumidor deve fornecer nome
-acessível quando o conteúdo visível for apenas um ícone. Ícones decorativos
-recebem `aria-hidden`. Não há estado disabled artificial em um link; destinos
-indisponíveis devem ser omitidos ou representados por texto no consumidor.
+The API uses native anchor props, `asChild` for composition, `className`, and `aria-current="page"` for the active state. The consumer supplies an accessible name when visible content is only an icon. Decorative icons use `aria-hidden`. A link has no artificial disabled state; omit unavailable destinations or represent them as text in the consumer.
 
-Foco visível, área mínima de 44 px, contraste pelos tokens existentes e reduced
-motion. Estados ativos não dependem somente da cor: aria-current comunica o
-destino atual. Phosphor já é dependência do pacote; os exports BarbellIcon e
-ForkKnifeIcon mantêm nomes visuais, não nomes de domínio.
+The primitive provides visible focus, a 44px minimum target, contrast through existing tokens, and reduced motion. Active state does not rely on color alone: `aria-current` communicates the current destination. Phosphor is already a package dependency; BarbellIcon and ForkKnifeIcon are visual exports, not domain names.
 
-SemVer: minor compatível. Subpaths novos não alteram Button ou outros exports.
-Rollback: consumidor mantém sua versão exata anterior. Release exclusivamente
-pelo workflow Release em main; sem publicação local ou consumo de dist copiado.
+SemVer: compatible minor. New subpaths do not change Button or other exports. Roll consumers back to their exact previous version. Release only through the `Release` workflow on `main`; do not publish locally or consume a copied `dist` directory.

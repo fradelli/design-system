@@ -4,7 +4,7 @@ import { dirname, join } from "node:path";
 
 const args = process.argv.slice(2);
 if (args.length > 1 || (args.length === 1 && args[0] !== "--check")) {
-  throw new Error("Uso: node scripts/build-tokens.mjs [--check]");
+  throw new Error("Usage: node scripts/build-tokens.mjs [--check]");
 }
 
 const check = args[0] === "--check";
@@ -25,6 +25,6 @@ if (check) {
   ]);
   await rm(".tmp/tokens", { recursive: true, force: true });
   if (expected !== actual) {
-    throw new Error("Tokens gerados estão divergentes. Execute npm run tokens:build.");
+    throw new Error("Generated tokens are out of date. Run npm run tokens:build.");
   }
 }

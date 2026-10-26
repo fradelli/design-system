@@ -7,14 +7,14 @@ const requiredContext = {
 
 for (const [name, expected] of Object.entries(requiredContext)) {
   if (process.env[name] !== expected) {
-    console.error(`Publicação recusada: ${name} não corresponde ao contexto de release.`);
+    console.error(`Publishing denied: ${name} does not match the release context.`);
     process.exit(1);
   }
 }
 
 if (!process.env.NODE_AUTH_TOKEN) {
-  console.error("Publicação recusada: credencial efêmera do registry ausente.");
+  console.error("Publishing denied: ephemeral registry credential is missing.");
   process.exit(1);
 }
 
-console.log("Contexto de publicação validado para main em fradelli/design-system.");
+console.log("Publishing context validated for main in fradelli/design-system.");

@@ -1,32 +1,32 @@
-# ADR 0005 — Liberação de vidro por etapas de consumo
+# ADR 0005 — Staged release of the glass visual language
 
-- **Status:** aceita pelo mantenedor
-- **Data:** 2026-10-19
-- **História:** KAN-226
-- **Decisão:** substitui somente o requisito da ADR 0003 de validar os três aplicativos antes da primeira publicação; preserva os contratos das ADRs 0001, 0003 e 0004.
+- **Status:** Accepted by the maintainer
+- **Date:** 2026-10-19
+- **Issue:** KAN-226
+- **Decision:** Supersedes only ADR 0003's requirement to validate all three applications before first publication; preserves the contracts in ADRs 0001, 0003, and 0004.
 
-## Contexto e autorização
+## Context and authorization
 
-O pacote e o catálogo foram validados; o portfólio foi migrado ao candidato e revisado pelo mantenedor. Kaizen e Sandicts seguem fora desta entrega.
+The package and catalog were validated. The portfolio was migrated to the candidate and reviewed by the maintainer. Kaizen and Sandicts are outside this delivery.
 
-Em 19/10/2026, o mantenedor autorizou explicitamente a exceção para publicar a versão 0.5.0 após validar o pacote e o portfólio, deixando a migração e a validação de Kaizen e Sandicts para entregas futuras. A decisão é registrada também na PR de versão #14.
+On 2026-10-19, the maintainer explicitly authorized publishing version 0.5.0 after validating the package and portfolio, leaving Kaizen and Sandicts migration and validation for future work. This decision is also recorded in version PR #14.
 
-## Decisão
+## Decision
 
-Liberar a minor incompatível 0.5.0 com validação do pacote e evidência do portfólio. Os aplicativos fixam versões independentes: publicar o pacote não atualiza Kaizen ou Sandicts. Esses consumidores precisam de suas próprias migrações, validações e autorizações antes de instalar a nova versão.
+Release the breaking minor version 0.5.0 with package validation and portfolio evidence. Applications pin independent versions: publishing the package does not update Kaizen or Sandicts. Those consumers need their own migrations, validation, and authorization before installing the new version.
 
-Não se declara aprovação de telas, contraste, desempenho ou compatibilidade desses dois produtos. A exceção limita-se à primeira publicação desta evolução e não dispensa os checks técnicos do pacote.
+This decision does not claim that screens, contrast, performance, or compatibility in those two products have been approved. The exception applies only to the first publication of this change and does not waive the package's technical checks.
 
-## Evidências e limites
+## Evidence and limits
 
-- `npm run ci` passou no pacote 0.5.0: 43 testes unitários, 49 stories Chromium, tokens, build, tarball, fixtures npm/pnpm com uma única instância de React e auditoria da árvore raiz sem achados.
-- A CI da PR passou após alinhar manifesto e lockfile em 0.5.0: execução 39306694188.
-- No portfólio, o gate local passou com 19 testes e build de produção. Cards foram conferidos em 320 px nos dois idiomas e em 375, 640 e 768 px em inglês, sem overflow interno; links e organização das habilidades foram exercitados por teclado.
-- Zoom real de 200%, matriz de preferências de transparência e simulação de envio válido permanecem limitações da revisão do consumidor. Não houve envio de email.
-- A fixture de ferramenta Tailwind mantém quatro avisos altos preexistentes, descritos nas evidências do pacote; isso não altera o resultado da auditoria da árvore raiz.
+- `npm run ci` passed for package version 0.5.0: 43 unit tests, 49 Chromium stories, tokens, build, tarball, npm/pnpm fixtures with one React instance, and a root dependency audit with no findings.
+- PR CI passed after aligning the manifest and lockfile at 0.5.0: run 39306694188.
+- The portfolio's local gate passed with 19 tests and a production build. Cards were checked at 320px in both languages and at 375, 640, and 768px in English, without internal overflow; links and skill organization were tested by keyboard.
+- Real 200% zoom, the transparency preference matrix, and a valid form submission simulation remain limitations of the consumer review. No email was sent.
+- The Tailwind tool fixture reports four preexisting high-severity findings described in the package evidence; this does not change the root dependency audit result.
 
-## Operação e reversão
+## Operation and rollback
 
-Publicar exclusivamente pelo workflow Release e Changesets. O portfólio instalará a versão exata publicada e repetirá instalação limpa e CI antes da promoção.
+Publish only through the `Release` workflow and Changesets. The portfolio will install the exact published version and repeat a clean install and CI before promotion.
 
-Reverter consumidores pelo conjunto de código, CSS, manifesto e lockfile. Uma correção do pacote usa nova versão imutável; não sobrescrever nem excluir versões publicadas.
+Roll back consumers by reverting code, CSS, manifest, and lockfile together. A package fix requires a new immutable version; never overwrite or delete a published version.
