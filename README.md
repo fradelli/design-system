@@ -70,14 +70,36 @@ Available subpaths are `alert`, `alert-dialog`, `badge`, `button`, `card`, `cn`,
 
 ```tsx
 import { NavigationItem } from "@fradelli/ui/navigation-item";
-import { BarbellIcon } from "@fradelli/ui/icons";
+import { BarbellIcon } from "@fradelli/ui/icons/Barbell";
 
 <NavigationItem href="/example" aria-label="Example" aria-current="page">
   <BarbellIcon aria-hidden="true" />
 </NavigationItem>;
 ```
 
-With consumer routers, use `asChild` to provide a single link without nested anchors. The `icons` subpath also exports `ForkKnifeIcon`; both icons use the existing Phosphor dependency without adding a direct application dependency.
+With consumer routers, use `asChild` to provide a single link without nested anchors.
+
+### Icons
+
+All 1,512 canonical drawings from the pinned Phosphor 2.1.10 SSR catalog are available
+through individual public entry points, with the same SVG props, size, weight, mirrored,
+alt, and ref support in Server Components and Client Components:
+
+```tsx
+import { CheckCircleIcon } from "@fradelli/ui/icons/CheckCircle";
+import { StopIcon } from "@fradelli/ui/icons/Stop";
+import { TrashIcon } from "@fradelli/ui/icons/Trash";
+```
+
+Prefer individual imports to avoid processing the aggregate catalog during development.
+`@fradelli/ui/icons` remains compatible, including `IconProps`, `BarbellIcon`, and
+`ForkKnifeIcon`, and also exposes the other named drawings. No context provider, dynamic
+name registry, or direct application dependency on Phosphor is required. Hide decorative
+icons with `aria-hidden` and `focusable="false"`; accessible names belong to controls.
+See [the icon catalog contract](docs/governance/iconography.md) for generation and releases.
+
+Enabled Button variants and composed links use a pointer cursor. Primary hover changes
+only the background to 98% opacity, retaining the text and icon opacity and visible focus.
 
 Consumers associate labels, descriptions, and errors using HTML attributes:
 
