@@ -5,11 +5,11 @@ import { cn } from "../../lib/cn.js";
 import { Slot } from "../../lib/slot.js";
 
 const buttonVariants = cva(
-  "fd-focus-managed inline-flex max-w-full shrink-0 items-center justify-center gap-2 rounded-md text-sm font-semibold whitespace-normal break-words text-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&>svg]:pointer-events-none [&>svg]:shrink-0",
+  "fd-focus-managed inline-flex max-w-full shrink-0 cursor-pointer items-center justify-center gap-2 rounded-md text-sm font-semibold whitespace-normal break-words text-center transition-colors outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-disabled:cursor-default disabled:pointer-events-none disabled:cursor-default disabled:opacity-50 [&>svg]:pointer-events-none [&>svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:brightness-95",
+        default: "bg-primary text-primary-foreground hover:bg-primary/98",
         destructive: "bg-status-destructive text-status-destructive-foreground hover:brightness-95",
         outline: "border border-border bg-transparent text-foreground hover:bg-surface-interactive",
         secondary: "bg-surface-interactive text-foreground hover:brightness-110",

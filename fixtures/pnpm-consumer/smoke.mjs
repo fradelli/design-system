@@ -60,3 +60,23 @@ const compiled = await readFile("output.css", "utf8");
 for (const expected of [".bg-primary", ".motion-reduce\\:animate-none", "prefers-reduced-motion"]) {
   if (!compiled.includes(expected)) throw new Error(`Shared class is missing: ${expected}`);
 }
+
+const { TrashIcon } = await import("@fradelli/ui/icons/Trash");
+const { PlusIcon } = await import("@fradelli/ui/icons/Plus");
+const iconMarkup = renderToStaticMarkup(
+  createElement(
+    "div",
+    null,
+    createElement(TrashIcon, { size: 20, weight: "regular", "aria-hidden": true }),
+    createElement(PlusIcon, { size: 24, mirrored: true, alt: "Add item" }),
+  ),
+);
+if ((iconMarkup.match(/<svg/g) ?? []).length !== 2 || !iconMarkup.includes("Add item")) {
+  throw new Error("Individual icon subpaths did not render with their public props.");
+}
+try {
+  await import("@fradelli/ui/icons/NotAnAdmittedIcon");
+  throw new Error("An unreviewed icon subpath unexpectedly resolved.");
+} catch (error) {
+  if (error.code !== "ERR_MODULE_NOT_FOUND") throw error;
+}

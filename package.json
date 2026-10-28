@@ -98,7 +98,11 @@
       "import": "./dist/icons/index.js"
     },
     "./styles.css": "./dist/styles.css",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./icons/*": {
+      "types": "./dist/icons/generated/*.d.ts",
+      "import": "./dist/icons/generated/*.js"
+    }
   },
   "sideEffects": [
     "./dist/styles.css"
@@ -125,16 +129,19 @@
     "tokens:check": "node scripts/build-tokens.mjs --check",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build --output-dir storybook-static",
-    "build": "npm run clean && npm run tokens:check && tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
+    "build": "npm run clean && npm run tokens:check && npm run icons:check && tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "pack:check": "npm run build && node scripts/validate-package.mjs",
     "fixtures:check": "node scripts/test-package-fixtures.mjs",
     "audit": "npm audit --audit-level=high",
-    "ci": "npm run format:check && npm run lint && npm run typecheck && npm run test:unit && npm run tokens:check && npm run storybook:build && npm run test:storybook && npm run pack:check && npm run fixtures:check && npm run audit",
+    "ci": "npm run icons:check && npm run format:check && npm run lint && npm run typecheck && npm run test:unit && npm run tokens:check && npm run storybook:build && npm run test:storybook && npm run pack:check && npm run fixtures:check && npm run fixtures:next && npm run audit",
     "changeset": "changeset",
     "version": "changeset version",
     "release": "changeset publish",
     "prepack": "npm run build",
-    "prepublishOnly": "node scripts/verify-publish-context.mjs"
+    "prepublishOnly": "node scripts/verify-publish-context.mjs",
+    "icons:generate": "node scripts/generate-icons.mjs",
+    "icons:check": "node scripts/generate-icons.mjs --check",
+    "fixtures:next": "node scripts/test-icon-next-fixture.mjs"
   },
   "peerDependencies": {
     "react": ">=19.2.7 <20",

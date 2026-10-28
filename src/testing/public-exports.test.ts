@@ -11,6 +11,7 @@ const expected = [
   "./cn",
   "./field",
   "./icons",
+  "./icons/*",
   "./input",
   "./label",
   "./loading-region",

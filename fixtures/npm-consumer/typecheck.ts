@@ -44,3 +44,16 @@ void props;
 void cn("px-2", "px-4");
 void BarbellIcon;
 void ForkKnifeIcon;
+
+import type { IconProps } from "@fradelli/ui/icons";
+import { TrashIcon } from "@fradelli/ui/icons/Trash";
+import { BarbellIcon as IndividualBarbellIcon } from "@fradelli/ui/icons/Barbell";
+import { createElement, createRef } from "react";
+const iconProps: IconProps = {
+  size: 20,
+  weight: "regular",
+  mirrored: true,
+  ref: createRef<SVGSVGElement>(),
+};
+void createElement(TrashIcon, iconProps);
+void createElement(IndividualBarbellIcon, iconProps);

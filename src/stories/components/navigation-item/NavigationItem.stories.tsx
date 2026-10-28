@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { NavigationItem } from "../../../components/navigation-item/index.js";
-import { BarbellIcon, ForkKnifeIcon } from "../../../icons/index.js";
+import { BarbellIcon } from "../../../icons/generated/Barbell.js";
+import { ForkKnifeIcon } from "../../../icons/generated/ForkKnife.js";
 
 const meta = {
   title: "Components/NavigationItem",

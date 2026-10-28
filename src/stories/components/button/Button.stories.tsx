@@ -1,5 +1,6 @@
 import { XIcon } from "@phosphor-icons/react/X";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 import { Button } from "../../../components/button/index.js";
 
 const meta = {
@@ -56,4 +57,27 @@ export const IconSizes: Story = {
       ))}
     </div>
   ),
+};
+
+export const InteractionStates: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-3">
+      <Button>Primary action</Button>
+      <Button disabled>Disabled action</Button>
+      <Button asChild>
+        <a href="#example">Link action</a>
+      </Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const primary = canvas.getByRole("button", { name: "Primary action" });
+    const disabled = canvas.getByRole("button", { name: "Disabled action" });
+    const link = canvas.getByRole("link", { name: "Link action" });
+    await expect(getComputedStyle(primary).cursor).toBe("pointer");
+    await expect(getComputedStyle(link).cursor).toBe("pointer");
+    await expect(getComputedStyle(disabled).cursor).toBe("default");
+    await expect(getComputedStyle(disabled).pointerEvents).toBe("none");
+    await expect(getComputedStyle(primary).opacity).toBe("1");
+  },
 };
