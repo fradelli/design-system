@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.0
+
+### Minor Changes
+
+- 2fdf58f: Expose every canonical icon from the pinned Phosphor 2.1.10 SSR catalog through individual public entry points such as `@fradelli/ui/icons/Trash`. Keep the aggregate icon entry point, `IconProps`, `BarbellIcon`, and `ForkKnifeIcon` compatible. Add a deterministic catalog generator, closed artifact validation, representative Storybook examples, and consumer fixtures. Applications should prefer individual imports to keep development module graphs small; no dynamic icon registry or React Context is shipped.
+
+### Patch Changes
+
+- 2fdf58f: Show a pointer cursor for enabled Button variants and composed links, retaining the disabled cursor and interaction guards. Make the primary hover background subtly translucent at 98% instead of darkening the entire control with a brightness filter. Text, icon, focus, and size/variant composition remain intact. Validate the actual cursor and background alpha in Storybook.
+
 ## 0.5.1
 
 ### Patch Changes
