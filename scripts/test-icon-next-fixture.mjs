@@ -142,7 +142,7 @@ try {
       await page.goto(`http://127.0.0.1:${port}`);
       const primary = page.locator("[data-hover-fixture]");
       const cursor = await primary.evaluate((button) => globalThis.getComputedStyle(button).cursor);
-      if (cursor !== "pointer") throw new Error("Enabled Button must show a pointer cursor.");
+      if (cursor !== "default") throw new Error("Enabled Button must use the default cursor.");
       await primary.hover();
       await page.waitForFunction(() => {
         const button = globalThis.document.querySelector("[data-hover-fixture]");
@@ -152,7 +152,7 @@ try {
         const style = globalThis.getComputedStyle(button);
         pixel.fillStyle = style.backgroundColor;
         pixel.fillRect(0, 0, 1, 1);
-        return pixel.getImageData(0, 0, 1, 1).data[3] === 250 && style.opacity === "1";
+        return pixel.getImageData(0, 0, 1, 1).data[3] === 204 && style.opacity === "1";
       });
       if (
         (await page
