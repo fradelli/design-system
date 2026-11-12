@@ -102,6 +102,14 @@
     "./icons/*": {
       "types": "./dist/icons/generated/*.d.ts",
       "import": "./dist/icons/generated/*.js"
+    },
+    "./checkbox": {
+      "types": "./dist/components/checkbox/index.d.ts",
+      "import": "./dist/components/checkbox/index.js"
+    },
+    "./dialog": {
+      "types": "./dist/components/dialog/index.d.ts",
+      "import": "./dist/components/dialog/index.js"
     }
   },
   "sideEffects": [
@@ -187,9 +195,11 @@
     "vitest": "4.1.12"
   },
   "dependencies": {
+    "@base-ui/react": "1.9.0",
     "@phosphor-icons/react": "2.1.10",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
+    "lucide-react": "1.71.0",
     "tailwind-merge": "3.6.0"
   }
 }

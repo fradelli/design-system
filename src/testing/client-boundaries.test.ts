@@ -14,7 +14,9 @@ const boundaries = new Map([
   ["src/components/navigation-item/index.tsx", false],
   ["src/components/card/index.tsx", false],
   ["src/components/field/index.tsx", false],
-  ["src/components/input/index.tsx", false],
+  ["src/components/input/index.tsx", true],
+  ["src/components/dialog/index.tsx", true],
+  ["src/components/checkbox/index.tsx", true],
   ["src/components/skeleton/index.tsx", false],
 ]);
 

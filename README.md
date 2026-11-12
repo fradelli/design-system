@@ -49,7 +49,9 @@ With Tailwind CSS 4, also import the framework and explicitly declare the instal
 @source "../node_modules/@fradelli/ui/dist";
 ```
 
-Each application loads Inter at its root and defines `--font-inter`. The package uses system fallbacks and does not distribute font files.
+Load IBM Plex Sans and Figtree at the application root and expose `--font-ibm-plex-sans` and `--font-figtree`. Existing applications may keep `--font-inter` as a fallback. The package uses system fallbacks and does not distribute font files.
+
+See the [Mira component decision](docs/decisions/0006-mira-component-recipes.md) and the [shared style guide](docs/governance/shared-ui-style.md). Dialog and Checkbox are available from `@fradelli/ui/dialog` and `@fradelli/ui/checkbox`.
 
 ### Components
 
@@ -64,7 +66,7 @@ import { RadioGroup } from "@fradelli/ui/radio-group";
 import { cn } from "@fradelli/ui/cn";
 ```
 
-Available subpaths are `alert`, `alert-dialog`, `badge`, `button`, `card`, `cn`, `field`, `icons`, `input`, `label`, `loading-region`, `navigation-item`, `pending-button`, `popover`, `radio-group`, `separator`, `sheet`, `skeleton`, `status-badge`, and `switch`. The root entry point intentionally stays empty to keep client and server boundaries separate.
+Available subpaths are `alert`, `alert-dialog`, `badge`, `button`, `card`, `checkbox`, `cn`, `dialog`, `field`, `icons`, `input`, `label`, `loading-region`, `navigation-item`, `pending-button`, `popover`, `radio-group`, `separator`, `sheet`, `skeleton`, `status-badge`, and `switch`. The root entry point intentionally stays empty to keep client and server boundaries separate.
 
 `NavigationItem` provides a link with a minimum touch target, visible focus, and native active state through `aria-current`. It does not determine routes, positioning, breakpoints, or copy. The app composes its own navigation and preserves its URL parameters.
 

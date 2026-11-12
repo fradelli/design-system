@@ -22,7 +22,7 @@ describe("Card surface contract", () => {
     expect(card).not.toHaveAttribute("surface");
     expect(card).not.toHaveAttribute("tabindex");
     expect(card).not.toHaveAttribute("role");
-    expect(screen.getByText("Summary")).toHaveClass("fd-text-card");
+    expect(screen.getByText("Summary")).toHaveClass("font-heading", "text-sm", "font-medium");
   });
 
   it("owns padding at the root for both surfaces", () => {

@@ -60,12 +60,55 @@
         "foreground": { "$value": "#19080B" }
       },
       "brandForeground": { "$value": "#1C0D0D" },
-      "primaryForeground": { "$value": "#15130B" }
+      "primaryForeground": { "$value": "#15130B" },
+      "graphite": {
+        "400": { "$value": "#29292C" },
+        "600": { "$value": "#202023" },
+        "300": { "$value": "#343438" },
+        "100": { "$value": "#A7A7AE" }
+      },
+      "gold": {
+        "600": { "$value": "#B59949" },
+        "300": { "$value": "#F5D97F" },
+        "100": { "$value": "#FBE9A9" }
+      },
+      "lilac": {
+        "400": { "$value": "#BCA7E8" },
+        "600": { "$value": "#8D7DAE" },
+        "300": { "$value": "#C8B7ED" },
+        "100": { "$value": "#E6DAFF" }
+      },
+      "sage": {
+        "400": { "$value": "#A8D5BA" },
+        "600": { "$value": "#7EA08C" },
+        "300": { "$value": "#B6DDC6" },
+        "100": { "$value": "#DCF4E5" }
+      },
+      "peach": {
+        "400": { "$value": "#E5BA9C" },
+        "600": { "$value": "#AC8C75" },
+        "300": { "$value": "#EAC6AD" },
+        "100": { "$value": "#FBE3D2" }
+      },
+      "sky": {
+        "400": { "$value": "#A9C5E8" },
+        "600": { "$value": "#7F94AE" },
+        "300": { "$value": "#B8CFED" },
+        "100": { "$value": "#DEEBFF" }
+      },
+      "rose": {
+        "400": { "$value": "#E8A0A6" },
+        "600": { "$value": "#AE787D" },
+        "300": { "$value": "#EDB1B6" },
+        "100": { "$value": "#FFDBDE" }
+      }
     },
     "font": {
       "family": {
         "$type": "string",
-        "sans": { "$value": "var(--font-inter, Inter), ui-sans-serif, system-ui, sans-serif" }
+        "sans": {
+          "$value": "var(--font-ibm-plex-sans, var(--font-inter, Inter)), ui-sans-serif, system-ui, sans-serif"
+        }
       },
       "weight": {
         "$type": "fontWeight",

@@ -7,6 +7,7 @@
 }
 
 @theme inline {
+  --font-heading: var(--font-figtree, var(--fd-font-family-sans));
   --color-background: var(--fd-color-background);
   --color-surface: var(--fd-color-surface);
   --color-surface-elevated: var(--fd-color-surface-elevated);
@@ -392,4 +393,83 @@
     font-weight: var(--fd-text-label-weight);
     letter-spacing: var(--fd-text-label-tracking);
   }
+}
+
+[data-slot="navigation-item"],
+[data-fd-tone="neutral"] {
+  --fd-button-fill: var(--fd-color-control-neutral-fill);
+  --fd-button-border: var(--fd-color-control-neutral-border);
+  --fd-button-hover: var(--fd-color-control-neutral-hover);
+  --fd-button-focus: var(--fd-color-control-neutral-focus);
+  --fd-button-text: var(--fd-color-foreground);
+}
+[data-slot="navigation-item"][aria-current="page"],
+[data-fd-tone="navigation"] {
+  --fd-button-fill: var(--fd-color-control-navigation-fill);
+  --fd-button-border: var(--fd-color-control-navigation-border);
+  --fd-button-hover: var(--fd-color-control-navigation-hover);
+  --fd-button-focus: var(--fd-color-control-navigation-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="general"] {
+  --fd-button-fill: var(--fd-color-control-general-fill);
+  --fd-button-border: var(--fd-color-control-general-border);
+  --fd-button-hover: var(--fd-color-control-general-hover);
+  --fd-button-focus: var(--fd-color-control-general-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="start"] {
+  --fd-button-fill: var(--fd-color-control-start-fill);
+  --fd-button-border: var(--fd-color-control-start-border);
+  --fd-button-hover: var(--fd-color-control-start-hover);
+  --fd-button-focus: var(--fd-color-control-start-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="warm"] {
+  --fd-button-fill: var(--fd-color-control-warm-fill);
+  --fd-button-border: var(--fd-color-control-warm-border);
+  --fd-button-hover: var(--fd-color-control-warm-hover);
+  --fd-button-focus: var(--fd-color-control-warm-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="cool"] {
+  --fd-button-fill: var(--fd-color-control-cool-fill);
+  --fd-button-border: var(--fd-color-control-cool-border);
+  --fd-button-hover: var(--fd-color-control-cool-hover);
+  --fd-button-focus: var(--fd-color-control-cool-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="danger"] {
+  --fd-button-fill: var(--fd-color-control-danger-fill);
+  --fd-button-border: var(--fd-color-control-danger-border);
+  --fd-button-hover: var(--fd-color-control-danger-hover);
+  --fd-button-focus: var(--fd-color-control-danger-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+
+[data-slot="navigation-item"],
+[data-fd-tone] {
+  color: var(--fd-button-text);
+  background-color: var(--fd-button-fill);
+  border-color: var(--fd-button-border);
+}
+[data-slot="navigation-item"]:not([aria-current="page"]),
+[data-fd-tone][data-fd-variant="ghost"] {
+  color: var(--fd-color-foreground);
+  background-color: transparent;
+  border-color: transparent;
+}
+[data-slot="navigation-item"]:hover,
+[data-fd-tone]:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--fd-button-hover);
+  color: var(--fd-button-text);
+}
+[data-slot="navigation-item"]:focus-visible,
+[data-fd-tone]:focus-visible {
+  --tw-ring-color: var(--fd-button-focus);
+  border-color: var(--fd-button-focus);
+}
+
+[data-fd-tone="danger"][data-fd-variant="ghost"]:not(:hover) {
+  color: var(--fd-button-fill);
 }

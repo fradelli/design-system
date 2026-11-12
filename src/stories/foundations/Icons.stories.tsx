@@ -14,31 +14,16 @@ type Story = StoryObj<typeof meta>;
 export const Actions: Story = {
   render: () => (
     <div className="flex flex-wrap gap-3">
-      <Button aria-label="Add item" size="icon" className="min-h-11 min-w-11 [&>svg]:size-5">
+      <Button aria-label="Add item" size="icon">
         <PlusIcon weight="regular" aria-hidden="true" focusable="false" />
       </Button>
-      <Button
-        aria-label="Edit item"
-        variant="outline"
-        size="icon"
-        className="min-h-11 min-w-11 [&>svg]:size-5"
-      >
+      <Button aria-label="Edit item" variant="outline" size="icon">
         <PencilSimpleIcon weight="regular" aria-hidden="true" focusable="false" />
       </Button>
-      <Button
-        aria-label="Delete item"
-        variant="ghost"
-        size="icon"
-        className="min-h-11 min-w-11 text-status-destructive [&>svg]:size-5"
-      >
+      <Button aria-label="Delete item" variant="ghost" size="icon" tone="danger">
         <TrashIcon weight="regular" aria-hidden="true" focusable="false" />
       </Button>
-      <Button
-        aria-label="Close"
-        variant="ghost"
-        size="icon"
-        className="min-h-11 min-w-11 [&>svg]:size-5"
-      >
+      <Button aria-label="Close" variant="ghost" size="icon">
         <XIcon weight="regular" aria-hidden="true" focusable="false" />
       </Button>
     </div>
@@ -50,8 +35,8 @@ export const Actions: Story = {
       const icon = button.querySelector("svg");
       await expect(icon).toHaveAttribute("aria-hidden", "true");
       await expect(icon).toHaveAttribute("focusable", "false");
-      await expect(button.getBoundingClientRect().width).toBeGreaterThanOrEqual(44);
-      await expect(icon?.getBoundingClientRect().width).toBe(20);
+      await expect(button.getBoundingClientRect().width).toBe(28);
+      await expect(icon?.getBoundingClientRect().width).toBe(14);
     }
   },
 };

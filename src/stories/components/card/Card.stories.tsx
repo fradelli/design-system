@@ -100,14 +100,14 @@ export const CompiledStyles: Story = {
     const card = canvas.getByTestId("glass-card");
     const styles = getComputedStyle(card);
     await expect(styles.backdropFilter).toBe("blur(12px)");
-    await expect(styles.borderRadius).toBe("16px");
-    await expect(getComputedStyle(canvas.getByText("Shared title")).fontSize).toBe("20px");
+    await expect(styles.borderRadius).toBe("12px");
+    await expect(getComputedStyle(canvas.getByText("Shared title")).fontSize).toBe("14px");
     await expect(getComputedStyle(card).paddingLeft).toBe("24px");
     await expect(canvas.getByRole("textbox", { name: "Name" })).toHaveAccessibleDescription(
       "A name is required.",
     );
-    await expect(getComputedStyle(canvas.getByText("Compact heading")).fontSize).toBe("20px");
-    await expect(getComputedStyle(canvas.getByText("Compact heading")).fontWeight).toBe("700");
+    await expect(getComputedStyle(canvas.getByText("Compact heading")).fontSize).toBe("14px");
+    await expect(getComputedStyle(canvas.getByText("Compact heading")).fontWeight).toBe("500");
     await expect(getComputedStyle(canvas.getByTestId("overridden-card")).backgroundColor).toBe(
       "rgb(28, 28, 31)",
     );
@@ -169,8 +169,8 @@ export const LayoutContracts: Story = {
       await expect(title.getBoundingClientRect().left - card.getBoundingClientRect().left).toBe(
         padding + 1,
       );
-      await expect(getComputedStyle(title).fontSize).toBe("20px");
-      await expect(getComputedStyle(title).lineHeight).toBe("28px");
+      await expect(getComputedStyle(title).fontSize).toBe("14px");
+      await expect(getComputedStyle(title).lineHeight).toBe("20px");
       await expect(card.scrollWidth).toBeLessThanOrEqual(card.clientWidth);
     }
     await expect(cards[0]!.getBoundingClientRect().height).toBe(
