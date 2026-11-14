@@ -49,6 +49,25 @@ import type { IconProps } from "@fradelli/ui/icons";
 import { TrashIcon } from "@fradelli/ui/icons/Trash";
 import { BarbellIcon as IndividualBarbellIcon } from "@fradelli/ui/icons/Barbell";
 import { createElement, createRef } from "react";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@fradelli/ui/select";
+void createElement(Select<string>, {
+  name: "choice",
+  defaultValue: "first",
+  onValueChange: (value) => {
+    const selected: string | null = value;
+    void selected;
+  },
+});
+void createElement(
+  SelectTrigger,
+  { "aria-label": "Choice", size: "sm" },
+  createElement(SelectValue),
+);
+void createElement(
+  SelectContent,
+  { alignItemWithTrigger: false },
+  createElement(SelectItem, { value: "first" }, "First"),
+);
 const iconProps: IconProps = {
   size: 20,
   weight: "regular",
@@ -57,3 +76,12 @@ const iconProps: IconProps = {
 };
 void createElement(TrashIcon, iconProps);
 void createElement(IndividualBarbellIcon, iconProps);
+
+import { Item, ItemContent } from "@fradelli/ui/item";
+import { StatusIndicator } from "@fradelli/ui/status-indicator";
+void createElement(
+  Item,
+  { variant: "outline", size: "sm" },
+  createElement(ItemContent, null, "Activity"),
+);
+void createElement(StatusIndicator, { tone: "success", pulse: true, "aria-label": "Active" });

@@ -1,32 +1,33 @@
-import type { ComponentProps } from "react";
+"use client";
 
+import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
 import { cn } from "../../lib/cn.js";
 
-export type SwitchProps = Omit<ComponentProps<"button">, "aria-checked" | "aria-label" | "role"> & {
-  checked: boolean;
-  "aria-label": string;
-};
-
-export function Switch({ checked, className, disabled, type = "button", ...props }: SwitchProps) {
+function Switch({
+  className,
+  size = "default",
+  ...props
+}: SwitchPrimitive.Root.Props & {
+  size?: "sm" | "default";
+}) {
   return (
-    <button
-      type={type}
-      role="switch"
-      aria-checked={checked}
+    <SwitchPrimitive.Root
       data-slot="switch"
-      data-state={checked ? "checked" : "unchecked"}
+      data-size={size}
       className={cn(
-        "fd-focus-managed group/switch relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-border bg-surface-interactive p-0.5 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-status-info-border data-[state=checked]:bg-status-info motion-reduce:transition-none",
+        "peer group/switch relative inline-flex shrink-0 items-center rounded-full border border-transparent transition-all outline-none group-has-[:focus-visible]/field-label:border-transparent group-has-[:focus-visible]/field-label:ring-0 after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-focus-ring focus-visible:ring-2 focus-visible:ring-focus-ring/30 aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20 data-[size=default]:h-[16.6px] data-[size=default]:w-[28px] data-[size=sm]:h-[14px] data-[size=sm]:w-[24px] dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:bg-primary data-unchecked:bg-surface-interactive dark:data-unchecked:bg-surface-interactive/80 data-disabled:cursor-not-allowed data-disabled:opacity-50",
         className,
       )}
-      disabled={disabled}
       {...props}
     >
-      <span
+      <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
-        aria-hidden="true"
-        className="pointer-events-none block size-4.5 rounded-full bg-foreground shadow-xs transition-transform group-data-[state=checked]/switch:translate-x-5 motion-reduce:transition-none"
+        className="pointer-events-none block rounded-full bg-background ring-0 transition-transform group-data-[size=default]/switch:size-3.5 group-data-[size=sm]/switch:size-3 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] dark:data-checked:bg-primary-foreground group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0 dark:data-unchecked:bg-foreground"
       />
-    </button>
+    </SwitchPrimitive.Root>
   );
 }
+
+export { Switch };
+
+export type SwitchProps = SwitchPrimitive.Root.Props & { size?: "sm" | "default" };

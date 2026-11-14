@@ -15,8 +15,14 @@ const boundaries = new Map([
   ["src/components/card/index.tsx", false],
   ["src/components/field/index.tsx", false],
   ["src/components/input/index.tsx", true],
+  ["src/components/item/index.tsx", true],
+  ["src/components/status-indicator/index.tsx", false],
   ["src/components/dialog/index.tsx", true],
+  ["src/components/select/index.tsx", true],
+  ["src/components/dropdown-menu/index.tsx", true],
   ["src/components/checkbox/index.tsx", true],
+  ["src/components/native-select/index.tsx", false],
+  ["src/components/collapsible/index.tsx", true],
   ["src/components/skeleton/index.tsx", false],
 ]);
 

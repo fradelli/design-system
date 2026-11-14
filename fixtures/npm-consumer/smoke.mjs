@@ -18,6 +18,18 @@ import { BarbellIcon, ForkKnifeIcon } from "@fradelli/ui/icons";
 import { Separator } from "@fradelli/ui/separator";
 import * as sheetApi from "@fradelli/ui/sheet";
 import { Skeleton } from "@fradelli/ui/skeleton";
+import { Select, SelectTrigger, SelectValue } from "@fradelli/ui/select";
+
+const selectMarkup = renderToStaticMarkup(
+  createElement(
+    Select,
+    { name: "choice", defaultValue: "first", items: { first: "First" } },
+    createElement(SelectTrigger, { "aria-label": "Choice" }, createElement(SelectValue)),
+  ),
+);
+if (!selectMarkup.includes('name="choice"') || !selectMarkup.includes('value="first"')) {
+  throw new Error("Select lost its initial form value in the distributed artifact.");
+}
 
 if (Object.keys(publicApi).length !== 0) throw new Error("A API raiz deve permanecer vazia.");
 if (Object.keys(sheetApi).length !== 10) throw new Error("Entrypoint Sheet incompleto.");
@@ -88,3 +100,28 @@ try {
 } catch (error) {
   if (error.code !== "ERR_MODULE_NOT_FOUND") throw error;
 }
+
+import { Item, ItemContent, ItemTitle } from "@fradelli/ui/item";
+import { StatusIndicator } from "@fradelli/ui/status-indicator";
+const activityMarkup = renderToStaticMarkup(
+  createElement(
+    Item,
+    { variant: "outline" },
+    createElement(
+      ItemContent,
+      null,
+      createElement(
+        ItemTitle,
+        null,
+        createElement(StatusIndicator, { tone: "success", pulse: true, "aria-label": "Active" }),
+        "Activity",
+      ),
+    ),
+  ),
+);
+if (!activityMarkup.includes('data-slot="item"') || !activityMarkup.includes('data-pulse="true"'))
+  throw new Error("Persistent status primitives are missing from the artifact.");
+
+import { Trash2 } from "@fradelli/ui/lucide-icons";
+if (!renderToStaticMarkup(createElement(Trash2, { "aria-hidden": true })).includes("<svg"))
+  throw new Error("Lucide export is missing.");

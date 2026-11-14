@@ -112,6 +112,57 @@
 }
 
 @layer fradelli-ui.components {
+  .fd-status-indicator {
+    display: inline-block;
+    width: var(--fd-space-2);
+    height: var(--fd-space-2);
+    flex-shrink: 0;
+    border-radius: var(--fd-radius-full);
+    color: var(--fd-color-muted-foreground);
+    background-color: currentColor;
+  }
+
+  .fd-status-indicator[data-tone="success"] {
+    color: var(--fd-color-status-success-solid);
+  }
+
+  .fd-status-indicator[data-tone="warning"] {
+    color: var(--fd-color-status-warning-solid);
+  }
+
+  .fd-status-indicator[data-tone="destructive"] {
+    color: var(--fd-color-status-destructive-solid);
+  }
+
+  .fd-status-indicator[data-pulse="true"] {
+    animation: fd-status-indicator-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes fd-status-indicator-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 currentColor;
+    }
+    50% {
+      opacity: 0.55;
+      box-shadow: 0 0 0 var(--fd-space-1) transparent;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fd-status-indicator[data-pulse="true"] {
+      animation: none !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .fd-status-indicator {
+      color: CanvasText;
+      forced-color-adjust: none;
+    }
+  }
+
   dialog[data-slot="alert-dialog-content"][open],
   dialog[data-slot="sheet-content"][open] {
     animation: fradelli-dialog-enter var(--fd-motion-duration-normal)
@@ -472,4 +523,33 @@
 
 [data-fd-tone="danger"][data-fd-variant="ghost"]:not(:hover) {
   color: var(--fd-button-fill);
+}
+
+/* Responsive modal presentation shared by consuming applications. */
+@media (width < 48rem) {
+  [data-slot="dialog-content"],
+  dialog[data-slot="alert-dialog-content"] {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - env(safe-area-inset-top));
+    transform: none;
+    translate: none !important;
+    overflow-y: auto;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    animation: fradelli-sheet-enter-bottom var(--fd-motion-duration-normal)
+      var(--fd-motion-easing-standard);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="dialog-content"],
+  dialog[data-slot="alert-dialog-content"] {
+    animation: none;
+  }
 }

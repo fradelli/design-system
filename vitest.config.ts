@@ -18,6 +18,8 @@ export default defineConfig({
         plugins: [tailwindcss(), storybookTest({ configDir: ".storybook" })],
         optimizeDeps: {
           include: [
+            "@base-ui/react/merge-props",
+            "@base-ui/react/use-render",
             "@phosphor-icons/react/dist/ssr/Barbell",
             "@phosphor-icons/react/dist/ssr/ForkKnife",
             "@phosphor-icons/react/X",

@@ -55,6 +55,66 @@ See the [Mira component decision](docs/decisions/0006-mira-component-recipes.md)
 
 ### Components
 
+#### Persistent activity surfaces
+
+Use the Mira `Item` primitive from `@fradelli/ui/item` for compact content with
+independent actions. Its additive `variant="elevated"` provides the shared
+surface, border, and shadow. Use `StatusIndicator` from
+`@fradelli/ui/status-indicator` for a semantic dot; `pulse` is opt-in and stops
+under reduced motion. Supply an accessible label or leave the dot decorative
+beside equivalent text. Consumers own fixed placement, safe-area/navigation
+offsets, timing, labels, and routes. The independent action can use Button
+`size="icon-touch"` and `Trash2` from `@fradelli/ui/lucide-icons`. See
+[source and validation](docs/governance/persistent-status-validation.md).
+
+#### Select
+
+The Mira Select primitive is available from `@fradelli/ui/select`. It is additive;
+`@fradelli/ui/native-select` remains available. Use Select for a field value and
+DropdownMenu for commands.
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@fradelli/ui/select";
+
+<Select name="intensity" defaultValue="low" items={{ low: "Low", high: "High" }}>
+  <SelectTrigger aria-label="Intensity">
+    <SelectValue placeholder="Choose intensity" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectItem value="low">Low</SelectItem>
+      <SelectItem value="high">High</SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>;
+```
+
+Supply `items` so an initial or controlled value displays its label before the
+popup mounts. For controlled fields, use `value` and `onValueChange`, whose empty
+value is `null`. Set `name`, `disabled`, and `required` on Select itself.
+An unselected named field serializes as an empty string; a disabled field is
+omitted from FormData. Supply the visible label or an accessible name on the
+trigger and connect application errors with `aria-invalid` and
+`aria-describedby`.
+
+SelectContent uses the Base UI portal and positioning behavior, including within
+Dialog. Use `alignItemWithTrigger={false}` to position below the trigger rather
+than align the selected item over it. Escape closes the Select before its parent
+Dialog. The application owns validation, pending submission, and persistence.
+
+Recipe sources: [Base UI Select](https://github.com/shadcn-ui/ui/blob/main/apps/v4/registry/bases/base/ui/select.tsx)
+and [Mira styles](https://github.com/shadcn-ui/ui/blob/main/apps/v4/registry/styles/style-mira.css).
+Imports, semantic colors, focus tokens, and icons are adapted to this package;
+geometry and recipe states are preserved. Select supports Base UI state callbacks
+in `className`.
+
 Components and the `cn` helper are exposed only through explicit subpaths:
 
 ```tsx
