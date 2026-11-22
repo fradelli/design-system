@@ -12,9 +12,11 @@ is documented as a temporary message, so it is not the persistent activity UI.
 retrieved directly as registry source, without running the CLI. The recipe needs
 only the existing Base UI, class-variance-authority, cn, and Separator dependencies.
 Changes: public package-relative imports, shared semantic color/focus mappings,
-an explicit client boundary for useRender, and an additive `elevated` variant
-using the shared elevated surface, border, and shadow. Other sizes and slots are
-preserved. This is a primitive, not a domain-specific activity bar.
+and an explicit client boundary for useRender. The official `default`, `outline`,
+and `muted` variants, sizes, and slots are preserved. An `elevated` variant was
+described here earlier but never shipped and is not part of the official recipe;
+consumers compose elevation with the shared surface tokens (for example `outline`
+with `bg-surface-elevated`). This is a primitive, not a domain-specific activity bar.
 
 Retrieved registry JSON SHA-256:
 `5f76a95b6dbac4cd164b49832be2d2b248e409449058fe67068c60020b056f1a`.

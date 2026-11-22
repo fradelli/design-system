@@ -14,7 +14,7 @@ it("keeps navigation and a sibling action independently keyboard accessible", as
   const user = userEvent.setup();
   const action = vi.fn();
   render(
-    <Item variant="elevated" aria-label="Current activity">
+    <Item variant="outline" aria-label="Current activity">
       <ItemContent>
         <Item render={<a href="#details" />}>
           <ItemTitle>Open activity</ItemTitle>
