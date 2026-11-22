@@ -147,6 +147,7 @@ export const KeyboardAndEscape: Story = {
     await userEvent.keyboard("{End}{Enter}");
     await waitFor(() => expect(trigger).toHaveTextContent("High"));
     await userEvent.click(trigger);
+    await expect(await page.findByRole("listbox")).toBeVisible();
     await userEvent.keyboard("{Escape}");
     await waitFor(() => expect(page.queryByRole("listbox")).not.toBeInTheDocument());
     await expect(trigger).toHaveFocus();
@@ -175,6 +176,8 @@ export const InsideDialog: Story = {
     await userEvent.click(await page.findByRole("option", { name: "High" }));
     await waitFor(() => expect(trigger).toHaveTextContent("High"));
     await userEvent.click(trigger);
+    // Escape before the listbox opens belongs to the Dialog; wait until the Select owns it.
+    await expect(await page.findByRole("listbox")).toBeVisible();
     await userEvent.keyboard("{Escape}");
     await waitFor(() => expect(page.queryByRole("listbox")).not.toBeInTheDocument());
     await expect(dialog).toBeVisible();
