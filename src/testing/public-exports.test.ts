@@ -12,6 +12,8 @@ const expected = [
   "./checkbox",
   "./cn",
   "./collapsible",
+  "./color-swatch",
+  "./context-menu",
   "./dialog",
   "./dropdown-menu",
   "./field",
@@ -19,6 +21,7 @@ const expected = [
   "./icons/*",
   "./input",
   "./item",
+  "./kbd",
   "./label",
   "./loading-region",
   "./lucide-icons",
@@ -27,6 +30,7 @@ const expected = [
   "./package.json",
   "./pending-button",
   "./popover",
+  "./progress",
   "./radio-group",
   "./select",
   "./separator",
@@ -36,6 +40,9 @@ const expected = [
   "./status-indicator",
   "./styles.css",
   "./switch",
+  "./table",
+  "./toast",
+  "./tooltip",
 ];
 
 describe("package exports", () => {

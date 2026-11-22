@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
+import { menuItemClasses, menuChoiceClasses } from "../../lib/menu-styles.js";
 import { cn } from "../../lib/cn.js";
 
 import { CheckIcon, ChevronRightIcon } from "lucide-react";
@@ -84,10 +85,7 @@ function DropdownMenuItem({
       data-slot="dropdown-menu-item"
       data-inset={inset}
       data-variant={variant}
-      className={cn(
-        "group/dropdown-menu-item relative flex min-h-7 cursor-default items-center gap-2 rounded-md px-2 py-1 text-xs/relaxed outline-hidden select-none focus:bg-surface-interactive focus:text-foreground not-data-[variant=destructive]:focus:**:text-foreground data-inset:pl-7.5 data-[variant=destructive]:text-status-destructive data-[variant=destructive]:focus:bg-status-destructive/10 data-[variant=destructive]:focus:text-status-destructive dark:data-[variant=destructive]:focus:bg-status-destructive/20 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5 data-[variant=destructive]:*:[svg]:text-status-destructive",
-        className,
-      )}
+      className={cn(menuItemClasses, className)}
       {...props}
     />
   );
@@ -109,10 +107,7 @@ function DropdownMenuSubTrigger({
     <MenuPrimitive.SubmenuTrigger
       data-slot="dropdown-menu-sub-trigger"
       data-inset={inset}
-      className={cn(
-        "flex min-h-7 cursor-default items-center gap-2 rounded-md px-2 py-1 text-xs outline-hidden select-none focus:bg-surface-interactive focus:text-foreground not-data-[variant=destructive]:focus:**:text-foreground data-inset:pl-7.5 data-popup-open:bg-surface-interactive data-popup-open:text-foreground data-open:bg-surface-interactive data-open:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
-        className,
-      )}
+      className={cn(menuItemClasses + " data-open:bg-surface-interactive", className)}
       {...props}
     >
       {children}
@@ -158,10 +153,7 @@ function DropdownMenuCheckboxItem({
     <MenuPrimitive.CheckboxItem
       data-slot="dropdown-menu-checkbox-item"
       data-inset={inset}
-      className={cn(
-        "relative flex min-h-7 cursor-default items-center gap-2 rounded-md py-1.5 pr-8 pl-2 text-xs outline-hidden select-none focus:bg-surface-interactive focus:text-foreground focus:**:text-foreground data-inset:pl-7.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
-        className,
-      )}
+      className={cn(menuChoiceClasses, className)}
       checked={checked}
       {...props}
     >
@@ -194,10 +186,7 @@ function DropdownMenuRadioItem({
     <MenuPrimitive.RadioItem
       data-slot="dropdown-menu-radio-item"
       data-inset={inset}
-      className={cn(
-        "relative flex min-h-7 cursor-default items-center gap-2 rounded-md py-1.5 pr-8 pl-2 text-xs outline-hidden select-none focus:bg-surface-interactive focus:text-foreground focus:**:text-foreground data-inset:pl-7.5 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5",
-        className,
-      )}
+      className={cn(menuChoiceClasses, className)}
       {...props}
     >
       <span

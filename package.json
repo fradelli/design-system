@@ -13,6 +13,10 @@
     "CHANGELOG.md"
   ],
   "exports": {
+    "./color-swatch": {
+      "types": "./dist/components/color-swatch/index.d.ts",
+      "import": "./dist/components/color-swatch/index.js"
+    },
     "./lucide-icons": {
       "types": "./dist/lucide-icons/index.d.ts",
       "import": "./dist/lucide-icons/index.js"
@@ -142,6 +146,30 @@
     "./dropdown-menu": {
       "types": "./dist/components/dropdown-menu/index.d.ts",
       "import": "./dist/components/dropdown-menu/index.js"
+    },
+    "./toast": {
+      "types": "./dist/components/toast/index.d.ts",
+      "import": "./dist/components/toast/index.js"
+    },
+    "./context-menu": {
+      "types": "./dist/components/context-menu/index.d.ts",
+      "import": "./dist/components/context-menu/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/components/tooltip/index.d.ts",
+      "import": "./dist/components/tooltip/index.js"
+    },
+    "./kbd": {
+      "types": "./dist/components/kbd/index.d.ts",
+      "import": "./dist/components/kbd/index.js"
+    },
+    "./table": {
+      "types": "./dist/components/table/index.d.ts",
+      "import": "./dist/components/table/index.js"
+    },
+    "./progress": {
+      "types": "./dist/components/progress/index.d.ts",
+      "import": "./dist/components/progress/index.js"
     }
   },
   "sideEffects": [

@@ -112,6 +112,15 @@
 }
 
 @layer fradelli-ui.components {
+  .fd-color-swatch {
+    display: inline-block;
+    width: var(--fd-space-3);
+    height: var(--fd-space-3);
+    flex-shrink: 0;
+    border-radius: var(--fd-radius-xs);
+    background-color: var(--fd-swatch-color, var(--fd-color-muted-foreground));
+  }
+
   .fd-status-indicator {
     display: inline-block;
     width: var(--fd-space-2);
