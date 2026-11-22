@@ -92,7 +92,7 @@ async function stop(child) {
 }
 
 const metrics = {
-  next: "16.4.2",
+  next: "16.4.6",
   artifact: tarballs[0],
   note: "Timings are single-run local observations. Client bytes include the Next runtime; icon source bytes are analyzed source, not transferred bytes.",
   cases: [],
