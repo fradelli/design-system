@@ -7,6 +7,7 @@
 }
 
 @theme inline {
+  --font-heading: var(--font-figtree, var(--fd-font-family-sans));
   --color-background: var(--fd-color-background);
   --color-surface: var(--fd-color-surface);
   --color-surface-elevated: var(--fd-color-surface-elevated);
@@ -111,6 +112,66 @@
 }
 
 @layer fradelli-ui.components {
+  .fd-color-swatch {
+    display: inline-block;
+    width: var(--fd-space-3);
+    height: var(--fd-space-3);
+    flex-shrink: 0;
+    border-radius: var(--fd-radius-xs);
+    background-color: var(--fd-swatch-color, var(--fd-color-muted-foreground));
+  }
+
+  .fd-status-indicator {
+    display: inline-block;
+    width: var(--fd-space-2);
+    height: var(--fd-space-2);
+    flex-shrink: 0;
+    border-radius: var(--fd-radius-full);
+    color: var(--fd-color-muted-foreground);
+    background-color: currentColor;
+  }
+
+  .fd-status-indicator[data-tone="success"] {
+    color: var(--fd-color-status-success-solid);
+  }
+
+  .fd-status-indicator[data-tone="warning"] {
+    color: var(--fd-color-status-warning-solid);
+  }
+
+  .fd-status-indicator[data-tone="destructive"] {
+    color: var(--fd-color-status-destructive-solid);
+  }
+
+  .fd-status-indicator[data-pulse="true"] {
+    animation: fd-status-indicator-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes fd-status-indicator-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 currentColor;
+    }
+    50% {
+      opacity: 0.55;
+      box-shadow: 0 0 0 var(--fd-space-1) transparent;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fd-status-indicator[data-pulse="true"] {
+      animation: none !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .fd-status-indicator {
+      color: CanvasText;
+      forced-color-adjust: none;
+    }
+  }
+
   dialog[data-slot="alert-dialog-content"][open],
   dialog[data-slot="sheet-content"][open] {
     animation: fradelli-dialog-enter var(--fd-motion-duration-normal)
@@ -391,5 +452,113 @@
     line-height: var(--fd-text-label-line-height);
     font-weight: var(--fd-text-label-weight);
     letter-spacing: var(--fd-text-label-tracking);
+  }
+}
+
+[data-slot="navigation-item"],
+[data-fd-tone="neutral"] {
+  --fd-button-fill: var(--fd-color-control-neutral-fill);
+  --fd-button-border: var(--fd-color-control-neutral-border);
+  --fd-button-hover: var(--fd-color-control-neutral-hover);
+  --fd-button-focus: var(--fd-color-control-neutral-focus);
+  --fd-button-text: var(--fd-color-foreground);
+}
+[data-slot="navigation-item"][aria-current="page"],
+[data-fd-tone="navigation"] {
+  --fd-button-fill: var(--fd-color-control-navigation-fill);
+  --fd-button-border: var(--fd-color-control-navigation-border);
+  --fd-button-hover: var(--fd-color-control-navigation-hover);
+  --fd-button-focus: var(--fd-color-control-navigation-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="general"] {
+  --fd-button-fill: var(--fd-color-control-general-fill);
+  --fd-button-border: var(--fd-color-control-general-border);
+  --fd-button-hover: var(--fd-color-control-general-hover);
+  --fd-button-focus: var(--fd-color-control-general-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="start"] {
+  --fd-button-fill: var(--fd-color-control-start-fill);
+  --fd-button-border: var(--fd-color-control-start-border);
+  --fd-button-hover: var(--fd-color-control-start-hover);
+  --fd-button-focus: var(--fd-color-control-start-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="warm"] {
+  --fd-button-fill: var(--fd-color-control-warm-fill);
+  --fd-button-border: var(--fd-color-control-warm-border);
+  --fd-button-hover: var(--fd-color-control-warm-hover);
+  --fd-button-focus: var(--fd-color-control-warm-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="cool"] {
+  --fd-button-fill: var(--fd-color-control-cool-fill);
+  --fd-button-border: var(--fd-color-control-cool-border);
+  --fd-button-hover: var(--fd-color-control-cool-hover);
+  --fd-button-focus: var(--fd-color-control-cool-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+[data-fd-tone="danger"] {
+  --fd-button-fill: var(--fd-color-control-danger-fill);
+  --fd-button-border: var(--fd-color-control-danger-border);
+  --fd-button-hover: var(--fd-color-control-danger-hover);
+  --fd-button-focus: var(--fd-color-control-danger-focus);
+  --fd-button-text: var(--fd-color-primary-foreground);
+}
+
+[data-slot="navigation-item"],
+[data-fd-tone] {
+  color: var(--fd-button-text);
+  background-color: var(--fd-button-fill);
+  border-color: var(--fd-button-border);
+}
+[data-slot="navigation-item"]:not([aria-current="page"]),
+[data-fd-tone][data-fd-variant="ghost"] {
+  color: var(--fd-color-foreground);
+  background-color: transparent;
+  border-color: transparent;
+}
+[data-slot="navigation-item"]:hover,
+[data-fd-tone]:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--fd-button-hover);
+  color: var(--fd-button-text);
+}
+[data-slot="navigation-item"]:focus-visible,
+[data-fd-tone]:focus-visible {
+  --tw-ring-color: var(--fd-button-focus);
+  border-color: var(--fd-button-focus);
+}
+
+[data-fd-tone="danger"][data-fd-variant="ghost"]:not(:hover) {
+  color: var(--fd-button-fill);
+}
+
+/* Responsive modal presentation shared by consuming applications. */
+@media (width < 48rem) {
+  [data-slot="dialog-content"],
+  dialog[data-slot="alert-dialog-content"] {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - env(safe-area-inset-top));
+    transform: none;
+    translate: none !important;
+    overflow-y: auto;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    animation: fradelli-sheet-enter-bottom var(--fd-motion-duration-normal)
+      var(--fd-motion-easing-standard);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="dialog-content"],
+  dialog[data-slot="alert-dialog-content"] {
+    animation: none;
   }
 }

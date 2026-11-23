@@ -1,0 +1,3 @@
+export const menuItemClasses =
+  "group/menu-item relative flex min-h-7 cursor-default items-center gap-2 rounded-md px-2 py-1 text-xs/relaxed font-normal outline-hidden select-none hover:bg-surface-interactive data-highlighted:bg-surface-interactive focus:bg-surface-interactive focus:text-foreground data-inset:pl-7.5 data-[variant=destructive]:text-status-destructive data-[variant=destructive]:focus:bg-status-destructive/10 data-[variant=destructive]:hover:bg-status-destructive/10 data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-3.5";
+export const menuChoiceClasses = menuItemClasses + " pr-8";

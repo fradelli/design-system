@@ -13,6 +13,26 @@
     "CHANGELOG.md"
   ],
   "exports": {
+    "./color-swatch": {
+      "types": "./dist/components/color-swatch/index.d.ts",
+      "import": "./dist/components/color-swatch/index.js"
+    },
+    "./lucide-icons": {
+      "types": "./dist/lucide-icons/index.d.ts",
+      "import": "./dist/lucide-icons/index.js"
+    },
+    "./item": {
+      "types": "./dist/components/item/index.d.ts",
+      "import": "./dist/components/item/index.js"
+    },
+    "./status-indicator": {
+      "types": "./dist/components/status-indicator/index.d.ts",
+      "import": "./dist/components/status-indicator/index.js"
+    },
+    "./accordion": {
+      "types": "./dist/components/accordion/index.d.ts",
+      "import": "./dist/components/accordion/index.js"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
@@ -102,6 +122,54 @@
     "./icons/*": {
       "types": "./dist/icons/generated/*.d.ts",
       "import": "./dist/icons/generated/*.js"
+    },
+    "./checkbox": {
+      "types": "./dist/components/checkbox/index.d.ts",
+      "import": "./dist/components/checkbox/index.js"
+    },
+    "./dialog": {
+      "types": "./dist/components/dialog/index.d.ts",
+      "import": "./dist/components/dialog/index.js"
+    },
+    "./select": {
+      "types": "./dist/components/select/index.d.ts",
+      "import": "./dist/components/select/index.js"
+    },
+    "./native-select": {
+      "types": "./dist/components/native-select/index.d.ts",
+      "import": "./dist/components/native-select/index.js"
+    },
+    "./collapsible": {
+      "types": "./dist/components/collapsible/index.d.ts",
+      "import": "./dist/components/collapsible/index.js"
+    },
+    "./dropdown-menu": {
+      "types": "./dist/components/dropdown-menu/index.d.ts",
+      "import": "./dist/components/dropdown-menu/index.js"
+    },
+    "./toast": {
+      "types": "./dist/components/toast/index.d.ts",
+      "import": "./dist/components/toast/index.js"
+    },
+    "./context-menu": {
+      "types": "./dist/components/context-menu/index.d.ts",
+      "import": "./dist/components/context-menu/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/components/tooltip/index.d.ts",
+      "import": "./dist/components/tooltip/index.js"
+    },
+    "./kbd": {
+      "types": "./dist/components/kbd/index.d.ts",
+      "import": "./dist/components/kbd/index.js"
+    },
+    "./table": {
+      "types": "./dist/components/table/index.d.ts",
+      "import": "./dist/components/table/index.js"
+    },
+    "./progress": {
+      "types": "./dist/components/progress/index.d.ts",
+      "import": "./dist/components/progress/index.js"
     }
   },
   "sideEffects": [
@@ -187,9 +255,11 @@
     "vitest": "4.1.12"
   },
   "dependencies": {
+    "@base-ui/react": "1.9.0",
     "@phosphor-icons/react": "2.1.10",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
+    "lucide-react": "1.71.0",
     "tailwind-merge": "3.6.0"
   }
 }

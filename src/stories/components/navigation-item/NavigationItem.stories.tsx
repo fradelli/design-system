@@ -25,10 +25,10 @@ export const TextLinks: Story = {
 export const IconLinks: Story = {
   render: () => (
     <nav aria-label="Example icon navigation" className="flex gap-2">
-      <NavigationItem href="#first" aria-label="First" aria-current="page">
+      <NavigationItem size="icon" href="#first" aria-label="First" aria-current="page">
         <BarbellIcon aria-hidden="true" />
       </NavigationItem>
-      <NavigationItem href="#second" aria-label="Second">
+      <NavigationItem size="icon" href="#second" aria-label="Second">
         <ForkKnifeIcon aria-hidden="true" />
       </NavigationItem>
     </nav>

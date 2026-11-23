@@ -1,19 +1,22 @@
-import type { ComponentProps } from "react";
-
+"use client";
+import * as React from "react";
+import { Input as InputPrimitive } from "@base-ui/react/input";
 import { cn } from "../../lib/cn.js";
 
-export type InputProps = ComponentProps<"input">;
-
-export function Input({ className, type, ...props }: InputProps) {
+function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
-    <input
+    <InputPrimitive
       type={type}
       data-slot="input"
       className={cn(
-        "fd-focus-managed h-9 w-full min-w-0 rounded-md border border-input bg-surface-elevated/60 px-3 py-1 text-base text-foreground shadow-xs outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-focus-ring focus-visible:ring-2 focus-visible:ring-focus-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-status-destructive aria-invalid:ring-status-destructive md:text-sm",
+        "fd-focus-managed h-7 w-full min-w-0 rounded-md border border-input bg-input/20 px-2 py-0.5 text-sm transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-xs/relaxed file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-focus-ring focus-visible:ring-2 focus-visible:ring-focus-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-status-destructive aria-invalid:ring-2 aria-invalid:ring-status-destructive/20 md:text-xs/relaxed dark:bg-input/30 dark:aria-invalid:border-status-destructive/50 dark:aria-invalid:ring-status-destructive/40",
         className,
       )}
       {...props}
     />
   );
 }
+
+export { Input };
+
+export type InputProps = React.ComponentProps<"input">;

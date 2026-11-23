@@ -15,6 +15,50 @@
     "brand": { "$value": "{primitive.color.red.solid}" },
     "brandForeground": { "$value": "{primitive.color.brandForeground}" },
     "focusRing": { "$value": "{primitive.color.yellow.solid}" },
+    "control": {
+      "neutral": {
+        "fill": { "$value": "{primitive.color.graphite.400}" },
+        "border": { "$value": "{primitive.color.graphite.600}" },
+        "hover": { "$value": "{primitive.color.graphite.300}" },
+        "focus": { "$value": "{primitive.color.graphite.100}" }
+      },
+      "navigation": {
+        "fill": { "$value": "{primitive.color.yellow.solid}" },
+        "border": { "$value": "{primitive.color.gold.600}" },
+        "hover": { "$value": "{primitive.color.gold.300}" },
+        "focus": { "$value": "{primitive.color.gold.100}" }
+      },
+      "general": {
+        "fill": { "$value": "{primitive.color.lilac.400}" },
+        "border": { "$value": "{primitive.color.lilac.600}" },
+        "hover": { "$value": "{primitive.color.lilac.300}" },
+        "focus": { "$value": "{primitive.color.lilac.100}" }
+      },
+      "start": {
+        "fill": { "$value": "{primitive.color.sage.400}" },
+        "border": { "$value": "{primitive.color.sage.600}" },
+        "hover": { "$value": "{primitive.color.sage.300}" },
+        "focus": { "$value": "{primitive.color.sage.100}" }
+      },
+      "warm": {
+        "fill": { "$value": "{primitive.color.peach.400}" },
+        "border": { "$value": "{primitive.color.peach.600}" },
+        "hover": { "$value": "{primitive.color.peach.300}" },
+        "focus": { "$value": "{primitive.color.peach.100}" }
+      },
+      "cool": {
+        "fill": { "$value": "{primitive.color.sky.400}" },
+        "border": { "$value": "{primitive.color.sky.600}" },
+        "hover": { "$value": "{primitive.color.sky.300}" },
+        "focus": { "$value": "{primitive.color.sky.100}" }
+      },
+      "danger": {
+        "fill": { "$value": "{primitive.color.rose.400}" },
+        "border": { "$value": "{primitive.color.rose.600}" },
+        "hover": { "$value": "{primitive.color.rose.300}" },
+        "focus": { "$value": "{primitive.color.rose.100}" }
+      }
+    },
     "category": {
       "yellow": {
         "solid": { "$value": "{primitive.color.yellow.solid}" },
@@ -93,7 +137,12 @@
     }
   },
   "font": {
-    "family": { "sans": { "$type": "string", "$value": "{primitive.font.family.sans}" } },
+    "family": {
+      "sans": {
+        "$type": "string",
+        "$value": "{primitive.font.family.sans}"
+      }
+    },
     "weight": {
       "$type": "fontWeight",
       "body": { "$value": "{primitive.font.weight.400}" },
@@ -142,9 +191,18 @@
     "full": { "$value": "{primitive.radius.full}" }
   },
   "focus": {
-    "width": { "$type": "dimension", "$value": "{primitive.focus.width}" },
-    "offset": { "$type": "dimension", "$value": "{primitive.focus.offset}" },
-    "color": { "$type": "color", "$value": "{primitive.color.yellow.solid}" }
+    "width": {
+      "$type": "dimension",
+      "$value": "{primitive.focus.width}"
+    },
+    "offset": {
+      "$type": "dimension",
+      "$value": "{primitive.focus.offset}"
+    },
+    "color": {
+      "$type": "color",
+      "$value": "{primitive.color.yellow.solid}"
+    }
   },
   "motion": {
     "duration": {

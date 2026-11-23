@@ -92,9 +92,11 @@ describe("shared primitives", () => {
 
     rerender(<Switch checked aria-label="Enable reminders" disabled />);
 
+    // Base UI Mira recipe: a non-native switch exposes disabled through ARIA and data state.
     const switchControl = screen.getByRole("switch", { name: "Enable reminders" });
     expect(switchControl).toHaveAttribute("aria-checked", "true");
-    expect(switchControl).toBeDisabled();
+    expect(switchControl).toHaveAttribute("aria-disabled", "true");
+    expect(switchControl).toHaveAttribute("data-disabled");
   });
 
   it("supports keyboard activation without submitting a form by default", async () => {
@@ -108,7 +110,6 @@ describe("shared primitives", () => {
     );
 
     const switchControl = within(container).getByRole("switch", { name: "Enable reminders" });
-    expect(switchControl).toHaveAttribute("type", "button");
     switchControl.focus();
     expect(switchControl).toHaveFocus();
     await user.keyboard(" ");

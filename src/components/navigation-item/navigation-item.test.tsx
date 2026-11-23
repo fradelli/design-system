@@ -11,14 +11,14 @@ afterEach(cleanup);
 describe("NavigationItem", () => {
   it("exposes the name and active state of an icon-only link", () => {
     render(
-      <NavigationItem href="/example" aria-label="Example" aria-current="page">
+      <NavigationItem size="icon" href="/example" aria-label="Example" aria-current="page">
         <BarbellIcon aria-hidden="true" />
       </NavigationItem>,
     );
     const link = screen.getByRole("link", { name: "Example" });
     expect(link).toHaveAttribute("aria-current", "page");
     expect(link).toHaveAttribute("href", "/example");
-    expect(link).toHaveClass("min-h-11", "min-w-11");
+    expect(link).toHaveClass("size-7");
   });
 
   it("composes a consumer link without nested anchors and remains keyboard focusable", async () => {

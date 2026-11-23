@@ -7,6 +7,10 @@ const meta = {
   title: "Components/Button",
   component: Button,
   argTypes: {
+    tone: {
+      control: "select",
+      options: ["neutral", "navigation", "general", "start", "warm", "cool", "danger"],
+    },
     variant: {
       control: "select",
       options: ["default", "secondary", "outline", "destructive", "ghost", "link"],
@@ -74,8 +78,8 @@ export const InteractionStates: Story = {
     const primary = canvas.getByRole("button", { name: "Primary action" });
     const disabled = canvas.getByRole("button", { name: "Disabled action" });
     const link = canvas.getByRole("link", { name: "Link action" });
-    await expect(getComputedStyle(primary).cursor).toBe("pointer");
-    await expect(getComputedStyle(link).cursor).toBe("pointer");
+    await expect(getComputedStyle(primary).cursor).toBe("default");
+    await expect(getComputedStyle(link).cursor).toBe("default");
     await expect(getComputedStyle(disabled).cursor).toBe("default");
     await expect(getComputedStyle(disabled).pointerEvents).toBe("none");
     await expect(getComputedStyle(primary).opacity).toBe("1");

@@ -3,13 +3,18 @@ import type { ComponentProps } from "react";
 
 import { cn } from "../../lib/cn.js";
 
-const cardVariants = cva("flex min-w-0 flex-col rounded-xl border text-foreground fd-card", {
-  variants: {
-    size: { default: "fd-card-default", sm: "fd-card-compact" },
-    surface: { glass: "fd-surface-glass", solid: "border-border bg-surface" },
+import { Slot } from "../../lib/slot.js";
+
+const cardVariants = cva(
+  "group/card flex min-w-0 flex-col rounded-lg border text-xs/relaxed text-foreground fd-card",
+  {
+    variants: {
+      size: { default: "fd-card-default", sm: "fd-card-compact" },
+      surface: { glass: "fd-surface-glass", solid: "border-border bg-surface" },
+    },
+    defaultVariants: { size: "default", surface: "glass" },
   },
-  defaultVariants: { size: "default", surface: "glass" },
-});
+);
 
 export type CardProps = ComponentProps<"div"> & VariantProps<typeof cardVariants>;
 
@@ -30,7 +35,7 @@ export function CardHeader({ className, ...props }: ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "grid min-w-0 gap-1.5 has-[>[data-slot=card-action]]:grid-cols-[minmax(0,1fr)_auto]",
+        "group/card-header grid min-w-0 auto-rows-min items-start gap-1 has-[>[data-slot=card-action]]:grid-cols-[minmax(0,1fr)_auto]",
         className,
       )}
       {...props}
@@ -38,15 +43,26 @@ export function CardHeader({ className, ...props }: ComponentProps<"div">) {
   );
 }
 
-export function CardTitle({ className, ...props }: ComponentProps<"div">) {
-  return <div data-slot="card-title" className={cn("fd-text-card", className)} {...props} />;
+export function CardTitle({
+  className,
+  asChild,
+  ...props
+}: ComponentProps<"div"> & { asChild?: boolean }) {
+  const Component = asChild ? Slot : "div";
+  return (
+    <Component
+      data-slot="card-title"
+      className={cn("font-heading text-sm font-medium", className)}
+      {...props}
+    />
+  );
 }
 
 export function CardDescription({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="card-description"
-      className={cn("text-sm leading-5 text-muted-foreground", className)}
+      className={cn("text-xs/relaxed text-muted-foreground", className)}
       {...props}
     />
   );
