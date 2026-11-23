@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.7.0
+
+### Minor Changes
+
+- 52b4af2: Add the official Base Mira toast recipe with Lucide icons and a configurable dismiss label.
+- 52b4af2: Add ColorSwatch, a reusable rounded-square palette sample with decorative and accessible labeled modes, exported from @fradelli/ui/color-swatch.
+- 52b4af2: Export the Base Mira context menu with shared surface tokens and Lucide icons.
+- 52b4af2: Export the Base Mira Kbd primitive and use shared elevated surfaces for tooltips with legible shortcut keycaps.
+- 52b4af2: Add the Base UI Mira accordion primitive and its public subpath.
+- 52b4af2: Adopt Mira form and button styles and expose the Base UI dialog and checkbox through dedicated package entries.
+  Export semantic button colors and apply Mira sizing to navigation links.
+  Apply Mira card typography and support interactive titles through composition.
+- 52b4af2: Add the official Mira Item primitive (default, outline, and muted variants) and a
+  generic StatusIndicator with opt-in pulse and reduced-motion support. Consumers
+  keep persistent placement, navigation, timers, and application state.
+  Provide an icon-touch Button size and an explicit Lucide Trash2 export for the
+  independent action without importing an icon library directly in the consumer.
+- 52b4af2: Export Mira native select, dropdown menu and collapsible components for shared forms and disclosures.
+- 52b4af2: Add the Base UI Mira Select primitive at `@fradelli/ui/select`, with Lucide icons, shared tokens, native form serialization, and keyboard interaction. Existing NativeSelect and Phosphor entry points remain compatible.
+- 52b4af2: Adopt the official Base Mira Switch recipe and bottom-anchored mobile modal presentation. Preserve status indicator halo space.
+
+  **Breaking in 0.x — Switch.** `Switch` now renders the Base UI switch (`<span role="switch">` with a hidden input) instead of a native `<button>`, and its props are `Switch.Root.Props` from `@base-ui/react/switch` plus `size` (`"sm" | "default"`).
+
+  - `checked` is no longer required. Pass `checked` with `onCheckedChange(checked)` for a controlled switch, or `defaultChecked` for an uncontrolled one. Replace `onClick` toggling with `onCheckedChange`.
+  - `type` is no longer accepted. The switch never submits a form; use `name` and `value` when the state must be posted with a form.
+  - `aria-label` is no longer required by the type. Keep an accessible name through `aria-label`, `aria-labelledby` or an associated label.
+  - Disabled state is exposed as `aria-disabled="true"` and `data-disabled`, not the native `disabled` attribute. Style with `data-disabled` and assert with `aria-disabled` in tests.
+  - Checked state is exposed as `data-checked` / `data-unchecked` instead of `data-state="checked" | "unchecked"`.
+
+- 52b4af2: Add Table and Progress from the official shadcn/ui Mira recipes (Base UI registry), exported from @fradelli/ui/table and @fradelli/ui/progress.
+- 52b4af2: Export the Base Mira tooltip and share item typography and interaction states across dropdown and context menus.
+
 ## 0.6.0
 
 ### Minor Changes
