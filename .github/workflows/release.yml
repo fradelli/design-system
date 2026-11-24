@@ -39,10 +39,22 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Validate releasable package
         run: npm run ci
+      # A version pull request opened or updated with GITHUB_TOKEN gets CI runs
+      # that wait for approval. A GitHub App token lets CI start on its own.
+      # Without the App configured, the step is skipped and GITHUB_TOKEN is used.
+      - name: Create release GitHub App token
+        id: app-token
+        if: vars.RELEASE_APP_CLIENT_ID != ''
+        uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3.4.0
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - name: Create version pull request or publish
         uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           publish-script: npm run release
           version-script: npm run version
           commit-message: "chore(release): version @fradelli/ui"
