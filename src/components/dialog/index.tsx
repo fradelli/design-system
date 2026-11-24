@@ -38,14 +38,24 @@ function DialogOverlay({ className, ...props }: DialogPrimitive.Backdrop.Props) 
   );
 }
 
+type DialogContentProps = DialogPrimitive.Popup.Props &
+  (
+    | {
+        /** Renders the corner close button. Defaults to `true`. */
+        showCloseButton?: true;
+        /** Accessible name of the close button, supplied in the application's language. */
+        closeLabel: string;
+      }
+    | { showCloseButton: false; closeLabel?: string }
+  );
+
 function DialogContent({
   className,
   children,
   showCloseButton = true,
+  closeLabel,
   ...props
-}: DialogPrimitive.Popup.Props & {
-  showCloseButton?: boolean;
-}) {
+}: DialogContentProps) {
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -66,7 +76,7 @@ function DialogContent({
             render={<Button variant="ghost" className="absolute top-2 right-2" size="icon-sm" />}
           >
             <XIcon aria-hidden="true" />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{closeLabel}</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>
@@ -80,14 +90,24 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+type DialogFooterProps = React.ComponentProps<"div"> &
+  (
+    | {
+        /** Renders a visible close button after the footer actions. */
+        showCloseButton: true;
+        /** Visible text of the close button, supplied in the application's language. */
+        closeLabel: string;
+      }
+    | { showCloseButton?: false; closeLabel?: string }
+  );
+
 function DialogFooter({
   className,
   showCloseButton = false,
+  closeLabel,
   children,
   ...props
-}: React.ComponentProps<"div"> & {
-  showCloseButton?: boolean;
-}) {
+}: DialogFooterProps) {
   return (
     <div
       data-slot="dialog-footer"
@@ -96,7 +116,9 @@ function DialogFooter({
     >
       {children}
       {showCloseButton && (
-        <DialogPrimitive.Close render={<Button variant="outline" />}>Close</DialogPrimitive.Close>
+        <DialogPrimitive.Close render={<Button variant="outline" />}>
+          {closeLabel}
+        </DialogPrimitive.Close>
       )}
     </div>
   );
@@ -144,3 +166,4 @@ export {
   DialogTitle,
   DialogTrigger,
 };
+export type { DialogContentProps, DialogFooterProps };

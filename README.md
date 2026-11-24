@@ -174,10 +174,17 @@ Consumers associate labels, descriptions, and errors using HTML attributes:
 </Field>
 ```
 
-`SheetContent` requires `closeLabel`. Supply this copy from the application's i18n system:
+Close controls never ship built-in copy. Supply each label from the application's i18n system:
+
+- `SheetContent` requires `closeLabel`.
+- `DialogContent` requires `closeLabel` unless `showCloseButton={false}`.
+- `DialogFooter` requires `closeLabel` when `showCloseButton` is set.
+- `Toaster` requires `closeLabel`, and `ToastClose` requires `aria-label`.
 
 ```tsx
 <SheetContent closeLabel={messages.closePanel}>...</SheetContent>
+<DialogContent closeLabel={messages.closeDialog}>...</DialogContent>
+<Toaster closeLabel={messages.dismissNotification} />
 ```
 
 ### Glass visual language
