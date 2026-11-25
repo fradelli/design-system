@@ -35,13 +35,7 @@ npm run tokens:check
 npm run storybook
 ```
 
-Consumers import the CSS once:
-
-```css
-@import "@fradelli/ui/styles.css";
-```
-
-With Tailwind CSS 4, also import the framework and explicitly declare the installed package source. The path may vary depending on the app's stylesheet:
+Consumers need Tailwind CSS 4 (`tailwindcss` is a required peer dependency): the package ships Tailwind theme variables and class names, and the consumer build compiles them. Import the framework and the package CSS once, and declare the installed package source. The path may vary depending on the app's stylesheet:
 
 ```css
 @import "tailwindcss";
