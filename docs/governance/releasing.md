@@ -10,7 +10,7 @@ Every PR that changes public API, styles, or behavior must classify its SemVer i
 
 1. The implementation PR merges into `main`.
 2. The `Release` workflow runs all gates again.
-3. If Changesets are present, the workflow creates or updates one version PR.
+3. If Changesets are present, the workflow creates or updates one version PR on `changeset-release/main`. The `CI` workflow starts on it without manual approval when the release GitHub App is configured (see [CI on the version PR](#ci-on-the-version-pr)).
 4. The version PR updates `package.json`, `package-lock.json`, and `CHANGELOG.md`, then removes consumed Changesets.
 5. The owner reviews the version, changelog, and CI before merging the version PR.
 6. Merging the version PR runs the workflow again.
@@ -18,6 +18,22 @@ Every PR that changes public API, styles, or behavior must classify its SemVer i
 8. The workflow creates the corresponding tag and GitHub Release.
 
 The implementation PR never runs `npm publish` directly. A published version is immutable and cannot be overwritten.
+
+## CI on the version PR
+
+GitHub does not start workflows for events made with `GITHUB_TOKEN`. For a pull request opened, synchronized, or reopened with `GITHUB_TOKEN`, it creates the `pull_request` runs in an approval-required state instead: the run ends as `action_required` with no jobs until someone with write access selects **Approve workflows to run**. This is GitHub behavior, not a repository setting; the fork contributor approval policy does not change it.
+
+The `Release` workflow therefore creates the version PR with a GitHub App installation token:
+
+- Repository variable `RELEASE_APP_CLIENT_ID` holds the App client ID.
+- Repository secret `RELEASE_APP_PRIVATE_KEY` holds the App private key.
+- The App is installed on `fradelli/design-system` only, with repository permissions **Contents: Read and write** and **Pull requests: Read and write**, and no webhook.
+- The workflow asks `actions/create-github-app-token` for a token limited to `contents: write` and `pull-requests: write` and passes it to `changesets/action`. The version commit, the version PR, tags, and GitHub Releases are attributed to the App.
+- Publishing to GitHub Packages still uses `GITHUB_TOKEN` with `packages: write`.
+
+When `RELEASE_APP_CLIENT_ID` is not set, the token step is skipped and `changesets/action` falls back to `GITHUB_TOKEN`. The version PR is still created, but its CI run waits as `action_required`: open the PR and select **Approve workflows to run**, or use **Re-run all jobs** on the run.
+
+To confirm the setup, run `gh run list --branch changeset-release/main` after the `Release` workflow updates the version PR: the newest `CI` run must start on attempt 1 without `action_required`.
 
 ## Version PR review
 
@@ -33,7 +49,7 @@ The first publish creates the private package. In `fradelli` â†’ **Packages** â†
 
 ## Authentication
 
-The producer workflow uses only the ephemeral `GITHUB_TOKEN` with `packages: write`. The repository does not need a PAT or registry-specific secret. Local development that needs to read the package authenticates outside the project in the user's profile with a classic PAT limited to `read:packages`. Never commit or log a token, `_authToken`, `.env`, or authenticated `.npmrc`.
+The producer workflow publishes with the ephemeral `GITHUB_TOKEN` with `packages: write` and opens the version PR with a short-lived GitHub App installation token (see [CI on the version PR](#ci-on-the-version-pr)). The repository does not need a PAT or registry-specific secret. Local development that needs to read the package authenticates outside the project in the user's profile with a classic PAT limited to `read:packages`. Never commit or log a token, `_authToken`, `.env`, or authenticated `.npmrc`.
 
 Consumer workflows use `GITHUB_TOKEN` with `packages: read` only after receiving explicit access. Authentication failure must stop installation; there is no fallback to copied source, a permanent tarball, or a floating version.
 
