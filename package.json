@@ -216,11 +216,6 @@
     "react-dom": ">=19.2.7 <20",
     "tailwindcss": ">=4.3.0 <5"
   },
-  "peerDependenciesMeta": {
-    "tailwindcss": {
-      "optional": true
-    }
-  },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
     "@changesets/cli": "3.0.2",
