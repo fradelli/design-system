@@ -129,7 +129,7 @@ describe("Select form contract", () => {
     render(
       <Dialog>
         <DialogTrigger>Open preferences</DialogTrigger>
-        <DialogContent>
+        <DialogContent closeLabel="Close preferences">
           <DialogTitle>Preferences</DialogTitle>
           <DialogDescription>Choose intensity.</DialogDescription>
           <Control defaultValue="low" />

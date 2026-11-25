@@ -158,7 +158,7 @@ export const InsideDialog: Story = {
   render: () => (
     <Dialog>
       <DialogTrigger render={<Button />}>Open preferences</DialogTrigger>
-      <DialogContent>
+      <DialogContent closeLabel="Close preferences">
         <DialogTitle>Preferences</DialogTitle>
         <DialogDescription>Choose the preferred intensity.</DialogDescription>
         <FormExample />

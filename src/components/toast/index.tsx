@@ -112,16 +112,20 @@ function ToastAction({
   );
 }
 
+type ToastCloseProps = ToastPrimitive.Close.Props & {
+  /** Accessible name of the close button, supplied in the application's language. */
+  "aria-label": string;
+};
+
 function ToastClose({
   className,
   children,
   render = <Button variant="ghost" size="icon" />,
   ...props
-}: ToastPrimitive.Close.Props) {
+}: ToastCloseProps) {
   return (
     <ToastPrimitive.Close
       data-slot="toast-close"
-      aria-label="Close toast"
       render={render}
       className={cn(
         "relative shrink-0 text-muted-foreground after:absolute after:-inset-2 after:content-[''] hover:text-foreground",
@@ -189,12 +193,12 @@ function ToastList({ closeLabel }: { closeLabel: string }) {
   ));
 }
 
-function Toaster({
-  children,
-  closeLabel = "Close toast",
-  toastManager = toast,
-  ...props
-}: ToastPrimitive.Provider.Props & { closeLabel?: string }) {
+type ToasterProps = ToastPrimitive.Provider.Props & {
+  /** Accessible name of each toast's close button, supplied in the application's language. */
+  closeLabel: string;
+};
+
+function Toaster({ children, closeLabel, toastManager = toast, ...props }: ToasterProps) {
   return (
     <ToastProvider toastManager={toastManager} {...props}>
       {children}
@@ -225,3 +229,4 @@ export {
   toast,
   useToastManager,
 };
+export type { ToastCloseProps, ToasterProps };

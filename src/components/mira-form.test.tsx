@@ -11,7 +11,7 @@ it("opens the form, toggles the checkbox with Space and returns focus on Escape"
   render(
     <Dialog>
       <DialogTrigger>Edit settings</DialogTrigger>
-      <DialogContent>
+      <DialogContent closeLabel="Close settings">
         <DialogTitle>Settings</DialogTitle>
         <Checkbox aria-label="Reminders" />
       </DialogContent>
